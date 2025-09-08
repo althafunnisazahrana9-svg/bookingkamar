@@ -22,7 +22,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Kamar_ID</th>
+                            <th>Kamar ID</th>
                             <th>Nama Pemesan</th>
                             <th>Email</th>
                             <th>Telephone</th>

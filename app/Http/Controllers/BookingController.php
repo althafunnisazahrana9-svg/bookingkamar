@@ -20,7 +20,7 @@ class BookingController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('pages.booking.index',compact('booking'));
+        return view('pages.booking.index', compact('booking'));
     }
 
     public function confirm($id)
