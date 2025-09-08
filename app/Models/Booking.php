@@ -15,9 +15,9 @@ class Booking extends Model
         'email',
         'telp',
         'alamat',
-        'ktp',
+        'nik',
         'jumlah_tamu',
-        'check_in',
+        'tanggal_checkin',
         'harga',
         'status'
     ];

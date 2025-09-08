@@ -13,22 +13,16 @@ return new class extends Migration
     {
         Schema::create('booking', function (Blueprint $table) {
             $table->id();
-            // Relasi ke tabel kamar
-            $table->foreignId('kamar_id')
-                  ->constrained('kamar') // Pastikan tabel 'kamar' sudah ada
-                  ->onDelete('cascade');
-
-            // Kolom detail booking
-            $table->string('nama_pemesan', 128);
-            $table->string('email', 32);
+            $table->foreignId('kamar_id')->constrained('kamar')->onDelete('cascade');
+            $table->string('nama_pemesan', 64);
+            $table->string('email', 64)->nullable();
             $table->string('telp', 16);
-            $table->string('alamat', 128);
-            $table->string('ktp', 32);
-            $table->integer('jumlah_tamu');
-            $table->date('check_in');
+            $table->string('alamat', 128)->nullable();
+            $table->string('nik', 16);
+            $table->integer('jumlah_tamu')->nullable();
+            $table->date('tanggal_checkin');
             $table->decimal('harga', 10, 2);
-            $table->enum('status', ['kosong', 'terisi'])->default('kosong');
-
+            $table->enum('status', ['konfirmasi', 'tidak konfirmasi', 'pending'])->default('pending');
             $table->timestamps();
         });
     }

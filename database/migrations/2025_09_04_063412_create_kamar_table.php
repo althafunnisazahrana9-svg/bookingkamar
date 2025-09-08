@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('kamar', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 64);
+            $table->string('nama', 128);
             $table->decimal('harga', 10, 2);
             $table->string('fasilitas', 128);
-            $table->enum('status', ['kosong', 'terisi'])
-                ->default('kosong');
+            $table->enum('status', ['kosong', 'terisi'])->default('kosong');
             $table->timestamps();
         });
     }

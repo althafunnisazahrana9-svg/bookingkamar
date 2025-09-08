@@ -9,7 +9,7 @@ class Kamar extends Model
     protected $table = 'kamar';
 
     protected $fillable = [
-        'name',
+        'nama',
         'harga',
         'fasilitas',
         'status'
