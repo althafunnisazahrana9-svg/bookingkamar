@@ -23,10 +23,10 @@
                 <ul class="dropdown-menu dropdown-menu-end">
 
                     <li>
-                        {{-- <a class="dropdown-item" href="{{ route('ubah-profil') }}">
+                        <a class="dropdown-item" href="{{ route('ubah-profil') }}">
                             <i class="ti ti-user me-3 ti-md"></i>
                             <span class="align-middle">Ubah Profil</span>
-                        </a> --}}
+                        </a>
                     </li>
                     <li>
                         <div class="d-grid px-2 pt-2 pb-1">
