@@ -44,20 +44,21 @@
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->telp }}</td>
                                 <td>{{ $item->alamat }}</td>
-                                <td>{{ $item->ktp }}</td>
+                                <td>{{ $item->nik }}</td>
                                 <td>{{ $item->jumlah_tamu }}</td>
                                 <td>{{ $item->tanggal_checkin }}</td>
                                 <td>{{ $item->harga }}</td>
                                 <td>{{ $item->status }}</td>
                                 <td>{{ $item->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
                                 <td>
-                                    {{-- <a href="{{ route('booking.show', $item->id) }}" class="btn btn-sm btn-info">
+                                    <a href="{{ route('booking.show', $item->id) }}" class="btn btn-sm btn-info">
                                         <span class="ti ti-eye"></span>
-                                    </a>  --}}
-                                    {{-- <a href="javascript:;" onclick="actionDelete('{{ route('tamu.destroy', $item->id) }}')"
+                                    </a>
+                                    <a href="javascript:;"
+                                        onclick="actionDelete('{{ route('booking.destroy', $item->id) }}')"
                                         class="btn btn-sm btn-danger">
                                         <span class="ti ti-trash"></span>
-                                    </a> --}}
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

@@ -41,12 +41,12 @@
             </a>
         </li>
 
-        {{-- <li class="menu-item">
-            <a href="{{ route('karyawan.index') }}" class="menu-link">
+        <li class="menu-item">
+            <a href="{{ route('kamar.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-apps-off"></i>
-                Karyawan
+                Data Kamar
             </a>
-        </li> --}}
+        </li>
 
         {{-- <li class="menu-item">
             <a href="{{ route('admin.index') }}" class="menu-link">

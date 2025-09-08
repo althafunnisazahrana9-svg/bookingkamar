@@ -6,16 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kamar extends Model
 {
+
     protected $table = 'kamar';
 
     protected $fillable = [
         'nama',
         'harga',
         'fasilitas',
-        'status'
+        'status',
     ];
 
-    public function booking ()
+    public function bookings()
     {
         return $this->hasMany(Booking::class);
     }

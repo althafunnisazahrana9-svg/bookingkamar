@@ -73,6 +73,8 @@ public function reject($id)
      */
     public function destroy(string $id)
     {
-        //
+        $booking = Booking::find($id);
+        $booking->delete();
+        return redirect()->route('booking.index');
     }
 }
