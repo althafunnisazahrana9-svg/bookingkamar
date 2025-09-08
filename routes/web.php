@@ -15,7 +15,7 @@ Auth::routes([
 Route::group([
     'middleware' => ['auth']
 ], function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::get('/booking', [App\Http\Controllers\BookingController::class, 'index'])->name('booking.index');
     Route::resource('/booking', App\Http\Controllers\BookingController::class);
