@@ -1,0 +1,78 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Booking;
+use Illuminate\Http\Request;
+
+class BookingController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        //$booking = Booking::with('kamar')->orderBy('created_at', 'desc')->get();
+
+        $booking = Booking::with('kamar')
+            ->when(request('tanggal'), function($query, $tanggal) {
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('pages.booking.index',compact('booking'));
+    }
+
+    public function confirm($id)
+{
+    $booking = Booking::findOrFail($id);
+    $booking->status = 'confirmed';
+    $booking->save();
+
+    // Kirim notif (opsional)
+    session()->flash('success', 'Booking berhasil dikonfirmasi!');
+    return redirect()->back();
+}
+
+public function reject($id)
+{
+    $booking = Booking::findOrFail($id);
+    $booking->status = 'rejected';
+    $booking->save();
+
+    session()->flash('error', 'Booking ditolak!');
+    return redirect()->back();
+}
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $boooking = Booking::with('kamar')->findOrfail($id);
+        return view('pages.booking.show', compact('booking'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+}
