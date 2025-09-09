@@ -55,6 +55,11 @@
                         <td>{{ $booking->tanggal_checkin }}</td>
                     </tr>
                     <tr>
+                        <th width="25%">Tanggal Checkout</th>
+                        <th width="10px">:</th>
+                        <td>{{ $booking->tanggal_checkout }}</td>
+                    </tr>
+                    <tr>
                         <th width="25%">Harga</th>
                         <th width="10px">:</th>
                         <td>{{ $booking->harga }}</td>

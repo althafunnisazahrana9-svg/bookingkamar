@@ -20,7 +20,9 @@ class Booking extends Model
         'nik',
         'jumlah_tamu',
         'tanggal_checkin',
+        'tanggal_checkout',
         'harga',
+        'metode_pembayaran',
         'status',
     ];
 

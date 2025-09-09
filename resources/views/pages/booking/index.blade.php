@@ -23,12 +23,7 @@
                         <tr>
                             <th>No</th>
                             <th>Kamar ID</th>
-                            <th>Nama Pemesan</th>
-                            <th>Email</th>
-                            <th>Telephone</th>
-                            <th>Alamat</th>
-                            <th>NIK</th>
-                            <th>Jumlah Tamu</th>
+                            <th>Nama</th>
                             <th>Tanggal Checkin</th>
                             <th>Harga</th>
                             <th>Status</th>
@@ -41,11 +36,6 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->kamar->nama }}</td>
                                 <td>{{ $item->nama_pemesan }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td>{{ $item->telp }}</td>
-                                <td>{{ $item->alamat }}</td>
-                                <td>{{ $item->nik }}</td>
-                                <td>{{ $item->jumlah_tamu }}</td>
                                 <td>{{ $item->tanggal_checkin }}</td>
                                 <td>{{ $item->harga }}</td>
                                 <td>{{ $item->status }}</td>

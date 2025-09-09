@@ -22,4 +22,6 @@ Route::group([
 
     Route::resource('/kamar', App\Http\Controllers\KamarController::class);
 
+    Route::resource('/pesan', App\Http\Controllers\PesanController::class);
+
 });

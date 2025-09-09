@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('nik', 16);
             $table->integer('jumlah_tamu')->nullable();
             $table->date('tanggal_checkin');
+            $table->date('tanggal_checkout');
             $table->decimal('harga', 10, 2);
+            $table->string('metode_pembayaran', 128);
             $table->enum('status', ['konfirmasi', 'tidak konfirmasi', 'pending'])->default('pending');
             $table->timestamps();
         });
