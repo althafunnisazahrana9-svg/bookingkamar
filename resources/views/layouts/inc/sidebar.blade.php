@@ -18,10 +18,7 @@
             <span class="app-brand-text demo menu-text fw-bold">Hotel Aetheria</span>
         </a>
 
-        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-            <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
-            <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
-        </a>
+
     </div>
 
     <div class="menu-inner-shadow"></div>
@@ -49,17 +46,20 @@
         </li>
 
         <li class="menu-item">
+<<<<<<< HEAD
             <a href="{{ route('pesan.index') }}" class="menu-link">
                 <i class="bi bi-calendar-check"></i>
                 Pesan Kamar
             </a>
         </li>
         {{-- <li class="menu-item">
+=======
+>>>>>>> d7adedcf60e17ad8f85996693dd3e1a377a6b7ef
             <a href="{{ route('admin.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>
                 Admin
             </a>
-        </li> --}}
+        </li>
 
     </ul>
 </aside>
