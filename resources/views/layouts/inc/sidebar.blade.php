@@ -46,15 +46,12 @@
         </li>
 
         <li class="menu-item">
-<<<<<<< HEAD
-            <a href="{{ route('pesan.index') }}" class="menu-link">
-                <i class="bi bi-calendar-check"></i>
+            <a href="{{ route('pesan.create') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-message"></i>
                 Pesan Kamar
             </a>
         </li>
-        {{-- <li class="menu-item">
-=======
->>>>>>> d7adedcf60e17ad8f85996693dd3e1a377a6b7ef
+        <li class="menu-item">
             <a href="{{ route('admin.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>
                 Admin

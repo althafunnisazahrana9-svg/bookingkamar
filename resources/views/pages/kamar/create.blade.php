@@ -9,6 +9,7 @@
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('kamar.store') }}" method="POST">
+                        @method('PUT')
                         @csrf
                         <div class="form-group mb-3">
                             <label for="nama" class="form-label">Nama</label>
@@ -45,8 +46,11 @@
 
                         <div class="form-group mb-3">
                             <label for="status" class="form-label">Status</label>
-                            <input type="text" class="form-control @error('status') is-invalid @enderror" id="status"
-                                name="status" value="{{ old('status') }}" />
+                            <select name="status" id="status" class="form-control" required>
+                                <option value="">-- Pilih Status --</option>
+                                <option value="terisi">Terisi</option>
+                                <option value="kosong">Kosong</option>
+                            </select>
                             @error('status')
                                 <div class="invalid-feedback d-block">
                                     {{ $message }}

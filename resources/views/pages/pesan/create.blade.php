@@ -71,14 +71,15 @@
 
                     <hr />
 
-                    <form action="{{ route('booking.show') }}" method="POST">
+                    <form action="{{ route('pesan.store') }}" method="POST">
+                        @method('POST')
                         @csrf
 
                         <div class="form-group mb-3">
-                            <label for="nama" class="form-label">Nama</label>
-                            <input type="text" class="form-control @error('nama') is-invalid @enderror"
-                                id="nama" name="nama" value="{{ old('nama') }}" />
-                            @error('nama')
+                            <label for="nama_pemesan" class="form-label">Nama</label>
+                            <input type="text" class="form-control @error('nama_pemesan') is-invalid @enderror"
+                                id="nama_pemesan" name="nama_pemesan" value="{{ old('nama_pemesan') }}" />
+                            @error('nama_pemesan')
                                 <span class="invalid-feedback d-block">{{ $message }}</span>
                             @enderror
                         </div>
@@ -177,6 +178,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="flex text-center">
+                            <a href="{{ route('booking.index') }}">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="ti ti-save me-1"></span>
+                                    Pesan
+                                </button>
+                            </a>
+
                     </form>
                 </div>
             </div>

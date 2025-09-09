@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama', 128);
             $table->decimal('harga', 10, 2);
             $table->string('fasilitas', 128);
-            $table->enum('status', ['kosong', 'terisi'])->default('kosong');
+            $table->enum('status', ['kosong', 'terisi']);
             $table->timestamps();
         });
     }
