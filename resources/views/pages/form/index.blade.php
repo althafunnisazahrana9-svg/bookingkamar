@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Halaman Form</title>
+    <title>Login Basic - Pages | Vuexy - Bootstrap Admin Template</title>
 
     <meta name="description" content="" />
 
@@ -66,12 +66,12 @@
             <div class="col-md-7">
                 <div class="card card-body">
                     <h5 class="mb-0 fw-bold text-center">
-                        HALAMAN FORM BOOKING KAMAR
+                        HALAMAN FORM BOOKING
                     </h5>
 
                     <hr />
 
-                    <form action="{{ route('pesan.store') }}" method="POST">
+                    <form action="{{ route('form.store') }}" method="POST">
                         @csrf
 
                         <div class="form-group mb-3">
@@ -90,7 +90,7 @@
                                         class="form-select @error('kamar_id') is-invalid @enderror">
                                         <option value="">-- Pilih Kamar --</option>
                                         @foreach ($kamar as $item)
-                                            <option value="{{ $item->id }}">
+                                            <option value="{{ $item->id }}" data-harga="{{ $item->harga }}">
                                                 {{ $item->nama }} - {{ $item->fasilitas }}
                                             </option>
                                         @endforeach
@@ -155,7 +155,7 @@
                                 <div class="form-group mb-3">
                                     <label for="harga" class="form-label">Harga</label>
                                     <input type="text" class="form-control @error('harga') is-invalid @enderror"
-                                        id="harga" name="harga" value="{{ old('harga') }}" />
+                                        id="harga" name="harga" value="{{ old('harga') }}" readonly />
                                     @error('harga')
                                         <span class="invalid-feedback d-block">{{ $message }}</span>
                                     @enderror
@@ -182,11 +182,28 @@
                                 <span class="ti ti-save me-1"></span>
                                 Pesan
                             </button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const kamarSelect = document.getElementById('kamar_id');
+            const hargaInput = document.getElementById('harga');
+
+            kamarSelect.addEventListener('change', function() {
+                let harga = this.options[this.selectedIndex].getAttribute('data-harga');
+                if (harga) {
+                    hargaInput.value = harga; // angka mentah, misalnya: 50000
+                } else {
+                    hargaInput.value = '';
+                }
+            });
+        });
+    </script>
 
     <!-- / Content -->
 

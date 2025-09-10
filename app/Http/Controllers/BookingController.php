@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Kamar;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -49,13 +50,37 @@ public function reject($id)
      */
     public function create()
     {
-        //
+
+        $kamar = Kamar::all(); // ambil semua data kamar
+    return view('pages.booking.create', compact('kamar'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
 
+    public function store(Request $request)
+    {
+         $request->validate([
+            'kamar_id' => 'required',
+            'nama_pemesan' => 'required',
+            'email' => 'required',
+            'telp' => 'required',
+            'alamat' => 'required',
+            'nik' => 'required',
+            'jumlah_tamu' => 'required',
+            'tanggal_checkin' => 'required',
+            'tanggal_checkout' => 'required',
+            'harga' => 'required',
+            'metode_pembayaran' => 'required',
+            'status' 
+
+        ]);
+
+        Booking::create($request->all());
+        return redirect()->route('booking.index')
+            ->with('success', 'Data booking berhasil ditambahkan');
+    }
     /**
      * Display the specified resource.
      */

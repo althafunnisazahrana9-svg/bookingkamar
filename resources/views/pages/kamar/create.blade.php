@@ -9,8 +9,8 @@
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('kamar.store') }}" method="POST">
-                        @method('PUT')
                         @csrf
+                        @method('POST')
                         <div class="form-group mb-3">
                             <label for="nama" class="form-label">Nama</label>
                             <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama"

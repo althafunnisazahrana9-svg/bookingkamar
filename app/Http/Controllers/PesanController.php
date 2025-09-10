@@ -23,6 +23,7 @@ class PesanController extends Controller
      */
     public function create()
     {
+        $booking = Booking::orderBy('nama_pemesan', 'asc')->get();
         $kamar = Kamar::orderBy('nama', 'asc')->get();
         return view('pages.pesan.create', compact('kamar'));
     }
@@ -31,22 +32,30 @@ class PesanController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-        'nama' => 'required|string',
+{
+    // Validasi input
+    $validate = $request->validate([
+        'nama_pemesan' => 'required',
         'tanggal_checkin' => 'required|date',
-        'tanggal_checkout' => 'required|date',
+        'tanggal_checkout' => 'required|date|after_or_equal:tanggal_checkin',
         'kamar_id' => 'required|exists:kamar,id',
-        // Jangan validasi status dari input user
+        'email' => 'required|email',
+        'telp' => 'required',
+        'alamat' => 'required|string',
+        'harga' => 'required|numeric',
+        'metode_pembayaran' => 'required|string',
     ]);
+    // Tambahkan status default = pending
+    $validate['status'] = 'pending';
 
-    $validate['status'] = 'pending'; // Paksa status pending
+    // Simpan ke database
+    Booking::create($request->all());
 
-    Booking::create($validate);
+    // Redirect ke halaman daftar booking
+    return redirect()->route('booking.index')
+        ->with('success', 'Pesanan berhasil dibuat dengan status pending.');
+}
 
-    //Redirect ke halaman booking.index
-    return redirect()->route('booking.index')->with('success', 'Pesanan berhasil dibuat dan status pending.');
-    }
 
     /**
      * Display the specified resource.

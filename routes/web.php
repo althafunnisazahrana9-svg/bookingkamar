@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/form', [App\Http\Controllers\FormController::class, 'index'])->name('form.index');
+Route::post('/form', [App\Http\Controllers\FormController::class, 'store'])->name('form.store');
+
+
 
 Auth::routes([
     'register' => false,
@@ -17,17 +21,13 @@ Route::group([
 ], function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::get('/booking', [App\Http\Controllers\BookingController::class, 'index'])->name('booking.index');
-    Route::resource('/booking', App\Http\Controllers\BookingController::class)
-        ->only('index', 'show', 'destroy');
+    
+    Route::resource('/pesan', App\Http\Controllers\PesanController::class);
+    Route::resource('/booking', App\Http\Controllers\BookingController::class);
 
     Route::resource('/admin', App\Http\Controllers\AdminController::class);
     Route::resource('/kamar', App\Http\Controllers\KamarController::class);
 
-    
-    
-    Route::get('/pesan/create', [App\Http\Controllers\PesanController::class, 'create'])->name('pesan.create');
-    Route::post('/pesan/store', [App\Http\Controllers\PesanController::class, 'store'])->name('pesan.store');
 
 
 

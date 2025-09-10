@@ -7,8 +7,17 @@
         <div class="col-md-12">
             <h3>Daftar Booking</h3>
 
+            @if (session('success'))
+                <p style="color: green">{{ session('success') }}</p>
+            @endif
+
+            <a href="{{ route('booking.create') }}" class="btn btn-primary mb-3">
+                <span class="ti ti-plus me-1"></span>
+                Tambah
+            </a>
+
             <div class="card card-body">
-                <div class="row">
+                <div class="row mb-3">
                     <div class="col-md-5">
                         <form action="" method="GET" class="d-flex align-items-center gap-2">
                             <label for="filter">Filter:</label>
@@ -22,9 +31,9 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Kamar ID</th>
-                            <th>Nama</th>
-                            <th>Tanggal Checkin</th>
+                            <th>Kamar</th>
+                            <th>Nama Pemesan</th>
+                            <th>Tanggal Check-in</th>
                             <th>Harga</th>
                             <th>Status</th>
                             <th>Aksi</th>
@@ -37,8 +46,12 @@
                                 <td>{{ $item->kamar->nama }}</td>
                                 <td>{{ $item->nama_pemesan }}</td>
                                 <td>{{ $item->tanggal_checkin }}</td>
-                                <td>{{ $item->harga }}</td>
-                                <td>{{ $item->status }}</td>
+                                <td>{{ number_format($item->harga, 0, ',', '.') }}</td>
+                                <td>
+                                    <span class="badge bg-{{ $item->status == 'pending' ? 'warning' : 'success' }}">
+                                        {{ ucfirst($item->status) }}
+                                    </span>
+                                </td>
                                 <td>{{ $item->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
                                 <td>
                                     <a href="{{ route('booking.show', $item->id) }}" class="btn btn-sm btn-info">
@@ -62,12 +75,11 @@
         @csrf
         @method('DELETE')
     </form>
-
 @endsection
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
-    <link rel="stylesheet" href="{{ asset('/vendor/libs/datables-resposive-bs5/responsive.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/libs/sweetalert2/sweetalert2.css') }}">
 @endpush
 
@@ -84,7 +96,7 @@
                 title: 'Apakah anda yakin?',
                 text: "Data akan dihapus!",
                 icon: 'warning',
-                showCancelButton: false,
+                showCancelButton: true,
                 confirmButtonText: 'Ya, hapus!'
             }).then((result) => {
                 if (result.isConfirmed) {

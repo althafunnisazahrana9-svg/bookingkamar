@@ -13,7 +13,7 @@ class Kamar extends Model
         'nama',
         'harga',
         'fasilitas',
-        'status',
+        'status'
     ];
 
     public function bookings()

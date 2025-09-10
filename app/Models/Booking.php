@@ -23,11 +23,11 @@ class Booking extends Model
         'tanggal_checkout',
         'harga',
         'metode_pembayaran',
-        'status',
+        'status'
     ];
 
     public function kamar()
     {
-        return $this->belongsTo(Kamar::class);
+        return $this->belongsTo(Kamar::class, 'kamar_id');
     }
 }
