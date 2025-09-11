@@ -77,6 +77,16 @@
                 </table>
             </div>
 
+            {{-- ✅ Tombol aksi --}}
+            @if ($booking->status == 'pending')
+                <a href="{{ route('booking.confirm', $booking->id) }}" class="btn btn-success">
+                    ✅ Konfirmasi
+                </a>
+                <a href="{{ route('booking.reject', $booking->id) }}" class="btn btn-danger">
+                    ❌ Tolak
+                </a>
+            @endif
+
             <a href="{{ route('booking.index') }}" class="btn btn-sm btn-primary">
                 <span class="ti ti-arrow-left"></span>
                 Kembali

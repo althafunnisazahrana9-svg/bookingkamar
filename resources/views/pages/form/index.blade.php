@@ -83,7 +83,7 @@
                             @enderror
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group" mb-3>
                                     <label for="kamar_id" class="form-label">Pilih Kamar</label>
                                     <select name="kamar_id" id="kamar_id"
@@ -100,7 +100,19 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
+
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="jumlah_tamu" class="form-label">Jumlah Tamu</label>
+                                    <input type="number"
+                                        class="form-control @error('jumlah_tamu') is-invalid @enderror" id="jumlah_tamu"
+                                        name="jumlah_tamu" value="{{ old('jumlah_tamu') }}" />
+                                    @error('jumlah_tamu')
+                                        <span class="invalid-feedback d-block">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="email" class="form-label">Email</label>
                                     <input type="email" class="form-control @error('email') is-invalid @enderror"

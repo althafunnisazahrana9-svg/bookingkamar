@@ -21,7 +21,11 @@ class BookingController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('pages.booking.index', compact('booking'));
+            // ambil data notifikasi
+            $notifikasi = Booking::with('kamar')->latest()->get();
+
+            // kirim data notifikasi ke view
+            return view('pages.booking.index', compact('booking'));
     }
 
     public function confirm($id)
@@ -30,9 +34,7 @@ class BookingController extends Controller
     $booking->status = 'confirmed';
     $booking->save();
 
-    // Kirim notif (opsional)
-    session()->flash('success', 'Booking berhasil dikonfirmasi!');
-    return redirect()->back();
+    return redirect()->route('booking.show', $id)->with('success', 'Booking berhasil dikonfirmasi!');
 }
 
 public function reject($id)
@@ -41,9 +43,9 @@ public function reject($id)
     $booking->status = 'rejected';
     $booking->save();
 
-    session()->flash('error', 'Booking ditolak!');
-    return redirect()->back();
+    return redirect()->route('booking.show', $id)->with('error', 'Booking ditolak!');
 }
+
 
     /**
      * Show the form for creating a new resource.
@@ -52,6 +54,7 @@ public function reject($id)
     {
 
         $kamar = Kamar::all(); // ambil semua data kamar
+        $notifikasi = Booking::with('kamar')->latest()->get();
     return view('pages.booking.create', compact('kamar'));
     }
 
@@ -86,9 +89,10 @@ public function reject($id)
      */
     public function show(string $id)
     {
-        $booking = Booking::with('kamar')->findOrfail($id);
+        $booking = \App\Models\Booking::with('kamar')->findOrfail($id);
         return view('pages.booking.show', compact('booking'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -96,6 +100,7 @@ public function reject($id)
     /**
      * Remove the specified resource from storage.
      */
+
     public function destroy(string $id)
     {
         $booking = Booking::find($id);

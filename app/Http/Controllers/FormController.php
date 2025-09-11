@@ -30,6 +30,7 @@ class FormController extends Controller
             'email' => 'required',
             'alamat' => 'required',
             'telp' => 'required',
+            'jumlah_tamu' => 'required',
             'nik' => 'required',
             'tanggal_checkin' => 'required',
             'tanggal_checkout' => 'required',

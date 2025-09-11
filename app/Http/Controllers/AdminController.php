@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Booking;
+use App\Models\Kamar;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -12,9 +14,31 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = User::orderBy('name', 'ASC')->get();
-        return view('pages.admin.index', compact('admins'));
+        $admin = User::orderBy('name', 'ASC')->get();
+        return view('pages.admin.index', compact('admin'));
     }
+
+
+    public function bookingIndex()
+{
+    $booking = Booking::with('kamar')->latest()->get();
+    return view('pages.booking.index', compact('booking'));
+}
+
+    public function updateStatus(Request $request)
+{
+    $request->validate([
+        'booking_id' => 'required|exists:bookings,id',
+        'status' => 'required|in:pending,confirmed,canceled',
+    ]);
+
+    $booking = Booking::find($request->booking_id);
+    $booking->status = $request->status;
+    $booking->save();
+
+    return redirect()->route('admin.booking')->with('success', 'Status berhasil diperbarui');
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -84,6 +108,7 @@ class AdminController extends Controller
         return redirect()->route('admin.index');
     }
 
+
     /**
      * Remove the specified resource from storage.
      */
@@ -93,4 +118,6 @@ class AdminController extends Controller
         $admin->delete();
         return redirect()->route('admin.index');
     }
+
+    
 }

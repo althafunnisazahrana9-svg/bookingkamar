@@ -10,6 +10,33 @@
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
+
+            <!-- Notifikasi -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="#" id="notificationDropdown" data-bs-toggle="dropdown">
+                    <i class="bi bi-bell"></i>
+                    @php
+                        $count = \App\Models\Booking::where('status', 'pending')->count();
+                    @endphp
+                    @if ($count > 0)
+                        <span class="badge bg-danger">{{ $count }}</span>
+                    @endif
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li class="dropdown-header">Notifikasi</li>
+                    @foreach ($notifikasi as $notif)
+                        <li>
+                            <a class="dropdown-item" href="{{ route('booking.show', $notif->id) }}">
+                                Booking baru: {{ $notif->kamar->nama ?? 'Kamar' }}
+                                oleh {{ $notif->nama_pemesan }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+
+            </li>
+
+
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">

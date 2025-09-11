@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date('tanggal_checkout');
             $table->decimal('harga', 10, 2);
             $table->string('metode_pembayaran', 128);
-            $table->enum('status', ['konfirmasi', 'tidak konfirmasi', 'pending'])->default('pending');
+            $table->enum('status', ['confirmed', 'rejected', 'pending'])->default('pending');
             $table->timestamps();
         });
     }

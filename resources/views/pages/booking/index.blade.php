@@ -7,14 +7,6 @@
         <div class="col-md-12">
             <h3>Daftar Booking</h3>
 
-            @if (session('success'))
-                <p style="color: green">{{ session('success') }}</p>
-            @endif
-
-            <a href="{{ route('booking.create') }}" class="btn btn-primary mb-3">
-                <span class="ti ti-plus me-1"></span>
-                Tambah
-            </a>
 
             <div class="card card-body">
                 <div class="row mb-3">
@@ -52,7 +44,6 @@
                                         {{ ucfirst($item->status) }}
                                     </span>
                                 </td>
-                                <td>{{ $item->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
                                 <td>
                                     <a href="{{ route('booking.show', $item->id) }}" class="btn btn-sm btn-info">
                                         <span class="ti ti-eye"></span>
@@ -106,4 +97,16 @@
             });
         }
     </script>
+
+    @if (Session::has('success'))
+        <script type="text/javascript">
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ Session::get('success') }}',
+                showConfirmButton: false,
+                timer: 3000
+            });
+        </script>
+    @endif
 @endpush
