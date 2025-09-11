@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login Basic - Pages | Vuexy - Bootstrap Admin Template</title>
+    <title>Form Booking</title>
 
     <meta name="description" content="" />
 
@@ -71,7 +71,7 @@
 
                     <hr />
 
-                    <form action="{{ route('form.store') }}" method="POST">
+                    <form action="{{ route('pages.form.store') }}" method="POST">
                         @csrf
 
                         <div class="form-group mb-3">
@@ -112,6 +112,29 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="telp" class="form-label">No Telp</label>
+                                    <input type="text" class="form-control @error('telp') is-invalid @enderror"
+                                        id="telp" name="telp" value="{{ old('telp') }}" />
+                                    @error('telp')
+                                        <span class="invalid-feedback d-block">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="nik" class="form-label">NIK</label>
+                                    <input type="text" class="form-control @error('nik') is-invalid @enderror"
+                                        id="nik" name="nik" value="{{ old('nik') }}" />
+                                    @error('nik')
+                                        <span class="invalid-feedback d-block">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="form-group mb-3">
                             <label for="alamat" class="form-label">Alamat</label>
@@ -149,6 +172,8 @@
                                 </div>
                             </div>
                         </div>
+
+
 
                         <div class="row">
                             <div class="col-md-6">
@@ -189,6 +214,8 @@
         </div>
     </div>
 
+
+    {{-- menggabungkan harga dan kamar_id --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const kamarSelect = document.getElementById('kamar_id');
@@ -197,7 +224,7 @@
             kamarSelect.addEventListener('change', function() {
                 let harga = this.options[this.selectedIndex].getAttribute('data-harga');
                 if (harga) {
-                    hargaInput.value = harga; // angka mentah, misalnya: 50000
+                    hargaInput.value = harga; // angka : 700000
                 } else {
                     hargaInput.value = '';
                 }

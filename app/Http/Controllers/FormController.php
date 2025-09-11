@@ -14,7 +14,8 @@ class FormController extends Controller
     public function index()
     {
         $kamar = Kamar::orderBy('nama','ASC')->get();
-        return view('pages.form.index', compact('kamar'));
+        $booking = Booking::all();
+        return view('pages.form.index', compact('kamar', 'booking'));
     }
 
 
@@ -29,6 +30,7 @@ class FormController extends Controller
             'email' => 'required',
             'alamat' => 'required',
             'telp' => 'required',
+            'nik' => 'required',
             'tanggal_checkin' => 'required',
             'tanggal_checkout' => 'required',
             'harga' => 'required',
@@ -36,7 +38,7 @@ class FormController extends Controller
         ]);
 
         Booking::create($request->all());
-        return redirect()->route('pages.form.index')
-            ->with('success', 'Data berhasil disimpan');
+        return redirect()->route('booking.index')
+        ->with('success', 'Data berhasil disimpan');
     }
 }

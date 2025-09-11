@@ -86,7 +86,7 @@ public function reject($id)
      */
     public function show(string $id)
     {
-        $boooking = Booking::with('kamar')->findOrfail($id);
+        $booking = Booking::with('kamar')->findOrfail($id);
         return view('pages.booking.show', compact('booking'));
     }
 
