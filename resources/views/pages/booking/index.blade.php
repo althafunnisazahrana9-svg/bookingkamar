@@ -39,11 +39,15 @@
                                 <td>{{ $item->nama_pemesan }}</td>
                                 <td>{{ $item->tanggal_checkin }}</td>
                                 <td>{{ number_format($item->harga, 0, ',', '.') }}</td>
+                                {{-- status  --}}
                                 <td>
-                                    <span class="badge bg-{{ $item->status == 'pending' ? 'warning' : 'success' }}">
-                                        {{ ucfirst($item->status) }}
-                                    </span>
-                                </td>
+                                    @if ($item->status == 'pending')
+                                        <span class="badge bg-warning">Pending</span> {{-- kuning --}}
+                                    @elseif ($item->status == 'confirmed')
+                                        <span class="badge bg-success">Confirmed</span> {{-- hijau --}}
+                                    @elseif ($item->status == 'rejected')
+                                        <span class="badge bg-danger">Rejected</span> {{-- merah --}}
+                                    @endif
                                 <td>
                                     <a href="{{ route('booking.show', $item->id) }}" class="btn btn-sm btn-info">
                                         <span class="ti ti-eye"></span>
@@ -82,6 +86,7 @@
             $('.dataTable').DataTable();
         });
 
+        // menghapus data
         function actionDelete(url) {
             Swal.fire({
                 title: 'Apakah anda yakin?',
@@ -98,6 +103,7 @@
         }
     </script>
 
+    {{-- untuk menampilkan notifikasi --}}
     @if (Session::has('success'))
         <script type="text/javascript">
             Swal.fire({

@@ -12,14 +12,19 @@
 
 
             <!-- Notifikasi -->
+            <!-- Notifikasi -->
             <li class="nav-item dropdown">
-                <a class="nav-link" href="#" id="notificationDropdown" data-bs-toggle="dropdown">
-                    <i class="bi bi-bell"></i>
+                <a class="nav-link position-relative" href="#" id="notificationDropdown"
+                    data-bs-toggle="dropdown">
+                    <i class="bi bi-bell" style="font-size: 20px;"></i>
                     @php
                         $count = \App\Models\Booking::where('status', 'pending')->count();
                     @endphp
                     @if ($count > 0)
-                        <span class="badge bg-danger">{{ $count }}</span>
+                        <span class="badge bg-danger rounded-pill"
+                            style="position: absolute; top: 2px; right: 2px; font-size: 11px; padding: 2px 6px;">
+                            {{ $count }}
+                        </span>
                     @endif
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -33,8 +38,8 @@
                         </li>
                     @endforeach
                 </ul>
-
             </li>
+
 
 
             <!-- User -->
