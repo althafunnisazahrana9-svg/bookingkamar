@@ -23,7 +23,7 @@ Auth::routes([
 Route::group([
  'middleware' => ['auth']
 ], function () {
-    route::get('/home', function(){
+    route::get('/', function(){
         return redirect()->route('dashboard'); // mengarahkan ke dashboard
     })->name('home');
 
