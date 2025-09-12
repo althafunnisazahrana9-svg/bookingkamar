@@ -13,7 +13,8 @@ class FormController extends Controller
      */
     public function index()
     {
-        $kamar = Kamar::orderBy('nama','ASC')->get();
+        // yang masuk ke form booking cuma yang kosong kamarnya
+        $kamar = Kamar::where('status', 'kosong')->orderBy('nama','ASC')->get();
         $booking = Booking::all();
         return view('pages.form.index', compact('kamar', 'booking'));
     }
@@ -44,5 +45,12 @@ class FormController extends Controller
         Booking::create($data);  
         return redirect()->route('booking.index')
         ->with('success', 'Data berhasil disimpan');
+
+        // ubah status kamar jadi terisi
+        $kamar = Kamar::find($request->kamar_id);
+        if ($kamar) {
+            $kamar->status = 'terisi';
+            $kamar->save();
+        }
     }
 }
