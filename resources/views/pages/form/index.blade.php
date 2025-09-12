@@ -192,7 +192,9 @@
                                 <div class="form-group mb-3">
                                     <label for="harga" class="form-label">Harga</label>
                                     <input type="text" class="form-control @error('harga') is-invalid @enderror"
-                                        id="harga" name="harga" value="{{ old('harga') }}" readonly />
+                                        {{-- supaya harga yang otomatis muncul itu ada titiknya contoh 8.000.000, tetapi di database tidak ada titiknya contoh 8000000 --}} oninput="formatHarga(this)" placeholder="8.000.000"
+                                        {{-- end --}} id="harga" name="harga"
+                                        value="{{ old('harga') }}" readonly />
                                     @error('harga')
                                         <span class="invalid-feedback d-block">{{ $message }}</span>
                                     @enderror
@@ -231,16 +233,57 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const kamarSelect = document.getElementById('kamar_id');
+            const checkin = document.getElementById('tanggal_checkin');
+            const checkout = document.getElementById('tanggal_checkout');
             const hargaInput = document.getElementById('harga');
 
-            kamarSelect.addEventListener('change', function() {
-                let harga = this.options[this.selectedIndex].getAttribute('data-harga');
-                if (harga) {
-                    hargaInput.value = harga; // angka : 700000
+            function hitungTotalHarga() {
+                const hargaPerMalam = parseFloat(kamarSelect.options[kamarSelect.selectedIndex].dataset.harga);
+                const tgl1 = checkin.valueAsDate;
+                const tgl2 = checkout.valueAsDate;
+
+                if (tgl1 && tgl2 && hargaPerMalam) {
+                    const selisih = (tgl2 - tgl1) / (1000 * 60 * 60 * 24); // jumlah malam
+                    if (selisih > 0) {
+                        const total = selisih * hargaPerMalam;
+                        hargaInput.value = total.toLocaleString();
+                    } else {
+                        hargaInput.value = "";
+                    }
                 } else {
-                    hargaInput.value = '';
+                    hargaInput.value = "";
                 }
-            });
+            }
+
+            kamarSelect.addEventListener('change', hitungTotalHarga); // 🔥
+            checkin.addEventListener('change', hitungTotalHarga); // 🔥
+            checkout.addEventListener('change', hitungTotalHarga); // 🔥
+        });
+    </script>
+
+    <script>
+        function formatHarga(input) {
+            // Hapus semua karakter non-digit
+            // replace(/\D/g, '')→ menghapus semua karakter yang bukan angka.
+            // \ D artinya non - digit(bukan 0– 9).
+            // g artinya global, yaitu semua non - digit di seluruh string akan dihapus.
+            // Input user: "8.000.000" → ., bukan angka, jadi dihapus → "8000000".
+            // ketika masih di form itu tampilannya ada titiknya tapi waktu sudah di "pesan" tidak ada titiknya
+            let value = input.value.replace(/\D/g, '');
+
+            // Tampilkan dengan titik ribuan
+            //input.value = new Intl.NumberFormat('id-ID').format(value);
+            // Intl.NumberFormat('id-ID')→ format angka sesuai lokal Indonesia, artinya ribuan dipisah dengan titik(.), desimal dengan koma(, ).
+            // .format(value)→ mengubah angka menjadi string yang mudah dibaca.
+            // contoh : value = "8000000"→.format(value)→
+            // "8.000.000"
+            input.value = new Intl.NumberFormat('id-ID').format(value);
+        }
+
+        // Saat form submit, kita ubah kembali ke angka bersih
+        document.querySelector('form').addEventListener('submit', function(e) {
+            let hargaInput = document.getElementById('harga');
+            hargaInput.value = hargaInput.value.replace(/\./g, ''); // hapus titik ribuan
         });
     </script>
 
