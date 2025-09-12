@@ -30,10 +30,13 @@
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li class="dropdown-header">Notifikasi</li>
                     @foreach ($notifikasi as $notif)
+                        {{-- supaya notifikasi yang belum dibaca hurufnya tebal dan notifikasi yang sudah dibaca hurufnya biasa : fw-bold --}}
                         <li>
-                            <a class="dropdown-item" href="{{ route('booking.show', $notif->id) }}">
-                                Booking baru: {{ $notif->kamar->nama ?? 'Kamar' }}
+                            <a class="dropdown-item @if ($notif->status == 'pending') fw-bold @endif"
+                                href="{{ route('booking.show', $notif->id) }}">
+                                Booking : {{ $notif->kamar->nama ?? 'Kamar' }}
                                 oleh {{ $notif->nama_pemesan }}
+                                <small class="text-muted">{{ $notif->created_at->diffForHumans() }}</small>
                             </a>
                         </li>
                     @endforeach
