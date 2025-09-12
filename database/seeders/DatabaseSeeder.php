@@ -21,5 +21,10 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('password123'), // ubah sesuai kebutuhan
             ]
         );
+
+        // kamar 
+            $this->call([
+            KamarSeeder::class,
+        ]);
     }
 }
