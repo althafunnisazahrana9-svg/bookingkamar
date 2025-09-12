@@ -38,7 +38,10 @@ class FormController extends Controller
             'metode_pembayaran' => 'required',
         ]);
 
-        Booking::create($request->all());
+        $data = $request->all();
+        $data['harga'] = str_replace(',', '', $request->harga);
+
+        Booking::create($data);  
         return redirect()->route('booking.index')
         ->with('success', 'Data berhasil disimpan');
     }
