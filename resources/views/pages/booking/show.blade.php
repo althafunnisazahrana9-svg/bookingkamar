@@ -15,7 +15,7 @@
                         <td>{{ $booking->id }}</td>
                     </tr>
                     <tr>
-                        <th width="25%">Kamar_ID</th>
+                        <th width="25%">Kamar ID</th>
                         <th width="10px">:</th>
                         <td>{{ $booking->kamar->nama }}</td>
                     </tr>
