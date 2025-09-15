@@ -34,6 +34,13 @@ class BookingController extends Controller
     $booking->status = 'confirmed';
     $booking->save();
 
+    // update status kamar jadi terisi
+    $kamar = Kamar::find($booking->kamar_id);
+    if ($kamar) {
+        $kamar->status = 'terisi';
+        $kamar->save();
+    }
+
     return redirect()->route('booking.show', $id)->with('success', 'Booking berhasil dikonfirmasi!');
 }
 
@@ -43,7 +50,14 @@ public function reject($id)
     $booking->status = 'rejected';
     $booking->save();
 
-    return redirect()->route('booking.show', $id)->with('error', 'Booking ditolak!');
+    // kembalikan status kamar ke kosong
+    $kamar = Kamar::find($booking->kamar_id);
+    if ($kamar) {
+        $kamar->status = 'kosong';
+        $kamar->save();
+    }
+
+    return redirect()->route('booking.show', $id)->with('info', 'Booking ditolak!');
 }
 
 

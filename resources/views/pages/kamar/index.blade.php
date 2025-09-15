@@ -6,10 +6,6 @@
     <div class="row">
         <div class="col-md-12">
             <h3>Data Kamar</h3>
-
-            <a href="{{ route('kamar.create') }}" class="btn btn-primary mb-3">
-                <span class="ti ti-plus me-1"></span>
-                Tambah
             </a>
 
             <table class="table table-striped dataTable">

@@ -26,18 +26,18 @@ class AdminController extends Controller
 }
 
     public function updateStatus(Request $request)
-{
-    $request->validate([
-        'booking_id' => 'required|exists:bookings,id',
-        'status' => 'required|in:pending,confirmed,canceled',
-    ]);
+    {
+        $request->validate([
+            'booking_id' => 'required|exists:booking,id',
+            'status' => 'required|in:pending,confirmed,canceled',
+        ]);
 
-    $booking = Booking::find($request->booking_id);
-    $booking->status = $request->status;
-    $booking->save();
+        $booking = Booking::findOrFail($request->booking_id);
+        $booking->status = $request->status;
+        $booking->save();
 
-    return redirect()->route('admin.booking')->with('success', 'Status berhasil diperbarui');
-}
+        return redirect()->back()->with('success', 'Status booking berhasil diperbarui.');
+    }
 
 
     /**

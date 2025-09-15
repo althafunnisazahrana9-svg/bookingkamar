@@ -36,8 +36,10 @@ Route::group([
     Route::get('booking/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
     Route::get('booking/{id}/reject', [BookingController::class, 'reject'])->name('booking.reject');
 
+    Route::post('/admin/bookings/update-status', [AdminController::class, 'updateStatus'])->name('admin.booking.updateStatus');
 
     
+
     // Booking CRUD (biasa, sudah ada dari resource)
     Route::resource('/admin', App\Http\Controllers\AdminController::class);
 
