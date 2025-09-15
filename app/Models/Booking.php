@@ -30,4 +30,15 @@ class Booking extends Model
     {
         return $this->belongsTo(Kamar::class, 'kamar_id');
     }
+
+    //bookingan dihapus, data kamar kembali kosong
+    protected static function booted()
+    {
+        static::deleted(function ($booking) {
+            if ($booking->kamar) {
+                $booking->kamar->update(['status' => 'kosong']);
+            }
+        });
+    }
+
 }
