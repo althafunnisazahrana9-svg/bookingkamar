@@ -77,20 +77,23 @@
                 </table>
             </div>
 
-            {{-- ✅ Tombol aksi --}}
-            @if ($booking->status == 'pending')
-                <a href="{{ route('booking.confirm', $booking->id) }}" class="btn btn-success">
-                    ✅ Konfirmasi
-                </a>
-                <a href="{{ route('booking.reject', $booking->id) }}" class="btn btn-danger">
-                    ❌ Tolak
-                </a>
-            @endif
-
-            <a href="{{ route('booking.index') }}" class="btn btn-sm btn-primary">
+            <a href="{{ route('booking.index') }}" class="btn btn-sm btn-primary my-3">
                 <span class="ti ti-arrow-left"></span>
                 Kembali
             </a>
+
+            @if ($booking->status == 'pending')
+                <a href="{{ route('booking.confirm', $booking->id) }}" class="btn btn-sm btn-success my-3">
+                    <span class="ti ti-check"></span>
+                    Konfirmasi
+                </a>
+                <a href="{{ route('booking.reject', $booking->id) }}" class="btn btn-sm btn-danger my-3">
+                    <span class="ti ti-x"></span>
+                    Tolak
+                </a>
+            @endif
+
+
         </div>
     </div>
 @endsection
