@@ -94,9 +94,23 @@ public function reject($id)
 
         ]);
 
+        if ($request->metode_pembayaran === 'transfer') {
+        // redirect ke halaman transfer bank
+        return redirect()->route('pembayaran.transfer', $booking->id);
+    }
+
+    return redirect()->route('booking.success')->with('success', 'Booking berhasil dibuat');
+
         Booking::create($request->all());
         return redirect()->route('booking.index')
             ->with('success', 'Data booking berhasil ditambahkan');
+    }
+
+    
+        public function struk($id)
+    {
+        $booking = Booking::findOrFail($id);
+        return view('pages.booking.struk', compact('booking'));
     }
     /**
      * Display the specified resource.

@@ -206,9 +206,8 @@
                                     <select name="metode_pembayaran" id="metode_pembayaran" class="form-control"
                                         required>
                                         <option value="">-- Pilih Metode Pembayaran --</option>
-                                        <option value="transfer">Transfer Bank</option>
-                                        <option value="cod">Bayar di Tempat (COD)</option>
-                                        <option value="ewallet">E-Wallet (OVO, GoPay, DANA)</option>
+                                        <option value="transfer">Transfer Bank (BCA, BNI)</option>
+                                        <option value="cash">Bayar di Tempat</option>
                                     </select>
                                     @error('metode_pembayaran')
                                         <span class="invalid-feedback d-block">{{ $message }}</span>

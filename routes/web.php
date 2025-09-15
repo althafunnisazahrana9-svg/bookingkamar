@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PembayaranController;
 
 Route::get('/form', [App\Http\Controllers\FormController::class, 'index'])->name('pages.form.index');
 Route::post('/form', [App\Http\Controllers\FormController::class, 'store'])->name('pages.form.store');
@@ -38,7 +39,16 @@ Route::group([
 
     Route::post('/admin/bookings/update-status', [AdminController::class, 'updateStatus'])->name('admin.booking.updateStatus');
 
-    
+    // untuk halaman transfer bank
+    Route::get('/pembayaran/transfer-bank/{booking}', [PembayaranController::class, 'transfer'])->name('pembayaran.transfer');
+
+    // konfirmasi pembayaran
+    Route::get('/pembayaran/konfirmasi/{booking}', [PembayaranController::class, 'konfirmasi'])
+        ->name('pembayaran.konfirmasi');
+
+    Route::post('/pembayaran/konfirmasi/{booking}', [PembayaranController::class, 'storeKonfirmasi'])
+        ->name('pembayaran.konfirmasi.store');
+
 
     // Booking CRUD (biasa, sudah ada dari resource)
     Route::resource('/admin', App\Http\Controllers\AdminController::class);

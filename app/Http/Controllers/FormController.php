@@ -24,33 +24,49 @@ class FormController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'nama_pemesan' => 'required',
-            'kamar_id' => 'required',
-            'email' => 'required',
-            'alamat' => 'required',
-            'telp' => 'required',
-            'jumlah_tamu' => 'required',
-            'nik' => 'required',
-            'tanggal_checkin' => 'required',
-            'tanggal_checkout' => 'required',
-            'harga' => 'required',
-            'metode_pembayaran' => 'required',
-        ]);
+{
+    $request->validate([
+        'nama_pemesan' => 'required|string|max:255',
+        'kamar_id' => 'required|exists:kamar,id',
+        'jumlah_tamu' => 'required|integer',
+        'email' => 'required|email',
+        'telp' => 'required|string|max:20',
+        'nik' => 'required|string|max:20',
+        'alamat' => 'required|string',
+        'tanggal_checkin' => 'required|date',
+        'tanggal_checkout' => 'required|date|after_or_equal:tanggal_checkin',
+        'harga' => 'required|numeric',
+        'metode_pembayaran' => 'required|in:transfer,cash',
+    ]);
 
-        $data = $request->all();
-        $data['harga'] = str_replace(',', '', $request->harga);
+    $booking = Booking::create([
+        'nama_pemesan' => $request->nama_pemesan,
+        'kamar_id' => $request->kamar_id,
+        'jumlah_tamu' => $request->jumlah_tamu,
+        'email' => $request->email,
+        'telp' => $request->telp,
+        'nik' => $request->nik,
+        'alamat' => $request->alamat,
+        'tanggal_checkin' => $request->tanggal_checkin,
+        'tanggal_checkout' => $request->tanggal_checkout,
+        'harga' => $request->harga,
+        'metode_pembayaran' => $request->metode_pembayaran,
+        'status_booking' => 'pending',
+    ]);
 
-        Booking::create($data);  
-        return redirect()->route('booking.index')
-        ->with('success', 'Data berhasil disimpan');
-
-        // ubah status kamar jadi terisi
-        $kamar = Kamar::find($request->kamar_id);
-        if ($kamar) {
-            $kamar->status = 'terisi';
-            $kamar->save();
+        // arahkan sesuai metode pembayaran
+        if ($request->metode_pembayaran === 'transfer') {
+            return redirect()->route('pembayaran.transfer', $booking->id);
         }
+
+        return redirect()->route('booking.success')
+                        ->with('success', 'Booking berhasil dibuat.');
+
+            // ubah status kamar jadi terisi
+            $kamar = Kamar::find($request->kamar_id);
+            if ($kamar) {
+                $kamar->status = 'terisi';
+                $kamar->save();
+            }
     }
 }

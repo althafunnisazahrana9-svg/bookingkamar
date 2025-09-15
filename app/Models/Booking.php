@@ -23,7 +23,8 @@ class Booking extends Model
         'tanggal_checkout',
         'harga',
         'metode_pembayaran',
-        'status'
+        'status',
+        'bukti_transfer',
     ];
 
     public function kamar()
