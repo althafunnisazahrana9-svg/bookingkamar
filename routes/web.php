@@ -37,6 +37,9 @@ Route::group([
     Route::get('booking/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
     Route::get('booking/{id}/reject', [BookingController::class, 'reject'])->name('booking.reject');
 
+    //struk
+    Route::get('/booking/{id}/struk', [BookingController::class, 'struk'])->name('booking.struk');
+
     Route::post('/admin/bookings/update-status', [AdminController::class, 'updateStatus'])->name('admin.booking.updateStatus');
 
     // untuk halaman transfer bank

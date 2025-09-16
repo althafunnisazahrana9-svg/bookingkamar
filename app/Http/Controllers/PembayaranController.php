@@ -35,11 +35,16 @@ class PembayaranController extends Controller
     }
 
     // Halaman instruksi transfer bank
-    public function transfer($bookingId)
-    {
-        $booking = Booking::findOrFail($bookingId);
+    public function transfer($id)
+{
+    $booking = Booking::findOrFail($id);
 
-        return view('pages.pembayaran.transfer', compact('booking'));
-    }
+    // kalau belum ada pembayaran, buat record
+    $booking->pembayaran()->firstOrCreate([], [
+        'status' => 'menunggu_konfirmasi',
+    ]);
+
+    return view('pages.pembayaran.transfer', compact('booking'));
+}
 
 }

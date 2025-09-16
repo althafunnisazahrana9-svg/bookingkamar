@@ -172,22 +172,41 @@
                         </table>
                     </div>
 
-                    <a href="{{ route('booking.index') }}" class="btn btn-sm btn-primary my-3">
-                        <span class="ti ti-arrow-left"></span>
-                        Kembali
-                    </a>
+                    <div class="d-flex justify-content-between my-3">
+                        <!-- Tombol kiri -->
+                        <div>
+                            <a href="{{ route('booking.index') }}" class="btn btn-sm btn-primary">
+                                <span class="ti ti-arrow-left"></span>
+                                Kembali
+                            </a>
 
-                    @if ($booking->status == 'pending')
-                        <a href="{{ route('booking.confirm', $booking->id) }}" class="btn btn-sm btn-success my-3">
-                            <span class="ti ti-check"></span>
-                            Konfirmasi
-                        </a>
-                        <a href="{{ route('booking.reject', $booking->id) }}" class="btn btn-sm btn-danger my-3">
-                            <span class="ti ti-x"></span>
-                            Tolak
-                        </a>
-                    @endif
+                            @if ($booking->pembayaran && $booking->pembayaran->bukti_transfer)
+                                <a href="{{ asset('storage/' . $booking->pembayaran->bukti_transfer) }}" target="_blank"
+                                    class="btn btn-sm btn-info">
+                                    <span class="ti ti-file"></span> Lihat Bukti Pembayaran
+                                </a>
+                            @else
+                                <a href="{{ route('pembayaran.transfer', $booking->id) }}" class="btn btn-sm btn-success">
+                                    <span class="ti ti-receipt-2"></span> Pembayaran
+                                </a>
+                            @endif
 
+                        </div>
+
+                        <!-- Tombol kanan -->
+                        <div>
+                            @if ($booking->status == 'pending')
+                                <a href="{{ route('booking.confirm', $booking->id) }}" class="btn btn-sm btn-success">
+                                    <span class="ti ti-check"></span>
+                                    Konfirmasi
+                                </a>
+                                <a href="{{ route('booking.reject', $booking->id) }}" class="btn btn-sm btn-danger">
+                                    <span class="ti ti-x"></span>
+                                    Tolak
+                                </a>
+                            @endif
+                        </div>
+                    </div>
 
                 </div>
             </div>

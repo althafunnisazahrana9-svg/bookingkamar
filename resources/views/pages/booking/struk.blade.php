@@ -20,7 +20,7 @@
                 <hr>
 
                 {{-- Detail transaksi --}}
-                <div class="text-start small">
+                <div class="text-start py-4">
                     <p><strong>Tanggal</strong><br>{{ now()->format('d M Y | H:i:s') }} WIB</p>
                     <p><strong>Nomor Referensi</strong><br>#{{ strtoupper(Str::random(12)) }}</p>
                     <p><strong>Nama Pemesan</strong><br>{{ $booking->nama_pemesan }}</p>
@@ -38,7 +38,7 @@
 
                 {{-- Tombol --}}
                 <div class="mt-3">
-                    <a href="{{ route('booking.index') }}" class="btn btn-primary w-100">OK</a>
+                    <a href="{{ route('pembayaran.transfer', $booking->id) }}" class="btn btn-primary w-100">OK</a>
                 </div>
 
             </div>

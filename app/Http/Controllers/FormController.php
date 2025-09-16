@@ -54,12 +54,7 @@ class FormController extends Controller
         'status_booking' => 'pending',
     ]);
 
-        // arahkan sesuai metode pembayaran
-        if ($request->metode_pembayaran === 'transfer') {
-            return redirect()->route('pembayaran.transfer', $booking->id);
-        }
-
-        return redirect()->route('booking.success')
+        return redirect()->route('booking.index')
                         ->with('success', 'Booking berhasil dibuat.');
 
             // ubah status kamar jadi terisi

@@ -32,6 +32,11 @@ class Booking extends Model
         return $this->belongsTo(Kamar::class, 'kamar_id');
     }
 
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class, 'booking_id');
+    }
+
     //bookingan dihapus, data kamar kembali kosong
     protected static function booted()
     {
