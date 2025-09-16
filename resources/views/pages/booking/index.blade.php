@@ -19,7 +19,7 @@
                     </div>
                 </div>
 
-                <table class="table dataTable">
+                <table class="table table-sm dataTable">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -49,14 +49,16 @@
                                         <span class="badge bg-danger">Rejected</span> {{-- merah --}}
                                     @endif
                                 <td>
-                                    <a href="{{ route('booking.show', $item->id) }}" class="btn btn-sm btn-info">
-                                        <span class="ti ti-eye"></span>
-                                    </a>
-                                    <a href="javascript:;"
-                                        onclick="actionDelete('{{ route('booking.destroy', $item->id) }}')"
-                                        class="btn btn-sm btn-danger">
-                                        <span class="ti ti-trash"></span>
-                                    </a>
+                                    <div class="btn-group" role="group">
+                                        <a href="{{ route('booking.show', $item->id) }}" class="btn btn-sm btn-info me-2">
+                                            <span class="ti ti-eye"></span>
+                                        </a>
+                                        <a href="javascript:;"
+                                            onclick="actionDelete('{{ route('booking.destroy', $item->id) }}')"
+                                            class="btn btn-sm btn-danger">
+                                            <span class="ti ti-trash"></span>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

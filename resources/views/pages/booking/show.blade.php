@@ -180,17 +180,20 @@
                                 Kembali
                             </a>
 
-                            @if ($booking->pembayaran && $booking->pembayaran->bukti_transfer)
-                                <a href="{{ asset('storage/' . $booking->pembayaran->bukti_transfer) }}" target="_blank"
-                                    class="btn btn-sm btn-info">
-                                    <span class="ti ti-file"></span> Lihat Bukti Pembayaran
-                                </a>
-                            @else
-                                <a href="{{ route('pembayaran.transfer', $booking->id) }}" class="btn btn-sm btn-success">
-                                    <span class="ti ti-receipt-2"></span> Pembayaran
-                                </a>
+                            {{-- Hanya tampilkan tombol pembayaran jika status bukan rejected --}}
+                            @if ($booking->status != 'rejected')
+                                @if ($booking->pembayaran && $booking->pembayaran->bukti_transfer)
+                                    <a href="{{ asset('storage/' . $booking->pembayaran->bukti_transfer) }}"
+                                        target="_blank" class="btn btn-sm btn-info">
+                                        <span class="ti ti-file"></span> Lihat Bukti Pembayaran
+                                    </a>
+                                @else
+                                    <a href="{{ route('pembayaran.transfer', $booking->id) }}"
+                                        class="btn btn-sm btn-success">
+                                        <span class="ti ti-receipt-2"></span> Pembayaran
+                                    </a>
+                                @endif
                             @endif
-
                         </div>
 
                         <!-- Tombol kanan -->
@@ -200,12 +203,18 @@
                                     <span class="ti ti-check"></span>
                                     Konfirmasi
                                 </a>
-                                <a href="{{ route('booking.reject', $booking->id) }}" class="btn btn-sm btn-danger">
-                                    <span class="ti ti-x"></span>
-                                    Tolak
-                                </a>
+
+                                <form action="{{ route('booking.reject', $booking->id) }}" method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <span class="ti ti-x"></span>
+                                        Tolak
+                                    </button>
+                                </form>
                             @endif
                         </div>
+
                     </div>
 
                 </div>
