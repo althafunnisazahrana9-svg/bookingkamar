@@ -35,7 +35,7 @@ class FormController extends Controller
         'alamat' => 'required|string',
         'tanggal_checkin' => 'required|date',
         'tanggal_checkout' => 'required|date|after_or_equal:tanggal_checkin',
-        'harga' => 'required|numeric',
+        'harga' => 'required',
         'metode_pembayaran' => 'required|in:transfer,cash',
     ]);
 
@@ -49,7 +49,7 @@ class FormController extends Controller
         'alamat' => $request->alamat,
         'tanggal_checkin' => $request->tanggal_checkin,
         'tanggal_checkout' => $request->tanggal_checkout,
-        'harga' => $request->harga,
+        'harga' => str_replace(',','', $request->harga),
         'metode_pembayaran' => $request->metode_pembayaran,
         'status_booking' => 'pending',
     ]);
