@@ -45,6 +45,10 @@ Route::group([
     Route::post('/pembayaran/konfirmasi/{booking}', [PembayaranController::class, 'storeKonfirmasi'])
         ->name('pembayaran.konfirmasi.store');
 
+    // upload bukti transfer
+    Route::post('/pembayaran/{booking}/upload-bukti-transfer',
+        [PembayaranController::class, 'uploadBuktiTransfer'])->name('pembayaran.uploadBuktiTransfer');
+
     // Booking CRUD (biasa, sudah ada dari resource)
     Route::resource('/admin', App\Http\Controllers\AdminController::class);
 

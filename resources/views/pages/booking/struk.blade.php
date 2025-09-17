@@ -20,25 +20,60 @@
                 <hr>
 
                 {{-- Detail transaksi --}}
-                <div class="text-start py-4">
-                    <p><strong>Tanggal</strong><br>{{ now()->format('d M Y | H:i:s') }} WIB</p>
-                    <p><strong>Nomor Referensi</strong><br>#{{ strtoupper(Str::random(12)) }}</p>
-                    <p><strong>Nama Pemesan</strong><br>{{ $booking->nama_pemesan }}</p>
-                    <p><strong>Jenis Transaksi</strong><br>Transfer Bank</p>
-                    <p><strong>Bank Tujuan</strong><br>BCA / BNI</p>
-                    <p><strong>Nomor Tujuan</strong><br>1234567890</p>
-                    <p><strong>Nama Tujuan</strong><br>Hotel Aetheria</p>
-                    <p><strong>Nominal</strong><br>Rp{{ number_format($booking->harga, 0, ',', '.') }}</p>
-                    <p><strong>Biaya Admin</strong><br>Rp6.500</p>
-                    <hr>
-                    <p class="fw-bold fs-5 text-primary">
-                        Total Rp{{ number_format($booking->harga + 6500, 0, ',', '.') }}
-                    </p>
+                <div class="card shadow-sm border-0" style="max-width: 450px; margin:auto;">
+                    <div class="card-body">
+
+                        <div class="row mb-2">
+                            <div class="col-5 fw-bold text-start">Tanggal</div>
+                            <div class="col-7 text-end">{{ now()->format('d M Y | H:i:s') }} WIB</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-5 fw-bold text-start">Nomor Referensi</div>
+                            <div class="col-7 text-end">{{ strtoupper(Str::random(12)) }}</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-5 fw-bold text-start">Nama Pemesan</div>
+                            <div class="col-7 text-end">{{ $booking->nama_pemesan }}</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-5 fw-bold text-start">Jenis Transaksi</div>
+                            <div class="col-7 text-end">Transfer Bank</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-5 fw-bold text-start">Bank Tujuan</div>
+                            <div class="col-7 text-end">BCA / BNI</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-5 fw-bold text-start">Nomor Tujuan</div>
+                            <div class="col-7 text-end">1234567890</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-5 fw-bold text-start">Nama Tujuan</div>
+                            <div class="col-7 text-end">Hotel Aetheria</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-5 fw-bold text-start">Nominal</div>
+                            <div class="col-7 text-end">Rp{{ number_format($booking->harga, 0, ',', '.') }}</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-5 fw-bold text-start">Biaya Admin</div>
+                            <div class="col-7 text-end">Rp6.500</div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-5 fw-bold text-start">Total</div>
+                            <div class="col-7 fw-bold text-primary text-end">
+                                Rp{{ number_format($booking->harga + 6500, 0, ',', '.') }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 {{-- Tombol --}}
                 <div class="mt-3">
-                    <a href="{{ route('pembayaran.transfer', $booking->id) }}" class="btn btn-primary w-100">OK</a>
+                    <a href="{{ route('booking.show', $booking->id) }}" class="btn btn-primary w-100">OK</a>
                 </div>
 
             </div>

@@ -109,7 +109,7 @@ public function reject($id)
     
         public function struk($id)
     {
-        $booking = Booking::findOrFail($id);
+        $booking = Booking::with('pembayaran')->findOrFail($id);
         return view('pages.booking.struk', compact('booking'));
     }
     /**

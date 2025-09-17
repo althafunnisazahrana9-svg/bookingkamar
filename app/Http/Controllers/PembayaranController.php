@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use App\Models\Pembayaran;
 use Illuminate\Support\Facades\Storage;
 
 class PembayaranController extends Controller
@@ -46,5 +47,24 @@ class PembayaranController extends Controller
 
     return view('pages.pembayaran.transfer', compact('booking'));
 }
+
+public function uploadBuktiTransfer(Request $request, $id)
+{
+    $request->validate([
+        'bukti_transfer' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
+
+    $pembayaran = Pembayaran::where('booking_id', $id)->firstOrFail();
+
+    // Simpan file ke storage/app/public/bukti_transfer
+    $filePath = $request->file('bukti_transfer')->store('bukti_transfer', 'public');
+
+    $pembayaran->bukti_transfer = $filePath;
+    $pembayaran->save();
+
+    return redirect()->route('booking.show', $id)
+                     ->with('success', 'Bukti transfer berhasil diupload.');
+}
+
 
 }
