@@ -94,9 +94,13 @@ public function reject($id)
 
         ]);
 
-        if ($request->metode_pembayaran === 'transfer') {
-        // redirect ke halaman transfer bank
+        // Cek metode pembayaran
+    if ($request->metode_pembayaran === 'transfer') {
         return redirect()->route('pembayaran.transfer', $booking->id);
+    }
+
+    if ($request->metode_pembayaran === 'cod') {
+        return redirect()->route('pembayaran.cod', $booking->id);
     }
 
     return redirect()->route('booking.success')->with('success', 'Booking berhasil dibuat');

@@ -66,5 +66,18 @@ public function uploadBuktiTransfer(Request $request, $id)
                      ->with('success', 'Bukti transfer berhasil diupload.');
 }
 
+    public function cod($id)
+{
+    $booking = Booking::findOrFail($id);
+
+    // Bisa update status booking kalau mau
+    $booking->update([
+        'status_booking' => 'menunggu pembayaran di tempat',
+    ]);
+
+    return view('pages.pembayaran.cod', compact('booking'));
+}
+
+    
 
 }

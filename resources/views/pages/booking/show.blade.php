@@ -188,7 +188,10 @@
                                         <span class="ti ti-file"></span> Lihat Bukti Transfer
                                     </a>
                                 @else
-                                    <a href="{{ route('pembayaran.transfer', $booking->id) }}"
+                            {{-- Kalau transfer tanpa bukti ATAU COD --}}
+                                    <a href="{{ $booking->metode_pembayaran === 'transfer' 
+                                                ? route('pembayaran.transfer', $booking->id) 
+                                                : route('pembayaran.cod', $booking->id) }}"
                                         class="btn btn-sm btn-success">
                                         <span class="ti ti-receipt-2"></span> Pembayaran
                                     </a>
