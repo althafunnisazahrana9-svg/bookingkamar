@@ -45,20 +45,18 @@ class PembayaranController extends Controller
         $booking->pembayaran()->firstOrCreate([], [
             'status' => 'menunggu_konfirmasi',
         ]);
+    }
+
     public function cod($id)
-{
-    $booking = Booking::findOrFail($id);
+    {
+        $booking = Booking::findOrFail($id);
 
-    // Bisa update status booking kalau mau
-    $booking->update([
-        'status_booking' => 'menunggu pembayaran di tempat',
-    ]);
+        // Bisa update status booking kalau mau
+        $booking->update([
+            'status_booking' => 'menunggu pembayaran di tempat',
+        ]);
 
-    return view('pages.pembayaran.cod', compact('booking'));
-}
-
-
-        return view('pages.pembayaran.transfer', compact('booking'));
+        return view('pages.pembayaran.cod', compact('booking'));
     }
 
     public function uploadBuktiTransfer(Request $request, $id)
