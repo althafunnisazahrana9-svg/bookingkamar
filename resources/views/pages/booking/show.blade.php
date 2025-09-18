@@ -147,14 +147,14 @@
                         </div>
 
                     </div>
-=======
+
                         @else
                             <a href="{{ route('pembayaran.transfer', $booking->id) }}" class="btn btn-sm btn-success">
                                 <span class="ti ti-receipt-2"></span> Pembayaran
                             </a>
                         @endif
                     @endif
->>>>>>> e67ca9267d5d47cebf2498fc2ffc0880849c95c5
+
 
                 </div>
 
