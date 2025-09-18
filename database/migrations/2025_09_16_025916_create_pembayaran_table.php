@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('booking_id');
             $table->string('bukti_transfer')->nullable();
-            $table->enum('status', ['belum_bayar','menunggu_konfirmasi','lunas'])->default('belum_bayar');
+            $table->enum('status', ['belum_bayar', 'menunggu_konfirmasi', 'lunas'])->default('belum_bayar');
             $table->timestamps();
         });
     }
