@@ -183,8 +183,9 @@
                             {{-- Hanya tampilkan tombol pembayaran jika status bukan rejected --}}
                             @if ($booking->status != 'rejected')
                                 @if ($booking->pembayaran && $booking->pembayaran->bukti_transfer)
-                                    <a href="{{ route('booking.struk', $booking->id) }}" class="btn btn-sm btn-info">
-                                        <span class="ti ti-file"></span> Lihat Struk
+                                    <a href="{{ asset('storage/' . $booking->pembayaran->bukti_transfer) }}"
+                                        target="_blank" class="btn btn-sm btn-info">
+                                        <span class="ti ti-file"></span> Lihat Bukti Transfer
                                     </a>
                                 @else
                                     <a href="{{ route('pembayaran.transfer', $booking->id) }}"
