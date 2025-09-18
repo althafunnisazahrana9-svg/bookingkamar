@@ -47,7 +47,7 @@ Route::group([
 
     // upload bukti transfer
     Route::post('/pembayaran/{booking}/upload-bukti-transfer',
-        [PembayaranController::class, 'uploadBuktiTransfer'])->name('pembayaran.uploadBuktiTransfer');
+        [PembayaranController::class, 'storeKonfirmasi'])->name('pembayaran.uploadKonfirmasi');
 
     // untuk halaman pembayaran di tempat
     Route::get('/pembayaran/cod/{booking}', [PembayaranController::class, 'cod'])
