@@ -49,6 +49,10 @@ Route::group([
     Route::post('/pembayaran/{booking}/upload-bukti-transfer',
         [PembayaranController::class, 'uploadBuktiTransfer'])->name('pembayaran.uploadBuktiTransfer');
 
+    // untuk halaman pembayaran di tempat
+    Route::get('/pembayaran/cod/{booking}', [PembayaranController::class, 'cod'])
+        ->name('pembayaran.cod');
+
     // status pembayaran
     Route::post('/booking/{id}/lunas', [BookingController::class, 'setLunas'])->name('booking.setLunas');
     Route::post('/booking/{id}/belum-lunas', [BookingController::class, 'setBelumLunas'])->name('booking.setBelumLunas');
