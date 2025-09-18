@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Kamar;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -13,53 +14,51 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //$booking = Booking::with('kamar')->orderBy('created_at', 'desc')->get();
+        // $booking = Booking::with('kamar')->orderBy('created_at', 'desc')->get();
 
         $booking = Booking::with('kamar')
-            ->when(request('tanggal'), function($query, $tanggal) {
-            })
+            ->when(request('tanggal'), function ($query, $tanggal) {})
             ->orderBy('created_at', 'desc')
             ->get();
 
-            // ambil data notifikasi
-            $notifikasi = Booking::with('kamar')->latest()->get();
+        // ambil data notifikasi
+        $notifikasi = Booking::with('kamar')->latest()->get();
 
-            // kirim data notifikasi ke view
-            return view('pages.booking.index', compact('booking'));
+        // kirim data notifikasi ke view
+        return view('pages.booking.index', compact('booking'));
     }
 
     public function confirm($id)
-{
-    $booking = Booking::findOrFail($id);
-    $booking->status = 'confirmed';
-    $booking->save();
+    {
+        $booking = Booking::findOrFail($id);
+        $booking->status = 'confirmed';
+        $booking->save();
 
-    // update status kamar jadi terisi
-    $kamar = Kamar::find($booking->kamar_id);
-    if ($kamar) {
-        $kamar->status = 'terisi';
-        $kamar->save();
+        // update status kamar jadi terisi
+        $kamar = Kamar::find($booking->kamar_id);
+        if ($kamar) {
+            $kamar->status = 'terisi';
+            $kamar->save();
+        }
+
+        return redirect()->route('booking.show', $id)->with('success', 'Booking berhasil dikonfirmasi!');
     }
 
-    return redirect()->route('booking.show', $id)->with('success', 'Booking berhasil dikonfirmasi!');
-}
+    public function reject($id)
+    {
+        $booking = Booking::findOrFail($id);
+        $booking->status = 'rejected';
+        $booking->save();
 
-public function reject($id)
-{
-    $booking = Booking::findOrFail($id);
-    $booking->status = 'rejected';
-    $booking->save();
+        // kembalikan status kamar ke kosong
+        $kamar = Kamar::find($booking->kamar_id);
+        if ($kamar) {
+            $kamar->status = 'kosong';
+            $kamar->save();
+        }
 
-    // kembalikan status kamar ke kosong
-    $kamar = Kamar::find($booking->kamar_id);
-    if ($kamar) {
-        $kamar->status = 'kosong';
-        $kamar->save();
+        return redirect()->route('booking.show', $id)->with('info', 'Booking ditolak!');
     }
-
-    return redirect()->route('booking.show', $id)->with('info', 'Booking ditolak!');
-}
-
 
     /**
      * Show the form for creating a new resource.
@@ -69,16 +68,16 @@ public function reject($id)
 
         $kamar = Kamar::all(); // ambil semua data kamar
         $notifikasi = Booking::with('kamar')->latest()->get();
-    return view('pages.booking.create', compact('kamar'));
+
+        return view('pages.booking.create', compact('kamar'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-
     public function store(Request $request)
     {
-         $request->validate([
+        $request->validate([
             'kamar_id' => 'required',
             'nama_pemesan' => 'required',
             'email' => 'required',
@@ -90,37 +89,62 @@ public function reject($id)
             'tanggal_checkout' => 'required',
             'harga' => 'required',
             'metode_pembayaran' => 'required',
-            'status' 
+            'status',
 
         ]);
 
         if ($request->metode_pembayaran === 'transfer') {
-        // redirect ke halaman transfer bank
-        return redirect()->route('pembayaran.transfer', $booking->id);
-    }
+            // redirect ke halaman transfer bank
+            return redirect()->route('pembayaran.transfer', $booking->id);
+        }
 
-    return redirect()->route('booking.success')->with('success', 'Booking berhasil dibuat');
+        return redirect()->route('booking.success')->with('success', 'Booking berhasil dibuat');
 
         Booking::create($request->all());
+
         return redirect()->route('booking.index')
             ->with('success', 'Data booking berhasil ditambahkan');
     }
 
-    
-        public function struk($id)
+    public function struk($id)
     {
         $booking = Booking::with('pembayaran')->findOrFail($id);
+
         return view('pages.booking.struk', compact('booking'));
     }
+
+    public function setLunas($id)
+    {
+        $pembayaran = Pembayaran::where('booking_id', $id)->first();
+        if ($pembayaran) {
+            $pembayaran->status = 'lunas';
+            $pembayaran->save();
+        }
+
+        return back()->with('success', 'Status pembayaran berhasil diubah menjadi Lunas.');
+    }
+
+    // lunas dan belum lunas
+    public function setBelumLunas($id)
+    {
+        $pembayaran = Pembayaran::where('booking_id', $id)->first();
+        if ($pembayaran) {
+            $pembayaran->status = 'belum_bayar'; // sesuaikan dengan status yang kamu pakai
+            $pembayaran->save();
+        }
+
+        return back()->with('success', 'Status pembayaran berhasil diubah menjadi Belum Lunas.');
+    }
+
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
         $booking = \App\Models\Booking::with('kamar')->findOrfail($id);
+
         return view('pages.booking.show', compact('booking'));
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -128,11 +152,11 @@ public function reject($id)
     /**
      * Remove the specified resource from storage.
      */
-
     public function destroy(string $id)
     {
         $booking = Booking::find($id);
         $booking->delete();
+
         return redirect()->route('booking.index');
     }
 }

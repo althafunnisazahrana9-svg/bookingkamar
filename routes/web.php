@@ -49,6 +49,10 @@ Route::group([
     Route::post('/pembayaran/{booking}/upload-bukti-transfer',
         [PembayaranController::class, 'uploadBuktiTransfer'])->name('pembayaran.uploadBuktiTransfer');
 
+    // status pembayaran
+    Route::post('/booking/{id}/lunas', [BookingController::class, 'setLunas'])->name('booking.setLunas');
+    Route::post('/booking/{id}/belum-lunas', [BookingController::class, 'setBelumLunas'])->name('booking.setBelumLunas');
+
     // Booking CRUD (biasa, sudah ada dari resource)
     Route::resource('/admin', App\Http\Controllers\AdminController::class);
 

@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
-use Illuminate\Http\Request;
 use App\Models\Pembayaran;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PembayaranController extends Controller
 {
-        public function konfirmasi($bookingId)
+    public function konfirmasi($bookingId)
     {
         $booking = Booking::findOrFail($bookingId);
+
         return view('pages.pembayaran.konfirmasi', compact('booking'));
     }
 
@@ -37,34 +38,88 @@ class PembayaranController extends Controller
 
     // Halaman instruksi transfer bank
     public function transfer($id)
-{
-    $booking = Booking::findOrFail($id);
+    {
+        $booking = Booking::findOrFail($id);
 
-    // kalau belum ada pembayaran, buat record
-    $booking->pembayaran()->firstOrCreate([], [
-        'status' => 'menunggu_konfirmasi',
-    ]);
+        // kalau belum ada pembayaran, buat record
+        $booking->pembayaran()->firstOrCreate([], [
+            'status' => 'menunggu_konfirmasi',
+        ]);
 
-    return view('pages.pembayaran.transfer', compact('booking'));
-}
+        return view('pages.pembayaran.transfer', compact('booking'));
+    }
 
-public function uploadBuktiTransfer(Request $request, $id)
-{
-    $request->validate([
-        'bukti_transfer' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-    ]);
+    public function uploadBuktiTransfer(Request $request, $id)
+    {
+        $request->validate([
+            'bukti_transfer' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
 
-    $pembayaran = Pembayaran::where('booking_id', $id)->firstOrFail();
+        $pembayaran = Pembayaran::where('booking_id', $id)->firstOrFail();
 
-    // Simpan file ke storage/app/public/bukti_transfer
-    $filePath = $request->file('bukti_transfer')->store('bukti_transfer', 'public');
+        // Simpan file ke storage/app/public/bukti_transfer
+        $filePath = $request->file('bukti_transfer')->store('bukti_transfer', 'public');
 
-    $pembayaran->bukti_transfer = $filePath;
-    $pembayaran->save();
+        $pembayaran->bukti_transfer = $filePath;
+        $pembayaran->save();
 
-    return redirect()->route('booking.show', $id)
-                     ->with('success', 'Bukti transfer berhasil diupload.');
-}
+        return redirect()->route('booking.show', $id)
+            ->with('success', 'Bukti transfer berhasil diupload.');
+    }
 
+    // status pembayaran
+    public function updateStatus(Request $request, Pembayaran $pembayaran)
+    {
+        $request->validate([
+            'status' => 'required|in:belum_bayar,menunggu_konfirmasi,lunas',
+        ]);
 
+        $pembayaran->status = $request->status;
+        $pembayaran->save();
+
+        return back()->with('success', 'Status pembayaran berhasil diperbarui.');
+    }
+
+    // store
+    public function store(Request $request, $bookingId)
+    {
+        $request->validate([
+            'bukti_transfer' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $path = $request->file('bukti_transfer')->store('bukti_transfer', 'public');
+
+        // simpan pembayaran
+        Pembayaran::create([
+            'booking_id' => $bookingId,
+            'bukti_transfer' => $path,
+            'status' => 'menunggu_konfirmasi', // <-- langsung set
+        ]);
+
+        return redirect()->route('booking.show', $bookingId)
+            ->with('success', 'Bukti transfer berhasil diunggah, menunggu konfirmasi admin.');
+    }
+
+    // lunas dan belum lunas
+    public function setLunas($id)
+    {
+        $pembayaran = Pembayaran::where('booking_id', $id)->first();
+        if ($pembayaran) {
+            $pembayaran->status = 'lunas';
+            $pembayaran->save();
+        }
+
+        return back()->with('success', 'Status pembayaran berhasil diubah menjadi Lunas.');
+    }
+
+    public function setBelumLunas($id)
+    {
+        $pembayaran = Pembayaran::where('booking_id', $id)->first();
+        if ($pembayaran) {
+            $pembayaran->status = 'belum_bayar';
+            $pembayaran->save();
+        }
+
+        return back()->with('success', 'Status pembayaran berhasil diubah menjadi Belum Lunas.');
+    }
 }

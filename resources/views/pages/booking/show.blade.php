@@ -83,6 +83,27 @@
                         {{-- end --}}
                     </tr>
                     <tr>
+                        <th width="25%">Status Pembayaran</th>
+                        <th width="10px">:</th>
+                        <td>
+                            @if ($booking->pembayaran)
+                                @if ($booking->pembayaran->status == 'belum_bayar')
+                                    <span class="badge bg-secondary">Belum Bayar</span>
+                                @elseif ($booking->pembayaran->status == 'menunggu_konfirmasi')
+                                    <span class="badge bg-warning text-dark">Menunggu Konfirmasi</span>
+                                @elseif ($booking->pembayaran->status == 'lunas')
+                                    <span class="badge bg-success">Lunas</span>
+                                @else
+                                    <span class="badge bg-dark">{{ ucfirst($booking->pembayaran->status) }}</span>
+                                @endif
+                            @else
+                                <span class="badge bg-secondary">Belum Ada Pembayaran</span>
+                            @endif
+
+
+                        </td>
+                    </tr>
+                    <tr>
                         <th width="25%">Booking pada</th>
                         <th width="10px">:</th>
                         <td>{{ $booking->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
@@ -129,6 +150,29 @@
                                 Tolak
                             </button>
                         </form>
+                    @endif
+                </div>
+
+                <div>
+                    {{-- Kalau sudah ada bukti transfer, tampilkan tombol Lunas/Belum Lunas --}}
+                    @if ($booking->pembayaran && $booking->pembayaran->bukti_transfer)
+                        <div style="display:flex; gap:5px;">
+                            <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST">
+                                @csrf
+                                <button type="submit"
+                                    class="btn btn-sm {{ $booking->pembayaran->status == 'lunas' ? 'btn-success' : 'btn btn-sm btn-success' }}">
+                                    Lunas
+                                </button>
+                            </form>
+
+                            <form action="{{ route('booking.setBelumLunas', $booking->id) }}" method="POST">
+                                @csrf
+                                <button type="submit"
+                                    class="btn btn-sm {{ $booking->pembayaran->status == 'belum_bayar' ? 'btn-warning' : 'btn-btn-sm btn-warning' }}">
+                                    Belum Lunas
+                                </button>
+                            </form>
+                        </div>
                     @endif
                 </div>
 
