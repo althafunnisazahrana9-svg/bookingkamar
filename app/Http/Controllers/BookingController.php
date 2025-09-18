@@ -99,6 +99,16 @@ class BookingController extends Controller
         }
 
         return redirect()->route('booking.success')->with('success', 'Booking berhasil dibuat');
+        // Cek metode pembayaran
+        if ($request->metode_pembayaran === 'transfer') {
+            return redirect()->route('pembayaran.transfer', $booking->id);
+        }
+
+        if ($request->metode_pembayaran === 'cod') {
+            return redirect()->route('pembayaran.cod', $booking->id);
+        }
+
+        return redirect()->route('booking.success')->with('success', 'Booking berhasil dibuat');
 
         Booking::create($request->all());
 
@@ -141,7 +151,7 @@ class BookingController extends Controller
      */
     public function show(string $id)
     {
-        $booking = \App\Models\Booking::with('kamar')->findOrfail($id);
+        $booking = Booking::with('kamar')->findOrfail($id);
 
         return view('pages.booking.show', compact('booking'));
     }
