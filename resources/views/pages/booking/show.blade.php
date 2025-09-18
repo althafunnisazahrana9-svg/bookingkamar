@@ -211,74 +211,6 @@
                                 <span class="ti ti-arrow-left"></span>
                                 Kembali
                             </a>
-<<<<<<< HEAD
-
-                            {{-- Hanya tampilkan tombol pembayaran jika status bukan rejected --}}
-                            @if ($booking->status != 'rejected')
-                                @if ($booking->pembayaran && $booking->pembayaran->bukti_transfer)
-                                    <a href="{{ asset('storage/' . $booking->pembayaran->bukti_transfer) }}"
-                                        target="_blank" class="btn btn-sm btn-info">
-                                        <span class="ti ti-file"></span> Lihat Bukti Transfer
-                                    </a>
-                                @else
-                                    {{-- Kalau transfer tanpa bukti ATAU COD --}}
-                                    <a href="{{ $booking->metode_pembayaran === 'transfer'
-                                        ? route('pembayaran.transfer', $booking->id)
-                                        : route('pembayaran.cod', $booking->id) }}"
-                                        class="btn btn-sm btn-success">
-                                        <span class="ti ti-receipt-2"></span> Pembayaran
-                                    </a>
-                                @endif
-                            @endif
-
-                        </div>
-
-                        <!-- Tombol kanan -->
-                        <div>
-                            @if ($booking->status == 'pending')
-                                <a href="{{ route('booking.confirm', $booking->id) }}" class="btn btn-sm btn-success">
-                                    <span class="ti ti-check"></span>
-                                    Konfirmasi
-                                </a>
-
-                                <form action="{{ route('booking.reject', $booking->id) }}" method="POST"
-                                    style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm btn-danger">
-                                        <span class="ti ti-x"></span>
-                                        Tolak
-                                    </button>
-                                </form>
-                            @endif
-                        </div>
-
-                        <div>
-                            {{-- Kalau sudah ada bukti transfer, tampilkan tombol Lunas/Belum Lunas --}}
-                            @if ($booking->pembayaran && $booking->pembayaran->bukti_transfer)
-                                <div style="display:flex; gap:5px;">
-                                    <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit"
-                                            class="btn btn-sm {{ $booking->pembayaran->status == 'lunas' ? 'btn-success' : 'btn btn-sm btn-success' }}">
-                                            Lunas
-                                        </button>
-                                    </form>
-
-                                    <form action="{{ route('booking.setBelumLunas', $booking->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit"
-                                            class="btn btn-sm {{ $booking->pembayaran->status == 'belum_bayar' ? 'btn-warning' : 'btn-btn-sm btn-warning' }}">
-                                            Belum Lunas
-                                        </button>
-                                    </form>
-                                </div>
-                            @endif
-                        </div>
-
-                    </div>
-
-                </div>
-=======
                         @else
                             {{-- Kalau transfer tanpa bukti ATAU COD --}}
                             <a href="{{ $booking->metode_pembayaran === 'transfer'
@@ -310,12 +242,9 @@
                     @endif
                 </div>
 
->>>>>>> d10eae5a807bd0a71ba22ef1fbd5a3cb9885b587
             </div>
         @endsection
 
-<<<<<<< HEAD
-=======
         </div>
         <!-- Tombol kanan -->
         <div>
@@ -357,7 +286,6 @@
                 </div>
             @endif
         </div>
->>>>>>> d10eae5a807bd0a71ba22ef1fbd5a3cb9885b587
     </div>
 </div>
 @endsection
