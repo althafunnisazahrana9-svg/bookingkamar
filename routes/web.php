@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PesanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/form', [App\Http\Controllers\FormController::class, 'index'])->name('pages.form.index');
@@ -23,8 +24,6 @@ Route::group([
     })->name('home');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-    Route::resource('/pesan', App\Http\Controllers\PesanController::class);
     Route::resource('/booking', App\Http\Controllers\BookingController::class);
 
     Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
@@ -32,6 +31,9 @@ Route::group([
     // Tambahan untuk konfirmasi & tolak booking
     Route::get('booking/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
     Route::post('booking/{id}/reject', [BookingController::class, 'reject'])->name('booking.reject');
+
+    // pesan welcome
+    Route::get('/welcome', [PesanController::class, 'welcome'])->name('pesan.welcome');
 
     // struk
     Route::get('/booking/{id}/struk', [BookingController::class, 'struk'])->name('booking.struk');

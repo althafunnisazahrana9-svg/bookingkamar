@@ -46,7 +46,7 @@
         </li>
 
         <li class="menu-item">
-            <a href="{{ route('pesan.create') }}" class="menu-link">
+            <a href="{{ route('pesan.welcome') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-message"></i>
                 Pesan Kamar
             </a>

@@ -20,7 +20,7 @@ class BookingController extends Controller
             ->when(request('tanggal'), function ($query, $tanggal) {
                 $query->whereDate('tanggal_checkin', $tanggal);
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->get();
 
         // ambil data notifikasi
