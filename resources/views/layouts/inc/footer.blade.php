@@ -2,7 +2,7 @@
     <div class="container-xxl">
         <div class="footer-container d-flex align-items-center justify-content-between py-4 flex-md-row flex-column">
             <div class="text-body">
-                Copyright &copy; {{ date('Y') }}. Hotel Aetheria | Timeless Luxury, Perfected Hospitality.
+                Copyright &copy; {{ date('Y') }}. Hotel Aetheria
             </div>
         </div>
     </div>

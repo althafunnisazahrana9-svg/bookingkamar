@@ -66,6 +66,9 @@
             <div class="col-md-7">
                 <div class="card card-body">
                     <h5 class="mb-0 fw-bold text-center">
+                        HOTEL AETHERIA
+                    </h5>
+                    <h5 class="mb-0 fw-bold text-center">
                         HALAMAN FORM BOOKING
                     </h5>
 
