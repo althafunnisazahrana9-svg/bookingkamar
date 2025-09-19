@@ -26,6 +26,9 @@ Route::group([
 
     Route::resource('/pesan', App\Http\Controllers\PesanController::class);
     Route::resource('/booking', App\Http\Controllers\BookingController::class);
+
+    Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
+
     // Tambahan untuk konfirmasi & tolak booking
     Route::get('booking/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
     Route::post('booking/{id}/reject', [BookingController::class, 'reject'])->name('booking.reject');
@@ -45,9 +48,12 @@ Route::group([
     Route::post('/pembayaran/konfirmasi/{booking}', [PembayaranController::class, 'storeKonfirmasi'])
         ->name('pembayaran.konfirmasi.store');
 
+    Route::post('/pembayaran/{id}', [PembayaranController::class, 'storeKonfirmasi'])
+        ->name('pembayaran.storeKonfirmasi');
+
     // upload bukti transfer
     Route::post('/pembayaran/{booking}/upload-bukti-transfer',
-        [PembayaranController::class, 'storeKonfirmasi'])->name('pembayaran.uploadKonfirmasi');
+        [PembayaranController::class, 'storeKonfirmasi'])->name('pembayaran.uploadBuktiTransfer');
 
     // untuk halaman pembayaran di tempat
     Route::get('/pembayaran/cod/{booking}', [PembayaranController::class, 'cod'])

@@ -39,7 +39,10 @@ class PembayaranController extends Controller
             'status' => 'menunggu_konfirmasi',
         ]);
 
-        return redirect()->route('booking.index')->with('success', 'Bukti transfer berhasil diupload!');
+        return redirect()
+            ->route('booking.show', $booking->id)
+            ->with('success', 'Bukti transfer berhasil diupload!');
+
     }
 
     // Halaman instruksi transfer

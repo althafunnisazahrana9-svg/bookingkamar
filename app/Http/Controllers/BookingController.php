@@ -17,7 +17,9 @@ class BookingController extends Controller
         // $booking = Booking::with('kamar')->orderBy('created_at', 'desc')->get();
 
         $booking = Booking::with('kamar')
-            ->when(request('tanggal'), function ($query, $tanggal) {})
+            ->when(request('tanggal'), function ($query, $tanggal) {
+                $query->whereDate('tanggal_checkin', $tanggal);
+            })
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -25,7 +27,7 @@ class BookingController extends Controller
         $notifikasi = Booking::with('kamar')->latest()->get();
 
         // kirim data notifikasi ke view
-        return view('pages.booking.index', compact('booking'));
+        return view('pages.booking.index', compact('booking', 'notifikasi'));
     }
 
     public function confirm($id)

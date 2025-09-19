@@ -23,7 +23,7 @@
                 <p>Booking untuk kamar: <strong>{{ $booking->kamar->nama }}</strong></p>
                 <p>Total bayar: <strong>Rp {{ number_format($booking->harga + 6500, 0, ',', '.') }}</strong></p>
 
-                <form action="{{ route('pembayaran.uploadBuktiTransfer', $booking->id) }}" method="POST"
+                <form action="{{ route('pembayaran.storeKonfirmasi', $booking->id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">

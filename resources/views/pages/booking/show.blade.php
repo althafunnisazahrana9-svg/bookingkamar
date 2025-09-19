@@ -109,9 +109,9 @@
                 </table>
             </div>
 
-            <div class="d-flex justify-content-between my-3">
-                <!-- Tombol kiri -->
-                <div>
+            <div class="d-flex justify-content-between mt-3">
+                <!-- Tombol kiri: Kembali, Lihat Bukti Transfer, Pembayaran -->
+                <div class="d-flex gap-2">
                     <a href="{{ route('booking.index') }}" class="btn btn-sm btn-primary">
                         <span class="ti ti-arrow-left"></span>
                         Kembali
@@ -134,11 +134,10 @@
                             </a>
                         @endif
                     @endif
-
                 </div>
 
-                <!-- Tombol kanan -->
-                <div>
+                <!-- Tombol kanan: Konfirmasi, Tolak, Lunas, Belum Lunas -->
+                <div class="d-flex gap-2">
                     @if ($booking->status == 'pending')
                         <a href="{{ route('booking.confirm', $booking->id) }}" class="btn btn-sm btn-success">
                             <span class="ti ti-check"></span>
@@ -153,33 +152,29 @@
                             </button>
                         </form>
                     @endif
-                </div>
 
-                <div>
                     {{-- Kalau sudah ada bukti transfer, tampilkan tombol Lunas/Belum Lunas --}}
                     @if ($booking->pembayaran && $booking->pembayaran->bukti_transfer)
-                        <div style="display:flex; gap:5px;">
-                            <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST">
+                        @if ($booking->pembayaran->status != 'lunas')
+                            <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST"
+                                style="display:inline;">
                                 @csrf
-                                <button type="submit"
-                                    class="btn btn-sm {{ $booking->pembayaran->status == 'lunas' ? 'btn-success' : 'btn btn-sm btn-success' }}">
-                                    Lunas
+                                <button type="submit" class="btn btn-sm btn-success">
+                                    <span class="ti ti-cash"></span> Lunas
                                 </button>
                             </form>
 
-                            <form action="{{ route('booking.setBelumLunas', $booking->id) }}" method="POST">
+                            <form action="{{ route('booking.setBelumLunas', $booking->id) }}" method="POST"
+                                style="display:inline;">
                                 @csrf
-                                <button type="submit"
-                                    class="btn btn-sm {{ $booking->pembayaran->status == 'belum_bayar' ? 'btn-warning' : 'btn-btn-sm btn-warning' }}">
-                                    Belum Lunas
+                                <button type="submit" class="btn btn-sm btn-warning">
+                                    <span class="ti ti-clock"></span> Belum Lunas
                                 </button>
                             </form>
-                        </div>
+                        @endif
                     @endif
                 </div>
-
             </div>
-
         </div>
     </div>
 @endsection
