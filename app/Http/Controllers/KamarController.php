@@ -13,6 +13,7 @@ class KamarController extends Controller
     public function index()
     {
         $kamar = Kamar::orderBy('nama')->get();
+
         return view('pages.kamar.index', compact('kamar'));
     }
 
@@ -36,6 +37,7 @@ class KamarController extends Controller
         ]);
 
         Kamar::create($request->all());
+
         return redirect()->route('kamar.index')
             ->with('success', 'Data kamar berhasil ditambahkan');
     }
@@ -46,6 +48,7 @@ class KamarController extends Controller
     public function show(string $id)
     {
         $kamar = Kamar::findOrFail($id);
+
         return view('pages.kamar.show', compact('kamar'));
     }
 
@@ -54,8 +57,7 @@ class KamarController extends Controller
      */
     public function edit(string $id)
     {
-        $kamar = Kamar::findOrFail($id);
-        return view('pages.kamar.edit', compact('kamar'));
+        //
     }
 
     /**
@@ -63,16 +65,7 @@ class KamarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'nama' => 'required',
-            'harga' => 'required',
-            'fasilitas' => 'required',
-        ]);
-
-        $kamar = Kamar::findOrFail($id);
-        $kamar->update($request->all());
-        return redirect()->route('kamar.index')
-            ->with('success', 'Data kamar berhasil diubah');
+        //
     }
 
     /**
@@ -80,9 +73,6 @@ class KamarController extends Controller
      */
     public function destroy(string $id)
     {
-        $kamar = Kamar::findOrFail($id);
-        $kamar->delete();
-        return redirect()->route('kamar.index')
-            ->with('success', 'Data kamar berhasil dihapus');
+        //
     }
 }
