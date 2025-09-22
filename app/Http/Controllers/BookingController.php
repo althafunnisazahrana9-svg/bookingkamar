@@ -148,6 +148,36 @@ class BookingController extends Controller
         return back()->with('success', 'Status pembayaran berhasil diubah menjadi Belum Lunas.');
     }
 
+    // about
+    public function about()
+    {
+        return view('pages.booking.about');
+    }
+
+    // services
+    public function services()
+    {
+        return view('pages.booking.services');
+    }
+
+    // rooms
+    public function rooms()
+    {
+        return view('pages.booking.rooms');
+    }
+
+    // news
+    public function news()
+    {
+        return view('pages.booking.news');
+    }
+
+    // contact
+    public function contact()
+    {
+        return view('pages.booking.contact');
+    }
+
     /**
      * Display the specified resource.
      */

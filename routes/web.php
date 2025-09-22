@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PembayaranController;
@@ -24,7 +25,28 @@ Route::group([
     })->name('home');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('/booking', App\Http\Controllers\BookingController::class);
+
+    Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
+
+    // about
+    Route::get('/about', [BookingController::class, 'about'])->name('booking.about');
+    Route::post('/about', [BookingController::class, 'about'])->name('booking.about');
+
+    // services
+    Route::get('/services', [BookingController::class, 'services'])->name('booking.services');
+    Route::post('/services', [BookingController::class, 'services'])->name('booking.services');
+
+    // rooms
+    Route::get('/rooms', [BookingController::class, 'rooms'])->name('booking.rooms');
+    Route::post('/rooms', [BookingController::class, 'rooms'])->name('booking.rooms');
+
+    // news
+    Route::get('/news', [BookingController::class, 'news'])->name('booking.news');
+    Route::post('/news', [BookingController::class, 'news'])->name('booking.news');
+
+    // contact
+    Route::get('/contact', [BookingController::class, 'contact'])->name('booking.contact');
+    Route::post('/contact', [BookingController::class, 'contact'])->name('booking.contact');
 
     Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
 

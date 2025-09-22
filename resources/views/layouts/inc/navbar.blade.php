@@ -1,91 +1,95 @@
-<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-    id="layout-navbar">
-    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-            <i class="ti ti-menu-2 ti-md"></i>
-        </a>
-    </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top w-100 shadow-sm">
+    <div class="container-fluid px-4">
+        {{-- Logo --}}
+        <a class="navbar-brand fw-bold text-white" href="#">HOTEL</a>
 
-    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+        {{-- Toggle button (mobile) --}}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <ul class="navbar-nav flex-row align-items-center ms-auto">
+        {{-- Menu --}}
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ route('booking.about') }}">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('booking.services') }}">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('booking.rooms') }}">Rooms</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('booking.news') }}">News</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('booking.contact') }}">Contact</a></li>
+            </ul>
 
+            {{-- Right section --}}
+            <ul class="navbar-nav d-flex align-items-center">
 
-            <!-- Notifikasi -->
-            <!-- Notifikasi -->
-            <li class="nav-item dropdown">
-                <a class="nav-link position-relative" href="#" id="notificationDropdown"
-                    data-bs-toggle="dropdown">
-                    <i class="bi bi-bell" style="font-size: 20px;"></i>
-                    @php
-                        $count = \App\Models\Booking::where('status', 'pending')->count();
-                    @endphp
-                    @if ($count > 0)
-                        <span class="badge bg-danger rounded-pill"
-                            style="position: absolute; top: 2px; right: 2px; font-size: 11px; padding: 2px 6px;">
-                            {{ $count }}
-                        </span>
-                    @endif
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li class="dropdown-header">Notifikasi</li>
-                    @foreach ($notifikasi as $notif)
-                        {{-- supaya notifikasi yang belum dibaca hurufnya tebal dan notifikasi yang sudah dibaca hurufnya biasa : fw-bold --}}
+                {{-- Alamat --}}
+                <li class="nav-item d-flex align-items-center text-white me-3">
+                    <i class="bi bi-geo-alt-fill me-1"></i>
+                    <small>1525 Laine, Los Angeles, CA</small>
+                </li>
+
+                {{-- Notifikasi --}}
+                <li class="nav-item dropdown mx-2">
+                    <a class="nav-link position-relative" href="#" id="notificationDropdown"
+                        data-bs-toggle="dropdown">
+                        <i class="bi bi-bell fs-5"></i>
+                        @php
+                            $count = \App\Models\Booking::where('status', 'pending')->count();
+                        @endphp
+                        @if ($count > 0)
+                            <span class="badge bg-danger rounded-pill"
+                                style="position: absolute; top: 0; right: 0; font-size: 11px; padding: 2px 6px;">
+                                {{ $count }}
+                            </span>
+                        @endif
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li class="dropdown-header">Notifikasi</li>
+                        @foreach ($notifikasi as $notif)
+                            <li>
+                                <a class="dropdown-item @if ($notif->status == 'pending') fw-bold @endif"
+                                    href="{{ route('booking.show', $notif->id) }}">
+                                    Booking: {{ $notif->kamar->nama ?? 'Kamar' }}
+                                    oleh {{ $notif->nama_pemesan }}
+                                    <small class="text-muted d-block">{{ $notif->created_at->diffForHumans() }}</small>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+
+                {{-- User / Admin --}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                        data-bs-toggle="dropdown">
+                        <img src="{{ asset('images/admin1.jpg') }}" alt="Admin" class="rounded-circle me-2"
+                            width="35" height="35">
+                        <span class="text-white">{{ Auth::user()->name }}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
                         <li>
-                            <a class="dropdown-item @if ($notif->status == 'pending') fw-bold @endif"
-                                href="{{ route('booking.show', $notif->id) }}">
-                                Booking : {{ $notif->kamar->nama ?? 'Kamar' }}
-                                oleh {{ $notif->nama_pemesan }}
-                                <small class="text-muted">{{ $notif->created_at->diffForHumans() }}</small>
+                            <a class="dropdown-item" href="{{ route('ubah-profil') }}">
+                                <i class="bi bi-person me-2"></i> Ubah Profil
                             </a>
                         </li>
-                    @endforeach
-                </ul>
-            </li>
-
-
-
-            <!-- User -->
-            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div class="d-flex align-items-center gap-1">
-                        <div class="avatar avatar-online">
-                            <img src="{{ asset('images/admin1.jpg') }}" alt class="rounded-circle" />
-                        </div>
-                        <span>{{ Auth::user()->name }}</span>
-                    </div>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-
-                    <li>
-                        <a class="dropdown-item" href="{{ route('ubah-profil') }}">
-                            <i class="ti ti-user me-3 ti-md"></i>
-                            <span class="align-middle">Ubah Profil</span>
-                        </a>
-                    </li>
-                    <li>
-                        <div class="d-grid px-2 pt-2 pb-1">
-                            <a class="btn btn-sm btn-danger d-flex" onclick="$('#logout-form').submit()"
-                                href="javascript:void(0);">
-                                <small class="align-middle">Logout</small>
-                                <i class="ti ti-logout ms-2 ti-14px"></i>
-                            </a>
-
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
                             <form id="logout-form" method="POST" action="{{ route('logout') }}">
                                 @csrf
+                                <button class="dropdown-item text-danger" type="submit">
+                                    <i class="bi bi-box-arrow-right me-2"></i> Logout
+                                </button>
                             </form>
-                        </div>
-                    </li>
-                </ul>
-            </li>
-            <!--/ User -->
-        </ul>
-    </div>
+                        </li>
+                    </ul>
+                </li>
 
-    <!-- Search Small Screens -->
-    <div class="navbar-search-wrapper search-input-wrapper d-none">
-        <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..."
-            aria-label="Search..." />
-        <i class="ti ti-x search-toggler cursor-pointer"></i>
+            </ul>
+        </div>
     </div>
 </nav>
+
+{{-- Tambahkan padding biar konten tidak ketutup navbar --}}
+<div style="padding-top: 80px;"></div>
