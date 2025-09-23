@@ -26,7 +26,7 @@ Route::group([
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
+    Route::resource('/booking', BookingController::class);
 
     // about
     Route::get('/about', [BookingController::class, 'about'])->name('booking.about');

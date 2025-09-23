@@ -98,12 +98,12 @@
                                         CNZ</span>
                                 </li>
                                 <li><img src="{{ asset('template2/img/phone-copy.png') }}" alt=""> <span>+62
-                                        (603)535-4592</span></li>
+                                        (885)0510-0167</span></li>
                                 <li><img src="{{ asset('template2/img/envelop.png') }}" alt="">
-                                    <span>hello@youremail.com</span>
+                                    <span>aetheria@mail.com</span>
                                 </li>
                                 <li><img src="{{ asset('template2/img/clock-copy.png') }}" alt="">
-                                    <span>Everyday: 06:00 -22:00</span>
+                                    <span>Everyday: 10:00 -22:00</span>
                                 </li>
                             </ul>
                         </div>
@@ -111,51 +111,8 @@
                             <h2>Follow us on:</h2>
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
                             <a href="#"><i class="fa fa-pinterest"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="contact-form">
-                        <h5>Write us ...</h5>
-                        <form action="#">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <p>From</p>
-                                    <div class="input-group">
-                                        <input type="text" placeholder="Full Name">
-                                        <img src="{{ asset('template2/img/edit.png') }}" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="input-group">
-                                        <input type="email" placeholder="Email">
-                                        <img src="{{ asset('template2/img/envelop-copy.png') }}" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="input-group phone-num">
-                                        <input type="text" placeholder="Phone">
-                                        <img src="{{ asset('template2/img/phone-copy.png') }}" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="message">
-                                        <p>Message</p>
-                                        <div class="textarea">
-                                            <textarea placeholder="Hi ..."></textarea>
-                                            <img src="{{ asset('template2/img/speech-copy.png') }}" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <button type="submit">Send <i class="lnr lnr-arrow-right"></i></button>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
