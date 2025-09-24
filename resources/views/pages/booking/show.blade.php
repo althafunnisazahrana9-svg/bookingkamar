@@ -153,24 +153,28 @@
                         </form>
                     @endif
 
-                    {{-- Kalau sudah ada bukti transfer, tampilkan tombol Lunas/Belum Lunas --}}
-                    @if ($booking->pembayaran && $booking->pembayaran->bukti_transfer)
-                        @if ($booking->pembayaran->status != 'lunas')
-                            <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST"
-                                style="display:inline;">
-                                @csrf
-                                <button type="submit" class="btn btn-sm btn-success">
-                                    <span class="ti ti-cash"></span> Lunas
-                                </button>
-                            </form>
+                    {{-- Tombol Lunas / Belum Lunas (Berlaku untuk COD & Transfer) --}}
+                    @if ($booking->pembayaran)
+                        @if ($booking->pembayaran->status !== 'lunas')
+                            <div class="text-end">
+                                {{-- Tombol Lunas --}}
+                                <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST"
+                                    class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="ti ti-cash"></i> Lunas
+                                    </button>
+                                </form>
 
-                            <form action="{{ route('booking.setBelumLunas', $booking->id) }}" method="POST"
-                                style="display:inline;">
-                                @csrf
-                                <button type="submit" class="btn btn-sm btn-warning">
-                                    <span class="ti ti-clock"></span> Belum Lunas
-                                </button>
-                            </form>
+                                {{-- Tombol Belum Lunas --}}
+                                <form action="{{ route('booking.setBelumLunas', $booking->id) }}" method="POST"
+                                    class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning">
+                                        <i class="ti ti-clock"></i> Belum Lunas
+                                    </button>
+                                </form>
+                            </div>
                         @endif
                     @endif
                 </div>
