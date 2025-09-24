@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{ asset('/vendor/fonts/fontawesome.css') }}" />
     <link rel="stylesheet" href="{{ asset('/vendor/fonts/tabler-icons.css') }}" />
     <link rel="stylesheet" href="{{ asset('/vendor/fonts/flag-icons.css') }}" />
+    <link rel="stylesheet" href="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css') }}">
 
     <!-- Core CSS -->
 
@@ -58,19 +59,22 @@
     <script src="{{ asset('/js/config.js') }}"></script>
 </head>
 
-<body>
+<body style="background-color: #c4a484;"> <!-- warna coklat muda untuk bg -->
     <!-- Content -->
 
     <div class="container-xxl">
         <div class="row justify-content-center py-5">
             <div class="col-md-7">
                 <div class="card card-body">
-                    <h5 class="mb-0 fw-bold text-center">
-                        HOTEL AETHERIA
-                    </h5>
-                    <h5 class="mb-0 fw-bold text-center">
-                        HALAMAN FORM BOOKING
-                    </h5>
+                    <div class="text-center mb-4">
+                        <!-- Logo -->
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo Hotel Aetheria"
+                            class="rounded-circle shadow" width="90" height="90">
+
+                        <!-- Judul -->
+                        <h4 class="fw-bold mt-3 mb-0">HOTEL AETHERIA</h4>
+                        <p class="text-muted mb-0">HALAMAN FORM BOOKING</p>
+                    </div>
 
                     <hr />
 
@@ -219,8 +223,9 @@
                             </div>
                         </div>
                         <div class="flex text-center">
-                            <button type="submit" class="btn btn-primary">
-                                <span class="ti ti-save me-1"></span>
+                            <button type="submit" class="btn px-5 py-2 fw-bold text-white"
+                                style="background-color:#A0522D;">
+                                <span class="bi bi-send-fill me-2"></span>
                                 Pesan
                             </button>
                         </div>
