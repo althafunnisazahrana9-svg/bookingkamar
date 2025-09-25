@@ -28,6 +28,7 @@
                             <th>Tanggal Check-in</th>
                             <th>Harga</th>
                             <th>Status</th>
+                            <th>Status Pembayaran</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -48,6 +49,17 @@
                                     @elseif ($item->status == 'rejected')
                                         <span class="badge bg-danger">Rejected</span> {{-- merah --}}
                                     @endif
+                                </td>
+                                {{-- status pembayaran --}}
+                                <td>
+                                    @if ($item->pembayaran && $item->pembayaran->status == 'belum_bayar')
+                                        <span class="badge bg-warning">Belum Bayar</span>
+                                    @elseif ($item->pembayaran && $item->pembayaran->status == 'lunas')
+                                        <span class="badge bg-success">Lunas</span>
+                                    @else
+                                        <span class="badge bg-secondary">-</span> {{-- kalau belum ada data pembayaran --}}
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="btn-group" role="group">
                                         <a href="{{ route('booking.show', $item->id) }}" class="btn btn-sm btn-info me-2">
