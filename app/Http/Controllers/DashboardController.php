@@ -31,10 +31,11 @@ class DashboardController extends Controller
             ->orderBy('tanggal', 'asc')
             ->pluck('total', 'tanggal');
 
-        // hitung status pembayaran
-        $belum = Pembayaran::where('status', 'belum_bayar')->count();
-        $pending = Pembayaran::where('status', 'menunggu_konfirmasi')->count();
-        $lunas = Pembayaran::where('status', 'lunas')->count();
+        // hitung status pembayaran berdasarkan booking
+        $statusPembayaran = Booking::join('pembayaran', 'booking.id', '=', 'pembayaran.booking_id')
+            ->select('pembayaran.status', \DB::raw('count(*) as total'))
+            ->groupBy('pembayaran.status')
+            ->pluck('total', 'pembayaran.status');
 
         // total pendapatan
         $totalPendapatan = Pembayaran::where('pembayaran.status', 'lunas')
@@ -46,9 +47,7 @@ class DashboardController extends Controller
             'bookingPerMetode',
             'bookingPerKamar',
             'totalPendapatan',
-            'belum',
-            'pending',
-            'lunas',
+            'statusPembayaran',
             'pendapatanPerHari'
         ));
     }

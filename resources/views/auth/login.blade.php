@@ -13,7 +13,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('/images/logo.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -69,12 +69,10 @@
                     <div class="card-body">
                         <!-- Logo -->
                         <div class="app-brand demo p-3">
-                            <a href="{{ route('home') }}" class="app-brand-link d-flex align-items-center text-white">
-                                <span class="app-brand-logo">
-                                    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="rounded-circle"
-                                        width="65" height="65">
-                                </span>
-                                <span class="app-brand-text fw-bold">Hotel Aetheria</span>
+                            <a href="{{ route('home') }}" class="d-flex align-items-center text-decoration-none">
+                                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="rounded-circle me-3"
+                                    width="85" height="85">
+                                <span class="fw-bold fs-4">Hotel Aetheria !</span>
                             </a>
                         </div>
                         <!-- /Logo -->

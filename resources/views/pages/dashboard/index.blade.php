@@ -97,20 +97,33 @@
         new Chart(ctxPayment, {
             type: 'pie',
             data: {
-                labels: ['Belum Bayar', 'Pending', 'Lunas'],
+                labels: {!! json_encode(
+                    $statusPembayaran->keys()->map(function ($key) {
+                        return ucwords(str_replace('_', ' ', $key));
+                    }),
+                ) !!}, // label otomatis dari DB
                 datasets: [{
-                    data: [{{ $belum }}, {{ $pending }}, {{ $lunas }}],
+                    data: {!! json_encode($statusPembayaran->values()) !!}, // jumlah otomatis
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.7)',
                         'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)'
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 159, 64, 0.7)'
                     ]
                 }]
             }
         });
 
-        // Chart Pendapatan Per Hari
+
+        // Chart Pendapatan Per Hari (Line Chart)
         const ctxPendapatan = document.getElementById('pendapatan-chart').getContext('2d');
+
+        // Membuat gradient untuk background line
+        const gradient = ctxPendapatan.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(153, 102, 255, 0.4)');
+        gradient.addColorStop(1, 'rgba(153, 102, 255, 0)');
+
         new Chart(ctxPendapatan, {
             type: 'line',
             data: {
@@ -118,10 +131,12 @@
                 datasets: [{
                     label: 'Pendapatan (Rp)',
                     data: {!! json_encode($pendapatanPerHari->values()) !!}, // Total
-                    borderColor: 'rgba(153, 102, 255, 0.9)',
-                    backgroundColor: 'rgba(153, 102, 255, 0.3)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    backgroundColor: gradient,
                     fill: true,
-                    tension: 0.3
+                    tension: 0.3, // membuat garis lebih smooth
+                    pointRadius: 4,
+                    pointBackgroundColor: 'rgba(153, 102, 255, 1)'
                 }]
             },
             options: {
