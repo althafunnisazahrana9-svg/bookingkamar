@@ -10,34 +10,36 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // total booking (angka)
-        $totalBooking = Booking::count();
+        // total booking (angka) -> exclude booking ditolak
+        $totalBooking = Booking::where('status', '!=', 'rejected')->count();
 
-        // booking per metode pembayaran (array -> bisa foreach atau chart)
-        $bookingPerMetode = Booking::select('metode_pembayaran', \DB::raw('count(*) as total'))
+        // booking per metode pembayaran -> exclude booking ditolak
+        $bookingPerMetode = Booking::where('status', '!=', 'rejected')
+            ->select('metode_pembayaran', \DB::raw('count(*) as total'))
             ->groupBy('metode_pembayaran')
             ->pluck('total', 'metode_pembayaran');
 
-        // booking per kamar (array -> bisa foreach)
-        $bookingPerKamar = Booking::select('kamar_id', \DB::raw('count(*) as total'))
+        // booking per kamar -> exclude booking ditolak
+        $bookingPerKamar = Booking::where('status', '!=', 'rejected')
+            ->select('kamar_id', \DB::raw('count(*) as total'))
             ->groupBy('kamar_id')
             ->pluck('total', 'kamar_id');
 
-        $pendapatanPerHari = Pembayaran::where('pembayaran.status', 'lunas') // kasih prefix
+        // pendapatan per hari (hanya yang lunas)
+        $pendapatanPerHari = Pembayaran::where('pembayaran.status', 'lunas')
             ->join('booking', 'pembayaran.booking_id', '=', 'booking.id')
             ->selectRaw('DATE(pembayaran.created_at) as tanggal, SUM(booking.harga) as total')
-            ->where('pembayaran.status', 'lunas')
             ->groupBy('tanggal')
             ->orderBy('tanggal', 'asc')
             ->pluck('total', 'tanggal');
 
-        // hitung status pembayaran berdasarkan booking
+        // status pembayaran berdasarkan booking
         $statusPembayaran = Booking::join('pembayaran', 'booking.id', '=', 'pembayaran.booking_id')
             ->select('pembayaran.status', \DB::raw('count(*) as total'))
             ->groupBy('pembayaran.status')
             ->pluck('total', 'pembayaran.status');
 
-        // total pendapatan
+        // total pendapatan (hanya yang lunas)
         $totalPendapatan = Pembayaran::where('pembayaran.status', 'lunas')
             ->join('booking', 'pembayaran.booking_id', '=', 'booking.id')
             ->sum('booking.harga');
