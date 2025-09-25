@@ -20,11 +20,11 @@ class DashboardController extends Controller
             ->pluck('total', 'metode_pembayaran');
 
         // booking per kamar -> exclude booking ditolak
-        $bookingPerKamar = Booking::where('status', '!=', 'rejected')
-            ->select('kamar_id', \DB::raw('count(*) as total'))
-            ->groupBy('kamar_id')
-            ->pluck('total', 'kamar_id');
-
+        $bookingPerKamar = Booking::where('booking.status', '!=', 'rejected')
+            ->join('kamar', 'booking.kamar_id', '=', 'kamar.id')
+            ->select('kamar.nama as kamar_nama', \DB::raw('count(*) as total'))
+            ->groupBy('kamar.nama')
+            ->pluck('total', 'kamar_nama');
         // pendapatan per hari (hanya yang lunas)
         $pendapatanPerHari = Pembayaran::where('pembayaran.status', 'lunas')
             ->join('booking', 'pembayaran.booking_id', '=', 'booking.id')

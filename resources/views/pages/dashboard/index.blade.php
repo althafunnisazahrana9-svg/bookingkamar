@@ -36,7 +36,7 @@
                         <h5>Booking per Kamar</h5>
                         <ul class="list-unstyled">
                             @foreach ($bookingPerKamar as $kamar => $total)
-                                <li>Kamar ID {{ $kamar }}: {{ $total }}</li>
+                                <li>Kamar {{ $kamar }}: {{ $total }}</li>
                             @endforeach
                         </ul>
                     </div>
