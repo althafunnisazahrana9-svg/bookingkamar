@@ -94,30 +94,37 @@
 
 @push('scripts')
     <script src="{{ asset('/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-    <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
-    <script type="text/javascript">
-        $(function() {
-            $('.dataTable').DataTable();
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
         });
 
-        // menghapus data
         function actionDelete(url) {
-            Swal.fire({
-                title: 'Apakah anda yakin?',
-                text: "Data akan dihapus!",
-                icon: 'warning',
+            swalWithBootstrapButtons.fire({
+                title: "Yakin anda ingin menghapus?",
+                text: "Data yang dihapus tidak akan kembali!",
+                icon: "warning",
                 showCancelButton: true,
-                confirmButtonText: 'Ya, hapus!'
+                confirmButtonText: "Ya, hapus!",
+                cancelButtonText: "Batal",
+                reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $('#formDelete').attr('action', url);
-                    $('#formDelete').submit();
+                    let form = document.getElementById('formDelete');
+                    form.action = url;
+                    form.submit();
                 }
             });
         }
     </script>
 
-    {{-- untuk menampilkan notifikasi --}}
+
+    {{-- untuk menampilkan notifikasi sukses setelah redirect --}}
     @if (Session::has('success'))
         <script type="text/javascript">
             Swal.fire({
