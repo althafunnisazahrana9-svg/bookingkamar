@@ -118,7 +118,10 @@
                                     <img src="{{ asset('template2/img/blog/recent-1.jpg') }}" alt="">
                                 </div>
                                 <div class="recent-text">
-                                    <h5>Aetheria: Kemewahan dan Kedamaian dalam Satu Tempat.</h5>
+                                    <h5>
+                                        <a href="{{ route('news.index') }}">Aetheria: Kemewahan dan Kedamaian dalam
+                                            Satu Tempat.</a>
+                                    </h5>
                                     <div class="recent-time">
                                         <i class="fa fa-clock-o"></i>
                                         <span>September 17, 2025</span>
@@ -130,10 +133,10 @@
                                     <img src="{{ asset('template2/img/blog/recent-2.jpg') }}" alt="">
                                 </div>
                                 <div class="recent-text">
-                                    <h5>Consectetur lorem ipsum dolor sit amet.</h5>
+                                    <h5>Kuliner Istimewa untuk Setiap Momen.</h5>
                                     <div class="recent-time">
                                         <i class="fa fa-clock-o"></i>
-                                        <span>February 17, 2018</span>
+                                        <span>September 17, 2025</span>
                                     </div>
                                 </div>
                             </div>
@@ -142,10 +145,10 @@
                                     <img src="{{ asset('template2/img/blog/recent-3.jpg') }}" alt="">
                                 </div>
                                 <div class="recent-text">
-                                    <h5>Ipsum dolor sit amet, consectetur.</h5>
+                                    <h5>Romantisme di Setiap Detil.</h5>
                                     <div class="recent-time">
                                         <i class="fa fa-clock-o"></i>
-                                        <span>February 17, 2018</span>
+                                        <span>September 17, 2025</span>
                                     </div>
                                 </div>
                             </div>

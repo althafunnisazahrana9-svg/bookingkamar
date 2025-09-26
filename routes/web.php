@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PengunjungController;
 use App\Http\Controllers\PesanController;
@@ -105,5 +106,9 @@ Route::group([
 
     Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
     Route::post('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
+
+    // news
+    Route::get('news/KemewahandanKedamaianalamSatuTempat', [NewsController::class, 'index'])->name('news.index');
+    Route::post('news/KemewahandanKedamaianalamSatuTempat', [NewsController::class, 'index'])->name('news.index');
 
 });
