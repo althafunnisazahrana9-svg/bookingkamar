@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -15,16 +15,20 @@ class DatabaseSeeder extends Seeder
     {
         // user admin default
         User::updateOrCreate(
-            ['email' => 'admin@mail.com'], 
+            ['email' => 'admin@mail.com'],
             [
                 'name' => 'Administrator',
                 'password' => Hash::make('password123'), // ubah sesuai kebutuhan
             ]
         );
 
-        // kamar 
-            $this->call([
+        // kamar
+        $this->call([
             KamarSeeder::class,
+        ]);
+
+        $this->call([
+            PengunjungSeeder::class,
         ]);
     }
 }

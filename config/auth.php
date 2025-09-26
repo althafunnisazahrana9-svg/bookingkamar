@@ -40,6 +40,12 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'pengunjung' => [
+            'driver' => 'session',
+            'provider' => 'pengunjung',
+        ],
+
     ],
 
     /*
@@ -69,6 +75,11 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        'pengunjung' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Pengunjung::class,
+        ],
     ],
 
     /*

@@ -4,11 +4,16 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PengunjungController;
 use App\Http\Controllers\PesanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/form', [App\Http\Controllers\FormController::class, 'index'])->name('pages.form.index');
 Route::post('/form', [App\Http\Controllers\FormController::class, 'store'])->name('pages.form.store');
+
+// route untuk login pengunjung
+Route::get('/pengunjung/login', [PengunjungController::class, 'index'])->name('pengunjung.login');
+Route::post('/pengunjung/login', [PengunjungController::class, 'login'])->name('pengunjung.login.post');
 
 Auth::routes([
     'register' => false,
