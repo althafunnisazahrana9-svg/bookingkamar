@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="{{ asset('template2/css/magnific-popup.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('template2/css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('template2/css/style.css') }}" type="text/css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}" />
 </head>
 
 <body>
@@ -54,8 +57,8 @@
                     <nav class="main-menu mobile-menu">
                         <ul>
                             <li><a href="{{ route('booking.about') }}">About</a></li>
-                            <li><a href="{{ route('booking.rooms') }}">Rooms</a></li>
                             <li><a href="{{ route('booking.services') }}">Services</a></li>
+                            <li><a href="{{ route('booking.rooms') }}">Rooms</a></li>
                             <li><a href="{{ route('booking.news') }}">News</a></li>
                             <li><a href="{{ route('booking.contact') }}">Contact</a></li>
                         </ul>

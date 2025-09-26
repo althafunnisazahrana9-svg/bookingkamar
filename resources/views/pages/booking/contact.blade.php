@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{ asset('template2/css/magnific-popup.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('template2/css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('template2/css/style.css') }}" type="text/css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}" />
 </head>
 
 <body>

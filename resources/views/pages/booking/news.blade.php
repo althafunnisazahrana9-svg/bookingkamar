@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="{{ asset('template2/css/magnific-popup.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('template2/css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('template2/css/style.css') }}" type="text/css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}" />
 </head>
 
 <body>
@@ -54,6 +57,7 @@
                     <nav class="main-menu mobile-menu">
                         <ul>
                             <li><a href="{{ route('booking.about') }}">About</a></li>
+                            <li><a href="{{ route('booking.services') }}">Services</a></li>
                             <li><a href="{{ route('booking.rooms') }}">Rooms</a></li>
                             <li><a href="{{ route('booking.news') }}">News</a></li>
                             <li><a href="{{ route('booking.contact') }}">Contact</a></li>
@@ -114,10 +118,10 @@
                                     <img src="{{ asset('template2/img/blog/recent-1.jpg') }}" alt="">
                                 </div>
                                 <div class="recent-text">
-                                    <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
+                                    <h5>Aetheria: Kemewahan dan Kedamaian dalam Satu Tempat.</h5>
                                     <div class="recent-time">
                                         <i class="fa fa-clock-o"></i>
-                                        <span>February 17, 2018</span>
+                                        <span>September 17, 2025</span>
                                     </div>
                                 </div>
                             </div>
