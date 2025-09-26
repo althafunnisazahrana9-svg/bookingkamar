@@ -7,12 +7,15 @@
     <meta name="keywords" content="Hotel, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Rooms | Hotel Aethera</title>
+    <title>Rooms | Hotel Aetheria</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Taviraj:300,400,500,600,700,800,900&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{ asset('template2/css/bootstrap.min.css') }}" type="text/css">
@@ -97,9 +100,6 @@
                             <div class="single-room-pic">
                                 <img src="{{ asset('template2/img/room/rooms-1.jpg') }}" alt="">
                             </div>
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-2.jpg') }}" alt="">
-                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -117,427 +117,448 @@
                                     eget sapien ac, ultrices rhoncus ipsum.</p>
                             </div>
                             <div class="room-features">
-                                <div class="room-info">
-                                    <i class="flaticon-019-television"></i>
-                                    <span>Smart TV</span>
+                                <div class="row">
+                                    <div class="col-md-3 col-6 mb-3">
+                                        <div class="room-info d-flex flex-column align-items-center">
+                                            <i class="bi bi-tv" style="font-size:40px; color:#a0843a;"></i>
+                                            <span class="mt-2">Smart TV</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-6 mb-3">
+                                        <div class="room-info d-flex flex-column align-items-center">
+                                            <i class="bi bi-wifi" style="font-size:40px; color:#a0843a;"></i>
+                                            <span class="mt-2">High Wi-fi</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-6 mb-3">
+                                        <div class="room-info d-flex flex-column align-items-center">
+                                            <i class="bi bi-snow" style="font-size:40px; color:#a0843a;"></i>
+                                            <span class="mt-2">AC</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-6 mb-3">
+                                        <div class="room-info d-flex flex-column align-items-center">
+                                            <i class="bi bi-cup-hot" style="font-size:40px; color:#a0843a;"></i>
+                                            <span class="mt-2">Sarapan</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="room-info">
-                                    <i class="flaticon-029-wifi"></i>
-                                    <span>High Wi-fii</span>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rooms-page-item">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="room-pic-slider owl-carousel">
+                        <div class="single-room-pic">
+                            <img src="{{ asset('template2/img/room/rooms-3.jpg') }}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="room-text">
+                        <div class="room-title">
+                            <h2>Lavender</h2>
+                            <div class="room-price">
+                                <span>From</span>
+                                <h2>Rp 1.325.000</h2>
+                                <sub>/night</sub>
+                            </div>
+                        </div>
+                        <div class="room-desc">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
+                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                        </div>
+                        <div class="room-features">
+                            <div class="row">
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-cup-hot" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Kopi</span>
+                                    </div>
                                 </div>
-                                <div class="room-info">
-                                    <i class="flaticon-003-air-conditioner"></i>
-                                    <span>AC</span>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-cup-hot" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Teh</span>
+                                    </div>
                                 </div>
-                                <div class="room-info">
-                                    <i class="flaticon-036-parking"></i>
-                                    <span>Sarapan</span>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-bucket" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Ketel Listrik</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="rooms-page-item">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="room-pic-slider owl-carousel">
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-3.jpg') }}" alt="">
-                            </div>
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-2.jpg') }}" alt="">
-                            </div>
+        </div>
+        </div>
+        <div class="rooms-page-item">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="room-pic-slider owl-carousel">
+                        <div class="single-room-pic">
+                            <img src="{{ asset('template2/img/room/rooms-4.jpg') }}" alt="">
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="room-text">
-                            <div class="room-title">
-                                <h2>Lavender</h2>
-                                <div class="room-price">
-                                    <span>From</span>
-                                    <h2>Rp 1.325.000</h2>
-                                    <sub>/night</sub>
-                                </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="room-text">
+                        <div class="room-title">
+                            <h2>Sky Blue</h2>
+                            <div class="room-price">
+                                <span>From</span>
+                                <h2>Rp 1.550.000</h2>
+                                <sub>/night</sub>
                             </div>
-                            <div class="room-desc">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                    eget sapien ac, ultrices rhoncus ipsum.</p>
-                            </div>
-                            <div class="room-features">
-                                <div class="room-info">
-                                    <i class="flaticon-019-television"></i>
-                                    <span>Kopi</span>
+                        </div>
+                        <div class="room-desc">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
+                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                        </div>
+                        <div class="room-features">
+                            <div class="row">
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-display" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Smart Mirror</span>
+                                    </div>
                                 </div>
-                                <div class="room-info">
-                                    <i class="flaticon-029-wifi"></i>
-                                    <span>Teh Set</span>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-fire" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Pemanas Ruangan</span>
+                                    </div>
                                 </div>
-                                <div class="room-info">
-                                    <i class="flaticon-003-air-conditioner"></i>
-                                    <span>Ketel Listrik</span>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-snow" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">AC</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="rooms-page-item">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="room-pic-slider owl-carousel">
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-4.jpg') }}" alt="">
-                            </div>
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-2.jpg') }}" alt="">
-                            </div>
+        </div>
+        <div class="rooms-page-item">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="room-pic-slider owl-carousel">
+                        <div class="single-room-pic">
+                            <img src="{{ asset('template2/img/room/rooms-5.jpg') }}" alt="">
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="room-text">
-                            <div class="room-title">
-                                <h2>Sky Blue</h2>
-                                <div class="room-price">
-                                    <span>From</span>
-                                    <h2>Rp 1.550.000</h2>
-                                    <sub>/night</sub>
-                                </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="room-text">
+                        <div class="room-title">
+                            <h2>Suite Room</h2>
+                            <div class="room-price">
+                                <span>From</span>
+                                <h2>Rp 2.000.000</h2>
+                                <sub>/night</sub>
                             </div>
-                            <div class="room-desc">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                    eget sapien ac, ultrices rhoncus ipsum.</p>
-                            </div>
-                            <div class="room-features">
-                                <div class="room-info">
-                                    <i class="flaticon-019-television"></i>
-                                    <span>Smart Mirror</span>
+                        </div>
+                        <div class="room-desc">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
+                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                        </div>
+                        <div class="room-features">
+                            <div class="row">
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-tv" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Smart TV</span>
+                                    </div>
                                 </div>
-                                <div class="room-info">
-                                    <i class="flaticon-029-wifi"></i>
-                                    <span>Pemanas Ruangan</span>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-wifi" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">High Wi-fi</span>
+                                    </div>
                                 </div>
-                                <div class="room-info">
-                                    <i class="flaticon-003-air-conditioner"></i>
-                                    <span>AC</span>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-snow" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">AC</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-tv-fill" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">TV Internasional</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="rooms-page-item">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="room-pic-slider owl-carousel">
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-5.jpg') }}" alt="">
-                            </div>
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-2.jpg') }}" alt="">
-                            </div>
+        </div>
+        <div class="rooms-page-item">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="room-pic-slider owl-carousel">
+                        <div class="single-room-pic">
+                            <img src="{{ asset('images/family.jpg') }}" alt="">
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="room-text">
-                            <div class="room-title">
-                                <h2>Suite Room</h2>
-                                <div class="room-price">
-                                    <span>From</span>
-                                    <h2>Rp 2.000.000</h2>
-                                    <sub>/night</sub>
-                                </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="room-text">
+                        <div class="room-title">
+                            <h2>Family Room</h2>
+                            <div class="room-price">
+                                <span>From</span>
+                                <h2>Rp 1.457.000</h2>
+                                <sub>/night</sub>
                             </div>
-                            <div class="room-desc">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                    eget sapien ac, ultrices rhoncus ipsum.</p>
-                            </div>
-                            <div class="room-features">
-                                <div class="room-info">
-                                    <i class="flaticon-019-television"></i>
-                                    <span>Smart TV</span>
+                        </div>
+                        <div class="room-desc">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
+                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                        </div>
+                        <div class="room-features">
+                            <div class="row">
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-house-door" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Balkon</span>
+                                    </div>
                                 </div>
-                                <div class="room-info">
-                                    <i class="flaticon-029-wifi"></i>
-                                    <span>High Wi-fii</span>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-tree" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Pemandangan</span>
+                                    </div>
                                 </div>
-                                <div class="room-info">
-                                    <i class="flaticon-003-air-conditioner"></i>
-                                    <span>AC</span>
-                                </div>
-                                <div class="room-info">
-                                    <i class="flaticon-036-parking"></i>
-                                    <span>TV Internasional</span>
+                                <div class="col-md-3 col-6 mb-3 px-0">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-snow mx-auto" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">AC</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="rooms-page-item">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="room-pic-slider owl-carousel">
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-5.jpg') }}" alt="">
-                            </div>
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-2.jpg') }}" alt="">
-                            </div>
+        </div>
+        <div class="rooms-page-item">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="room-pic-slider owl-carousel">
+                        <div class="single-room-pic">
+                            <img src="{{ asset('images/couple.jpg') }}" alt="">
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="room-text">
-                            <div class="room-title">
-                                <h2>Family Room</h2>
-                                <div class="room-price">
-                                    <span>From</span>
-                                    <h2>Rp 1.457.000</h2>
-                                    <sub>/night</sub>
-                                </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="room-text">
+                        <div class="room-title">
+                            <h2>Couple Room</h2>
+                            <div class="room-price">
+                                <span>From</span>
+                                <h2>Rp 3.000.000</h2>
+                                <sub>/night</sub>
                             </div>
-                            <div class="room-desc">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                    eget sapien ac, ultrices rhoncus ipsum.</p>
+                        </div>
+                        <div class="room-desc">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
+                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                        </div>
+                        <div class="room-features">
+                            <div class="room-info">
+                                <i class="flaticon-019-television"></i>
+                                <span>Ranjang Linen</span>
                             </div>
-                            <div class="room-features">
-                                <div class="room-info">
-                                    <i class="flaticon-019-television"></i>
-                                    <span>Balkon</span>
-                                </div>
-                                <div class="room-info">
-                                    <i class="flaticon-029-wifi"></i>
-                                    <span>Pemandangan Langsung</span>
-                                </div>
-                                <div class="room-info">
-                                    <i class="flaticon-003-air-conditioner"></i>
-                                    <span>AC</span>
-                                </div>
+                            <div class="room-info">
+                                <i class="flaticon-029-wifi"></i>
+                                <span>Speacker</span>
+                            </div>
+                            <div class="room-info">
+                                <i class="flaticon-003-air-conditioner"></i>
+                                <span>AC</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="rooms-page-item">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="room-pic-slider owl-carousel">
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-5.jpg') }}" alt="">
-                            </div>
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-2.jpg') }}" alt="">
-                            </div>
+        </div>
+        <div class="rooms-page-item">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="room-pic-slider owl-carousel">
+                        <div class="single-room-pic">
+                            <img src="{{ asset('images/crystal.jpg') }}" alt="">
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="room-text">
-                            <div class="room-title">
-                                <h2>Couple Room</h2>
-                                <div class="room-price">
-                                    <span>From</span>
-                                    <h2>Rp 3.000.000</h2>
-                                    <sub>/night</sub>
-                                </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="room-text">
+                        <div class="room-title">
+                            <h2>Crystal</h2>
+                            <div class="room-price">
+                                <span>From</span>
+                                <h2>Rp 2.755.000</h2>
+                                <sub>/night</sub>
                             </div>
-                            <div class="room-desc">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                    eget sapien ac, ultrices rhoncus ipsum.</p>
+                        </div>
+                        <div class="room-desc">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
+                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                        </div>
+                        <div class="room-features">
+                            <div class="room-info">
+                                <i class="flaticon-019-television"></i>
+                                <span>Shower</span>
                             </div>
-                            <div class="room-features">
-                                <div class="room-info">
-                                    <i class="flaticon-019-television"></i>
-                                    <span>Ranjang Linen</span>
-                                </div>
-                                <div class="room-info">
-                                    <i class="flaticon-029-wifi"></i>
-                                    <span>Speacker</span>
-                                </div>
-                                <div class="room-info">
-                                    <i class="flaticon-003-air-conditioner"></i>
-                                    <span>AC</span>
-                                </div>
+                            <div class="room-info">
+                                <i class="flaticon-029-wifi"></i>
+                                <span>Bathtub Terpisah</span>
+                            </div>
+                            <div class="room-info">
+                                <i class="flaticon-003-air-conditioner"></i>
+                                <span>AC</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="rooms-page-item">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="room-pic-slider owl-carousel">
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-5.jpg') }}" alt="">
-                            </div>
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-2.jpg') }}" alt="">
-                            </div>
+        </div>
+        <div class="rooms-page-item">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="room-pic-slider owl-carousel">
+                        <div class="single-room-pic">
+                            <img src="{{ asset('images/luxury.jpg') }}" alt="">
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="room-text">
-                            <div class="room-title">
-                                <h2>Crystal</h2>
-                                <div class="room-price">
-                                    <span>From</span>
-                                    <h2>Rp 2.755.000</h2>
-                                    <sub>/night</sub>
-                                </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="room-text">
+                        <div class="room-title">
+                            <h2>Luxury Stay</h2>
+                            <div class="room-price">
+                                <span>From</span>
+                                <h2>Rp 4.999.999</h2>
+                                <sub>/night</sub>
                             </div>
-                            <div class="room-desc">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                    eget sapien ac, ultrices rhoncus ipsum.</p>
+                        </div>
+                        <div class="room-desc">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
+                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                        </div>
+                        <div class="room-features">
+                            <div class="room-info">
+                                <i class="flaticon-019-television"></i>
+                                <span>Kulkas Kecil</span>
                             </div>
-                            <div class="room-features">
-                                <div class="room-info">
-                                    <i class="flaticon-019-television"></i>
-                                    <span>Shower</span>
-                                </div>
-                                <div class="room-info">
-                                    <i class="flaticon-029-wifi"></i>
-                                    <span>Bathtub Terpisah</span>
-                                </div>
-                                <div class="room-info">
-                                    <i class="flaticon-003-air-conditioner"></i>
-                                    <span>AC</span>
-                                </div>
+                            <div class="room-info">
+                                <i class="flaticon-029-wifi"></i>
+                                <span>Meja Kerja</span>
+                            </div>
+                            <div class="room-info">
+                                <i class="flaticon-003-air-conditioner"></i>
+                                <span>AC</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="rooms-page-item">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="room-pic-slider owl-carousel">
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-5.jpg') }}" alt="">
-                            </div>
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-2.jpg') }}" alt="">
-                            </div>
+        </div>
+        <div class="rooms-page-item">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="room-pic-slider owl-carousel">
+                        <div class="single-room-pic">
+                            <img src="{{ asset('images/platinum.jpg') }}" alt="">
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="room-text">
-                            <div class="room-title">
-                                <h2>Luxury Stay</h2>
-                                <div class="room-price">
-                                    <span>From</span>
-                                    <h2>Rp 4.999.999</h2>
-                                    <sub>/night</sub>
-                                </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="room-text">
+                        <div class="room-title">
+                            <h2>Platinum</h2>
+                            <div class="room-price">
+                                <span>From</span>
+                                <h2>Rp 4.443.000</h2>
+                                <sub>/night</sub>
                             </div>
-                            <div class="room-desc">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                    eget sapien ac, ultrices rhoncus ipsum.</p>
+                        </div>
+                        <div class="room-desc">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
+                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                        </div>
+                        <div class="room-features">
+                            <div class="room-info">
+                                <i class="flaticon-019-television"></i>
+                                <span>Smart Mirror</span>
                             </div>
-                            <div class="room-features">
-                                <div class="room-info">
-                                    <i class="flaticon-019-television"></i>
-                                    <span>Kulkas Kecil</span>
-                                </div>
-                                <div class="room-info">
-                                    <i class="flaticon-029-wifi"></i>
-                                    <span>Meja Kerja</span>
-                                </div>
-                                <div class="room-info">
-                                    <i class="flaticon-003-air-conditioner"></i>
-                                    <span>AC</span>
-                                </div>
+                            <div class="room-info">
+                                <i class="flaticon-003-air-conditioner"></i>
+                                <span>AC</span>
+                            </div>
+                            <div class="room-info">
+                                <i class="flaticon-036-parking"></i>
+                                <span>TV Internasional</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="rooms-page-item">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="room-pic-slider owl-carousel">
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-5.jpg') }}" alt="">
-                            </div>
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-2.jpg') }}" alt="">
-                            </div>
+        </div>
+        <div class="rooms-page-item">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="room-pic-slider owl-carousel">
+                        <div class="single-room-pic">
+                            <img src="{{ asset('images/diamond.jpg') }}" alt="">
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="room-text">
-                            <div class="room-title">
-                                <h2>Platinum</h2>
-                                <div class="room-price">
-                                    <span>From</span>
-                                    <h2>Rp 4.443.000</h2>
-                                    <sub>/night</sub>
-                                </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="room-text">
+                        <div class="room-title">
+                            <h2>Diamond</h2>
+                            <div class="room-price">
+                                <span>From</span>
+                                <h2>Rp 6.999.999</h2>
+                                <sub>/night</sub>
                             </div>
-                            <div class="room-desc">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                    eget sapien ac, ultrices rhoncus ipsum.</p>
+                        </div>
+                        <div class="room-desc">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
+                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                        </div>
+                        <div class="room-features">
+                            <div class="room-info">
+                                <i class="flaticon-019-television"></i>
+                                <span>Ranjang Linen</span>
                             </div>
-                            <div class="room-features">
-                                <div class="room-info">
-                                    <i class="flaticon-019-television"></i>
-                                    <span>Smart Mirror</span>
-                                </div>
-                                <div class="room-info">
-                                    <i class="flaticon-003-air-conditioner"></i>
-                                    <span>AC</span>
-                                </div>
-                                <div class="room-info">
-                                    <i class="flaticon-036-parking"></i>
-                                    <span>TV Internasional</span>
-                                </div>
+                            <div class="room-info">
+                                <i class="flaticon-029-wifi"></i>
+                                <span>Shower</span>
+                            </div>
+                            <div class="room-info">
+                                <i class="flaticon-003-air-conditioner"></i>
+                                <span>Bathtub Terpisah</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="rooms-page-item">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="room-pic-slider owl-carousel">
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-5.jpg') }}" alt="">
-                            </div>
-                            <div class="single-room-pic">
-                                <img src="{{ asset('template2/img/room/rooms-2.jpg') }}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="room-text">
-                            <div class="room-title">
-                                <h2>Diamond</h2>
-                                <div class="room-price">
-                                    <span>From</span>
-                                    <h2>Rp 6.999.999</h2>
-                                    <sub>/night</sub>
-                                </div>
-                            </div>
-                            <div class="room-desc">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                    eget sapien ac, ultrices rhoncus ipsum.</p>
-                            </div>
-                            <div class="room-features">
-                                <div class="room-info">
-                                    <i class="flaticon-019-television"></i>
-                                    <span>Ranjang Linen</span>
-                                </div>
-                                <div class="room-info">
-                                    <i class="flaticon-029-wifi"></i>
-                                    <span>Shower</span>
-                                </div>
-                                <div class="room-info">
-                                    <i class="flaticon-003-air-conditioner"></i>
-                                    <span>Bathtub Terpisah</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
         </div>
     </section>
     <!-- Rooms Section End -->
