@@ -107,8 +107,16 @@ Route::group([
     Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
     Route::post('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
 
-    // news
+    // news kemewahan
     Route::get('news/KemewahandanKedamaianalamSatuTempat', [NewsController::class, 'index'])->name('news.index');
     Route::post('news/KemewahandanKedamaianalamSatuTempat', [NewsController::class, 'index'])->name('news.index');
+
+    // news kuliner
+    Route::get('news/KulinerIstimewauntukSetiapMomen', [NewsController::class, 'kuliner'])->name('news.kuliner');
+    Route::post('news/KulinerIstimewauntukSetiapMomen', [NewsController::class, 'kuliner'])->name('news.kuliner');
+
+    // news kuliner
+    Route::get('news/RomantismediSetiapDetil', [NewsController::class, 'romantisme'])->name('news.romantisme');
+    Route::post('news/RomantismediSetiapDetil', [NewsController::class, 'romantisme'])->name('news.romantisme');
 
 });

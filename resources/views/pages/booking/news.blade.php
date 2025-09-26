@@ -133,7 +133,9 @@
                                     <img src="{{ asset('template2/img/blog/recent-2.jpg') }}" alt="">
                                 </div>
                                 <div class="recent-text">
-                                    <h5>Kuliner Istimewa untuk Setiap Momen.</h5>
+                                    <h5>
+                                        <a href="{{ route('news.kuliner') }}">Kuliner Istimewa untuk Setiap Momen.</a>
+                                    </h5>
                                     <div class="recent-time">
                                         <i class="fa fa-clock-o"></i>
                                         <span>September 17, 2025</span>
@@ -145,7 +147,9 @@
                                     <img src="{{ asset('template2/img/blog/recent-3.jpg') }}" alt="">
                                 </div>
                                 <div class="recent-text">
-                                    <h5>Romantisme di Setiap Detil.</h5>
+                                    <h5>
+                                        <a href="{{ route('news.romantisme') }}">Romantisme di Setiap Detil.</a>
+                                    </h5>
                                     <div class="recent-time">
                                         <i class="fa fa-clock-o"></i>
                                         <span>September 17, 2025</span>
@@ -157,10 +161,10 @@
                             <h4>Tags</h4>
                             <div class="tag-links">
                                 <a href="#">hotel</a>
-                                <a href="#">theme</a>
-                                <a href="#">wordpress</a>
-                                <a href="#">booking</a>
-                                <a href="#">booking</a>
+                                <a href="#">Aetheria</a>
+                                <a href="#">StayInStyle</a>
+                                <a href="#">DreamStay</a>
+                                <a href="#">PerfectGetaway</a>
                                 <a href="#">accommodation</a>
                             </div>
                         </div>

@@ -8,4 +8,14 @@ class NewsController extends Controller
     {
         return view('pages.news.index');
     }
+
+    public function kuliner()
+    {
+        return view('pages.news.kuliner');
+    }
+
+    public function romantisme()
+    {
+        return view('pages.news.romantisme');
+    }
 }

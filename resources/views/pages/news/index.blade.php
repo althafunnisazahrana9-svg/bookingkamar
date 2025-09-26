@@ -5,15 +5,20 @@
 @section('content')
     <div class="container mt-5">
 
-        <!-- Judul Utama -->
-        <div class="text-center mb-5">
-            <h1 class="fw-bold" style="color:#000; z-index:10; position:relative;">
-                Aetheria: Kemewahan dan Kedamaian dalam Satu Tempat
-            </h1>
-            <p class="text-muted" style="z-index:10; position:relative;">
-                Nikmati pengalaman menginap yang tak terlupakan dengan fasilitas terbaik dan suasana nyaman.
-            </p>
-        </div>
+        <head>
+            <!-- Judul Utama -->
+            <div class="text-center mb-5">
+                <h1 class="fw-bold" style="color:#000; z-index:10; position:relative;">
+                    Aetheria: Kemewahan dan Kedamaian dalam Satu Tempat
+                </h1>
+                <p class="text-muted" style="z-index:10; position:relative;">
+                    Nikmati pengalaman menginap yang tak terlupakan dengan fasilitas terbaik dan suasana nyaman.
+                </p>
+            </div>
+
+            <!-- Favicon -->
+            <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}" />
+        </head>
 
         <!-- Section Teks di Kiri, Gambar di Kanan -->
         <div class="row align-items-center mb-5">
@@ -29,7 +34,7 @@
                     seluruh keluarga.
                 </p>
                 <a href="{{ route('pages.form.index') }}" class="btn btn-primary mt-3">
-                    <i class="bi bi-calendar-check me-2"></i> Pesan Sekarang
+                    <i class="bi bi-bag me-2"></i> Pesan Sekarang
                 </a>
             </div>
             <div class="col-md-6 text-center">
