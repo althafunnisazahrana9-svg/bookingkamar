@@ -177,30 +177,19 @@
                                 <img src="{{ asset('template2/img/blog/blog-1.jpg') }}" alt="">
                             </div>
                             <div class="blog-text">
-                                <h4>What you should know before going in holidays.</h4>
+                                <h4>Yang Perlu Kamu Tahu Sebelum Berlibur.</h4>
                                 <div class="blog-widget">
-                                    <div class="blog-info">
-                                        <i class="lnr lnr-user"></i>
-                                        <span>Admin</span>
-                                    </div>
                                     <div class="blog-info">
                                         <img src="{{ asset('template2/img/clock.png') }}" alt="">
                                         <span>February 17, 2018</span>
                                     </div>
-                                    <div class="blog-info">
-                                        <img src="{{ asset('template2/img/speech.png') }}" alt="">
-                                        <span>4 Comments</span>
-                                    </div>
-                                    <div class="blog-info">
-                                        <i class="fa fa-folder-o"></i>
-                                        <span>Category</span>
-                                    </div>
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus libero mauris,
-                                    bibendum eget sapien ac, ultrices rhoncus ipsum. Donec nec sapien in urna fermentum
-                                    ornare. Morbi vel ultrices leo. Sed eu turpis eu arcu vehicula fringilla ut vitae
-                                    orci. ...</p>
-                                <a href="#">Continue Reading <i class="lnr lnr-arrow-right"></i></a>
+                                <p>Liburan adalah momen yang ditunggu-tunggu banyak orang. Namun, agar liburan berjalan
+                                    lancar, ada
+                                    beberapa
+                                    hal yang perlu diperhatikan sebelum berangkat ...</p>
+                                <a href="{{ route('news.holidays') }}">Continue Reading <i
+                                        class="lnr lnr-arrow-right"></i></a>
                             </div>
                         </div>
                         <div class="single-blog-post">
@@ -231,7 +220,7 @@
                                     bibendum eget sapien ac, ultrices rhoncus ipsum. Donec nec sapien in urna fermentum
                                     ornare. Morbi vel ultrices leo. Sed eu turpis eu arcu vehicula fringilla ut vitae
                                     orci. ...</p>
-                                <a href="#">Continue Reading <i class="lnr lnr-arrow-right"></i></a>
+                                <a href="">Continue Reading <i class="lnr lnr-arrow-right"></i></a>
                             </div>
                         </div>
                         <div class="single-blog-post">
@@ -262,15 +251,8 @@
                                     bibendum eget sapien ac, ultrices rhoncus ipsum. Donec nec sapien in urna fermentum
                                     ornare. Morbi vel ultrices leo. Sed eu turpis eu arcu vehicula fringilla ut vitae
                                     orci. ...</p>
-                                <a href="#">Continue Reading <i class="lnr lnr-arrow-right"></i></a>
+                                <a href="">Continue Reading <i class="lnr lnr-arrow-right"></i></a>
                             </div>
-                        </div>
-                        <div class="blog-pagination">
-                            <a class="active" href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
                         </div>
                     </div>
                 </div>

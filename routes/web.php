@@ -119,4 +119,7 @@ Route::group([
     Route::get('news/RomantismediSetiapDetil', [NewsController::class, 'romantisme'])->name('news.romantisme');
     Route::post('news/RomantismediSetiapDetil', [NewsController::class, 'romantisme'])->name('news.romantisme');
 
+    // news holidays
+    Route::get('news/YangPerluKamuTahuSebelumBerlibur', [NewsController::class, 'holidays'])->name('news.holidays');
+    Route::post('news/YangPerluKamuTahuSebelumBerlibur', [NewsController::class, 'holidays'])->name('news.holidays');
 });

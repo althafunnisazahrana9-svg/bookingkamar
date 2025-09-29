@@ -18,4 +18,9 @@ class NewsController extends Controller
     {
         return view('pages.news.romantisme');
     }
+
+    public function holidays()
+    {
+        return view('pages.news.holidays');
+    }
 }

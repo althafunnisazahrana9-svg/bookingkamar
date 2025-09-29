@@ -79,7 +79,6 @@
                     </div>
                 </div>
                 <div class="page-nav">
-                    <a href="{{ route('dashboard') }}" class="left-nav"><i class="lnr lnr-arrow-left"></i> Back</a>
                     <a href="{{ route('booking.services') }}" class="right-nav">Services <i
                             class="lnr lnr-arrow-right"></i></a>
                 </div>
@@ -131,8 +130,7 @@
                     </div>
                 </div>
                 <div class="video-play-btn">
-                    <a href="https://www.youtube.com/watch?v=hGsVLXnFgbA" class="pop-up"><i
-                            class="fa fa-play"></i></a>
+                    <a href="https://www.youtube.com/watch?v=hGsVLXnFgbA" class="pop-up"><i class="fa fa-play"></i></a>
                 </div>
             </div>
         </div>
