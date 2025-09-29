@@ -116,8 +116,10 @@
                                 </div>
                             </div>
                             <div class="room-desc">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                    eget sapien ac, ultrices rhoncus ipsum.</p>
+                                <p>Nikmati kenyamanan penuh di Kamar Emerald, dirancang dengan sentuhan modern dan
+                                    elegan.
+                                    Dilengkapi Smart TV, Wi-Fi berkecepatan tinggi, AC yang sejuk, serta sarapan lezat
+                                    setiap pagi.</p>
                             </div>
                             <div class="room-features">
                                 <div class="row">
@@ -174,8 +176,9 @@
                             </div>
                         </div>
                         <div class="room-desc">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                            <p>Kamar Lavender dirancang untuk menghadirkan suasana hangat dan menenangkan. Nikmati
+                                kenyamanan beristirahat dengan fasilitas modern, dilengkapi kopi dan teh pilihan yang
+                                dapat Anda seduh sendiri menggunakan ketel listrik pribadi.</p>
                         </div>
                         <div class="room-features">
                             <div class="row">
@@ -224,8 +227,9 @@
                             </div>
                         </div>
                         <div class="room-desc">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                            <p>Kamar Sky Blue menghadirkan pengalaman menginap modern dengan kenyamanan maksimal.
+                                Dilengkapi Smart Mirror yang canggih, pemanas ruangan untuk suasana hangat, serta AC
+                                untuk kesejukan sempurna.</p>
                         </div>
                         <div class="room-features">
                             <div class="row">
@@ -273,8 +277,9 @@
                             </div>
                         </div>
                         <div class="room-desc">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                            <p>Suite Room adalah puncak kemewahan dan kenyamanan di Hotel Aetheria. Dengan desain luas
+                                dan elegan, kamar ini dilengkapi Smart TV, akses Wi-Fi berkecepatan tinggi, AC yang
+                                sejuk, serta saluran TV Internasional untuk menemani waktu santai Anda.</p>
                         </div>
                         <div class="room-features">
                             <div class="row">
@@ -328,8 +333,9 @@
                             </div>
                         </div>
                         <div class="room-desc">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                            <p>Family Room menghadirkan kenyamanan bagi seluruh keluarga. Dilengkapi balkon pribadi
+                                dengan pemandangan indah, suasana menginap terasa lebih hangat dan menyenangkan.
+                                Ditambah dengan AC yang sejuk.</p>
                         </div>
                         <div class="room-features">
                             <div class="row">
@@ -377,21 +383,30 @@
                             </div>
                         </div>
                         <div class="room-desc">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                            <p>Couple Room dirancang khusus untuk menghadirkan suasana romantis dan intim. Dilengkapi
+                                dengan ranjang linen yang lembut, speaker untuk menemani momen dengan musik favorit,
+                                serta AC yang sejuk.</p>
                         </div>
                         <div class="room-features">
-                            <div class="room-info">
-                                <i class="flaticon-019-television"></i>
-                                <span>Ranjang Linen</span>
-                            </div>
-                            <div class="room-info">
-                                <i class="flaticon-029-wifi"></i>
-                                <span>Speacker</span>
-                            </div>
-                            <div class="room-info">
-                                <i class="flaticon-003-air-conditioner"></i>
-                                <span>AC</span>
+                            <div class="row">
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-grid-3x3-gap-fill" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Ranjang Linen</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-speaker" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Speacker</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3 px-0">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-snow mx-auto" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">AC</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -418,21 +433,30 @@
                             </div>
                         </div>
                         <div class="room-desc">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                            <p>Crystal Room menghadirkan kombinasi kenyamanan modern dengan sentuhan elegan. Dilengkapi
+                                shower praktis, bathtub terpisah untuk relaksasi maksimal, serta AC yang menyejukkan.
+                            </p>
                         </div>
                         <div class="room-features">
-                            <div class="room-info">
-                                <i class="flaticon-019-television"></i>
-                                <span>Shower</span>
-                            </div>
-                            <div class="room-info">
-                                <i class="flaticon-029-wifi"></i>
-                                <span>Bathtub Terpisah</span>
-                            </div>
-                            <div class="room-info">
-                                <i class="flaticon-003-air-conditioner"></i>
-                                <span>AC</span>
+                            <div class="row">
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-droplet-half" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Shower</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-water" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Bathtub Terpisah</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3 px-0">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-snow mx-auto" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">AC</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -459,21 +483,30 @@
                             </div>
                         </div>
                         <div class="room-desc">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                            <p>Luxury Stay dirancang untuk menghadirkan kenyamanan premium bagi tamu istimewa.
+                                Dilengkapi kulkas kecil pribadi untuk menyimpan minuman favorit, meja kerja elegan bagi
+                                Anda yang tetap produktif, serta AC modern untuk menjaga kesejukan.</p>
                         </div>
                         <div class="room-features">
-                            <div class="room-info">
-                                <i class="flaticon-019-television"></i>
-                                <span>Kulkas Kecil</span>
-                            </div>
-                            <div class="room-info">
-                                <i class="flaticon-029-wifi"></i>
-                                <span>Meja Kerja</span>
-                            </div>
-                            <div class="room-info">
-                                <i class="flaticon-003-air-conditioner"></i>
-                                <span>AC</span>
+                            <div class="row">
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-box" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Kulkas Kecil</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-journal-text" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Meja Kerja</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3 px-0">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-snow mx-auto" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">AC</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -500,21 +533,30 @@
                             </div>
                         </div>
                         <div class="room-desc">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                            <p>Platinum Room menawarkan kenyamanan modern dengan sentuhan elegan. Dilengkapi Smart
+                                Mirror interaktif, AC yang menjaga kesejukan ruangan, serta TV Internasional untuk
+                                hiburan kelas dunia.</p>
                         </div>
                         <div class="room-features">
-                            <div class="room-info">
-                                <i class="flaticon-019-television"></i>
-                                <span>Smart Mirror</span>
-                            </div>
-                            <div class="room-info">
-                                <i class="flaticon-003-air-conditioner"></i>
-                                <span>AC</span>
-                            </div>
-                            <div class="room-info">
-                                <i class="flaticon-036-parking"></i>
-                                <span>TV Internasional</span>
+                            <div class="row">
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-display" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Smart Miror</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-snow mx-auto" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">AC</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3 px-0">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-tv-fill" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">TV Internasional</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -541,21 +583,30 @@
                             </div>
                         </div>
                         <div class="room-desc">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mauris, bibendum
-                                eget sapien ac, ultrices rhoncus ipsum.</p>
+                            <p>Diamond Room adalah simbol kemewahan sejati di Hotel Aetheria. Dilengkapi ranjang linen
+                                premium untuk tidur berkualitas, shower modern yang praktis, serta bathtub terpisah
+                                untuk momen relaksasi.</p>
                         </div>
                         <div class="room-features">
-                            <div class="room-info">
-                                <i class="flaticon-019-television"></i>
-                                <span>Ranjang Linen</span>
-                            </div>
-                            <div class="room-info">
-                                <i class="flaticon-029-wifi"></i>
-                                <span>Shower</span>
-                            </div>
-                            <div class="room-info">
-                                <i class="flaticon-003-air-conditioner"></i>
-                                <span>Bathtub Terpisah</span>
+                            <div class="row">
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-grid-3x3-gap-fill" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Ranjang Linen</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-droplet-half" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Shower</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3 px-0">
+                                    <div class="room-info d-flex flex-column align-items-center">
+                                        <i class="bi bi-water" style="font-size:40px; color:#a0843a;"></i>
+                                        <span class="mt-2">Bathtub Terpisah</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
