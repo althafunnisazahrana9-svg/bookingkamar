@@ -23,4 +23,14 @@ class NewsController extends Controller
     {
         return view('pages.news.holidays');
     }
+
+    public function coffeeshop()
+    {
+        return view('pages.news.coffeeshop');
+    }
+
+    public function master()
+    {
+        return view('pages.news.master');
+    }
 }

@@ -56,20 +56,28 @@ Route::get('/pembayaran/cod/{booking}', [PembayaranController::class, 'cod'])
     ->name('pembayaran.cod');
 
 // news kemewahan
-Route::get('news/KemewahandanKedamaianalamSatuTempat', [NewsController::class, 'index'])->name('news.index');
-Route::post('news/KemewahandanKedamaianalamSatuTempat', [NewsController::class, 'index'])->name('news.index');
+Route::get('news/Kemewahan-dan-Kedamaian-alam-Satu-Tempat', [NewsController::class, 'index'])->name('news.index');
+Route::post('news/Kemewahan-dan-Kedamaian-alam-Satu-Tempat', [NewsController::class, 'index'])->name('news.index');
 
 // news kuliner
-Route::get('news/KulinerIstimewauntukSetiapMomen', [NewsController::class, 'kuliner'])->name('news.kuliner');
-Route::post('news/KulinerIstimewauntukSetiapMomen', [NewsController::class, 'kuliner'])->name('news.kuliner');
+Route::get('news/Kuliner-Istimewa-untuk-Setiap-Momen', [NewsController::class, 'kuliner'])->name('news.kuliner');
+Route::post('news/Kuliner-Istimewa-untuk-Setiap-Momen', [NewsController::class, 'kuliner'])->name('news.kuliner');
 
 // news kuliner
-Route::get('news/RomantismediSetiapDetil', [NewsController::class, 'romantisme'])->name('news.romantisme');
-Route::post('news/RomantismediSetiapDetil', [NewsController::class, 'romantisme'])->name('news.romantisme');
+Route::get('news/Romantisme-di-Setiap-Detil', [NewsController::class, 'romantisme'])->name('news.romantisme');
+Route::post('news/Romantisme-di-Setiap-Detil', [NewsController::class, 'romantisme'])->name('news.romantisme');
 
 // news holidays
-Route::get('news/YangPerluKamuTahuSebelumBerlibur', [NewsController::class, 'holidays'])->name('news.holidays');
-Route::post('news/YangPerluKamuTahuSebelumBerlibur', [NewsController::class, 'holidays'])->name('news.holidays');
+Route::get('news/Yang-Perlu-Kamu-Tahu-Sebelum-Berlibur', [NewsController::class, 'holidays'])->name('news.holidays');
+Route::post('news/Yang-Perlu-Kamu-Tahu-Sebelum-Berlibur', [NewsController::class, 'holidays'])->name('news.holidays');
+
+// news coffe
+Route::get('news/Coffee-Shop-Baru', [NewsController::class, 'coffeeshop'])->name('news.coffeeshop');
+Route::post('news/Coffee-Shop-Baru', [NewsController::class, 'coffeeshop'])->name('news.coffeeshop');
+
+// news master
+Route::get('news/Peningkatan-Fasilitas-Telah-Dilakukan-pada-Master-Suite-HOTEL', [NewsController::class, 'master'])->name('news.master');
+Route::post('news/Peningkatan-Fasilitas-Telah-Dilakukan-pada-Master-Suite-HOTEL', [NewsController::class, 'master'])->name('news.master');
 
 // success
 Route::get('/booking/success/{id}', [\App\Http\Controllers\BookingController::class, 'success'])

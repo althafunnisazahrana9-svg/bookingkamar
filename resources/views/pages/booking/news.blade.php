@@ -182,7 +182,7 @@
                                 <div class="blog-widget">
                                     <div class="blog-info">
                                         <img src="{{ asset('template2/img/clock.png') }}" alt="">
-                                        <span>February 17, 2018</span>
+                                        <span>September 17, 2025</span>
                                     </div>
                                 </div>
                                 <p>Liburan adalah momen yang ditunggu-tunggu banyak orang. Namun, agar liburan berjalan
@@ -198,30 +198,19 @@
                                 <img src="{{ asset('template2/img/blog/blog-2.jpg') }}" alt="">
                             </div>
                             <div class="blog-text">
-                                <h4>HOTEL has now a new Coffee shop open for business.</h4>
+                                <h4>Coffee Shop Baru di HOTEL</h4>
                                 <div class="blog-widget">
                                     <div class="blog-info">
-                                        <i class="lnr lnr-user"></i>
-                                        <span>Admin</span>
-                                    </div>
-                                    <div class="blog-info">
                                         <img src="{{ asset('template2/img/clock.png') }}" alt="">
-                                        <span>February 17, 2018</span>
-                                    </div>
-                                    <div class="blog-info">
-                                        <img src="{{ asset('template2/img/speech.png') }}" alt="">
-                                        <span>4 Comments</span>
-                                    </div>
-                                    <div class="blog-info">
-                                        <i class="fa fa-folder-o"></i>
-                                        <span>Category</span>
+                                        <span>September 17, 2025</span>
                                     </div>
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus libero mauris,
-                                    bibendum eget sapien ac, ultrices rhoncus ipsum. Donec nec sapien in urna fermentum
-                                    ornare. Morbi vel ultrices leo. Sed eu turpis eu arcu vehicula fringilla ut vitae
-                                    orci. ...</p>
-                                <a href="">Continue Reading <i class="lnr lnr-arrow-right"></i></a>
+                                <p>Coffee Shop baru di HOTEL menghadirkan tempat yang nyaman untuk bersantai sambil
+                                    menikmati kopi premium.
+                                    Desain modern dipadukan dengan nuansa hangat akan membuat pengalaman Anda semakin
+                                    menyenangkan. ...</p>
+                                <a href="{{ route('news.coffeeshop') }}">Continue Reading <i
+                                        class="lnr lnr-arrow-right"></i></a>
                             </div>
                         </div>
                         <div class="single-blog-post">
@@ -229,35 +218,23 @@
                                 <img src="{{ asset('template2/img/blog/blog-3.jpg') }}" alt="">
                             </div>
                             <div class="blog-text">
-                                <h4>Upgrades have been made to the Master Suite</h4>
-                                <div class="blog-widget">
-                                    <div class="blog-info">
-                                        <i class="lnr lnr-user"></i>
-                                        <span>Admin</span>
-                                    </div>
-                                    <div class="blog-info">
-                                        <img src="{{ asset('template2/img/clock.png') }}" alt="">
-                                        <span>February 17, 2018</span>
-                                    </div>
-                                    <div class="blog-info">
-                                        <img src="{{ asset('template2/img/speech.png') }}" alt="">
-                                        <span>4 Comments</span>
-                                    </div>
-                                    <div class="blog-info">
-                                        <i class="fa fa-folder-o"></i>
-                                        <span>Category</span>
-                                    </div>
+                                <h4>Peningkatan Fasilitas Telah Dilakukan pada Master Suite HOTEL</h4>
+                                <div class="blog-info">
+                                    <img src="{{ asset('template2/img/clock.png') }}" alt="">
+                                    <span>September 17, 2025</span>
                                 </div>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus libero mauris,
                                     bibendum eget sapien ac, ultrices rhoncus ipsum. Donec nec sapien in urna fermentum
                                     ornare. Morbi vel ultrices leo. Sed eu turpis eu arcu vehicula fringilla ut vitae
                                     orci. ...</p>
-                                <a href="">Continue Reading <i class="lnr lnr-arrow-right"></i></a>
+                                <a href="{{ route('news.master') }}">Continue Reading <i
+                                        class="lnr lnr-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     <!-- Blog Section End -->
