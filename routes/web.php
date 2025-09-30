@@ -26,13 +26,16 @@ Auth::routes([
 Route::group([
     'middleware' => ['auth'],
 ], function () {
-    route::get('/', function () {
-        return redirect()->route('dashboard'); // mengarahkan ke dashboard
+    Route::get('/', function () {
+        return redirect()->Route('dashboard'); // mengarahkan ke dashboard
     })->name('home');
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Daftar Booking (bisa diakses pengunjung & admin)
+    Route::get('/booking', [BookingController::class, 'index'])
+        ->name('booking.index')
+        ->middleware('role:pengunjung,admin');
 
-    Route::resource('/booking', BookingController::class);
+    Route::resource('/booking', App\Http\Controllers\BookingController::class);
 
     // about
     Route::get('/about', [BookingController::class, 'about'])->name('booking.about');
@@ -54,8 +57,6 @@ Route::group([
     Route::get('/contact', [BookingController::class, 'contact'])->name('booking.contact');
     Route::post('/contact', [BookingController::class, 'contact'])->name('booking.contact');
 
-    Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
-
     // Tambahan untuk konfirmasi & tolak booking
     Route::get('booking/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
     Route::post('booking/{id}/reject', [BookingController::class, 'reject'])->name('booking.reject');
@@ -66,20 +67,8 @@ Route::group([
     // struk
     Route::get('/booking/{id}/struk', [BookingController::class, 'struk'])->name('booking.struk');
 
-    Route::post('/admin/bookings/update-status', [AdminController::class, 'updateStatus'])->name('admin.booking.updateStatus');
-
     // untuk halaman transfer bank
     Route::get('/pembayaran/transfer-bank/{booking}', [PembayaranController::class, 'transfer'])->name('pembayaran.transfer');
-
-    // konfirmasi pembayaran
-    Route::get('/pembayaran/konfirmasi/{booking}', [PembayaranController::class, 'konfirmasi'])
-        ->name('pembayaran.konfirmasi');
-
-    Route::post('/pembayaran/konfirmasi/{booking}', [PembayaranController::class, 'storeKonfirmasi'])
-        ->name('pembayaran.konfirmasi.store');
-
-    Route::post('/pembayaran/{id}', [PembayaranController::class, 'storeKonfirmasi'])
-        ->name('pembayaran.storeKonfirmasi');
 
     // upload bukti transfer
     Route::post('/pembayaran/{booking}/upload-bukti-transfer',
@@ -88,24 +77,6 @@ Route::group([
     // untuk halaman pembayaran di tempat
     Route::get('/pembayaran/cod/{booking}', [PembayaranController::class, 'cod'])
         ->name('pembayaran.cod');
-
-    // status pembayaran
-    Route::post('/booking/{id}/lunas', [BookingController::class, 'setLunas'])->name('booking.setLunas');
-    Route::post('/booking/{id}/belum-lunas', [BookingController::class, 'setBelumLunas'])->name('booking.setBelumLunas');
-
-    // Booking CRUD (biasa, sudah ada dari resource)
-    Route::resource('/admin', App\Http\Controllers\AdminController::class);
-
-    // Tambahan khusus admin
-    Route::get('/admin/booking', [App\Http\Controllers\AdminController::class, 'bookingIndex'])
-        ->name('admin.booking');
-    Route::post('/admin/booking/update-status', [App\Http\Controllers\AdminController::class, 'updateStatus'])
-        ->name('admin.booking.updateStatus');
-
-    Route::resource('/kamar', App\Http\Controllers\KamarController::class);
-
-    Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
-    Route::post('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
 
     // news kemewahan
     Route::get('news/KemewahandanKedamaianalamSatuTempat', [NewsController::class, 'index'])->name('news.index');
@@ -122,4 +93,42 @@ Route::group([
     // news holidays
     Route::get('news/YangPerluKamuTahuSebelumBerlibur', [NewsController::class, 'holidays'])->name('news.holidays');
     Route::post('news/YangPerluKamuTahuSebelumBerlibur', [NewsController::class, 'holidays'])->name('news.holidays');
+
+    // Halaman lain khusus admin
+    Route::middleware('role:admin')->group(function () {
+
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
+
+        Route::post('/admin/bookings/update-status', [AdminController::class, 'updateStatus'])->name('admin.booking.updateStatus');
+
+        // konfirmasi pembayaran
+        Route::get('/pembayaran/konfirmasi/{booking}', [PembayaranController::class, 'konfirmasi'])
+            ->name('pembayaran.konfirmasi');
+        Route::post('/pembayaran/konfirmasi/{booking}', [PembayaranController::class, 'storeKonfirmasi'])
+            ->name('pembayaran.konfirmasi.store');
+
+        Route::post('/pembayaran/{id}', [PembayaranController::class, 'storeKonfirmasi'])
+            ->name('pembayaran.storeKonfirmasi');
+
+        // status pembayaran
+        Route::post('/booking/{id}/lunas', [BookingController::class, 'setLunas'])->name('booking.setLunas');
+        Route::post('/booking/{id}/belum-lunas', [BookingController::class, 'setBelumLunas'])->name('booking.setBelumLunas');
+
+        // Booking CRUD (biasa, sudah ada dari resource)
+        Route::resource('/admin', App\Http\Controllers\AdminController::class);
+
+        // Tambahan khusus admin
+        Route::get('/admin/booking', [App\Http\Controllers\AdminController::class, 'bookingIndex'])
+            ->name('admin.booking');
+        Route::post('/admin/booking/update-status', [App\Http\Controllers\AdminController::class, 'updateStatus'])
+            ->name('admin.booking.updateStatus');
+
+        Route::resource('/kamar', App\Http\Controllers\KamarController::class);
+
+        Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
+        Route::post('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
+
+    });
 });
