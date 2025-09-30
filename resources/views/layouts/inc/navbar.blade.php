@@ -54,7 +54,13 @@
                         <div class="avatar avatar-online">
                             <img src="{{ asset('images/admin1.jpg') }}" alt class="rounded-circle" />
                         </div>
-                        <span>{{ Auth::user()->name }}</span>
+                        @if (Auth::check())
+                            <span>{{ Auth::user()->nama }}</span>
+                        @elseif(session('nama_pemesan'))
+                            <span>{{ session('nama_pemesan') }}</span>
+                        @else
+                            <span>Pengunjung</span>
+                        @endif
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">

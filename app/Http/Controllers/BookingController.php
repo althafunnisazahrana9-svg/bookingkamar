@@ -91,17 +91,16 @@ class BookingController extends Controller
             'tanggal_checkout' => 'required',
             'harga' => 'required',
             'metode_pembayaran' => 'required',
-            'status',
-
+            'status' => 'nullable',
         ]);
 
-        if ($request->metode_pembayaran === 'transfer') {
-            // redirect ke halaman transfer bank
-            return redirect()->route('pembayaran.transfer', $booking->id);
-        }
+        // Simpan booking ke database
+        $booking = \App\Models\Booking::create($request->all());
 
-        return redirect()->route('booking.success')->with('success', 'Booking berhasil dibuat');
-        // Cek metode pembayaran
+        // Simpan nama ke session supaya bisa tampil di navbar
+        session(['nama_pemesan' => $request->nama_pemesan]);
+
+        // Arahkan sesuai metode pembayaran
         if ($request->metode_pembayaran === 'transfer') {
             return redirect()->route('pembayaran.transfer', $booking->id);
         }
@@ -110,12 +109,9 @@ class BookingController extends Controller
             return redirect()->route('pembayaran.cod', $booking->id);
         }
 
-        return redirect()->route('booking.success')->with('success', 'Booking berhasil dibuat');
-
-        Booking::create($request->all());
-
-        return redirect()->route('booking.index')
-            ->with('success', 'Data booking berhasil ditambahkan');
+        // Default redirect kalau tidak ada metode cocok
+        return redirect()->route('booking.success', ['id' => $booking->id])
+            ->with('success', 'Booking berhasil dibuat');
     }
 
     public function struk($id)
@@ -146,6 +142,13 @@ class BookingController extends Controller
         }
 
         return back()->with('success', 'Status pembayaran berhasil diubah menjadi Belum Lunas.');
+    }
+
+    public function success($id)
+    {
+        $booking = \App\Models\Booking::findOrFail($id);
+
+        return view('pages.booking.success', compact('booking'));
     }
 
     // about
