@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Booking;
-use App\Models\Kamar;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; // import Auth
 
 class AdminController extends Controller
 {
@@ -15,15 +15,30 @@ class AdminController extends Controller
     public function index()
     {
         $admin = User::orderBy('name', 'ASC')->get();
+
         return view('pages.admin.index', compact('admin'));
     }
 
-
     public function bookingIndex()
-{
-    $booking = Booking::with('kamar')->latest()->get();
-    return view('pages.booking.index', compact('booking'));
-}
+    {
+        $booking = Booking::with('kamar')->latest()->get();
+
+        return view('pages.booking.index', compact('booking'));
+    }
+
+    public function logout(Request $request)
+    {
+        // Logout semua guard
+        Auth::guard('web')->logout();          // logout admin
+        Auth::guard('pengunjung')->logout();   // logout pengunjung
+
+        // Invalidasi session dan token CSRF
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // Redirect ke halaman login atau homepage
+        return redirect('/')->with('success', 'Anda berhasil logout!');
+    }
 
     public function updateStatus(Request $request)
     {
@@ -38,7 +53,6 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Status booking berhasil diperbarui.');
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -64,6 +78,7 @@ class AdminController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
+
         return redirect()->route('admin.index');
     }
 
@@ -73,6 +88,7 @@ class AdminController extends Controller
     public function show(string $id)
     {
         $admin = User::find($id);
+
         return view('pages.admin.show', compact('admin'));
     }
 
@@ -82,6 +98,7 @@ class AdminController extends Controller
     public function edit(string $id)
     {
         $admin = User::find($id);
+
         return view('pages.admin.edit', compact('admin'));
     }
 
@@ -92,7 +109,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
+            'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'nullable|min:8|confirmed',
         ]);
 
@@ -105,9 +122,9 @@ class AdminController extends Controller
         }
 
         $admin->save();
+
         return redirect()->route('admin.index');
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -116,8 +133,7 @@ class AdminController extends Controller
     {
         $admin = User::find($id);
         $admin->delete();
+
         return redirect()->route('admin.index');
     }
-
-    
 }

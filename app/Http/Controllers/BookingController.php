@@ -16,6 +16,7 @@ class BookingController extends Controller
     {
         // $booking = Booking::with('kamar')->orderBy('created_at', 'desc')->get();
 
+        // Ambil semua booking terbaru untuk notifikasi
         $booking = Booking::with('kamar')
             ->when(request('tanggal'), function ($query, $tanggal) {
                 $query->whereDate('tanggal_checkin', $tanggal);

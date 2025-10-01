@@ -136,6 +136,8 @@ Route::group([
         Route::resource('/kamar', App\Http\Controllers\KamarController::class);
         Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
         Route::post('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
+        Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
+        Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
 
     });
 });

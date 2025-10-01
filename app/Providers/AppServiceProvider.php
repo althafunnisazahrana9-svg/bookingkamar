@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\View;
 use App\Models\Booking;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,9 +21,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // supaya notifikasinya tampilannya sesuai yang booking itu berapa
         View::composer('*', function ($view) {
-        $notifikasi = Booking::with('kamar')->latest()->take(5)->get();
-        $view->with('notifikasi', $notifikasi);
-    });
+            $notifikasi = Booking::with('kamar')->latest()->get();
+            $view->with('notifikasi', $notifikasi);
+        });
     }
 }
