@@ -18,6 +18,13 @@ Route::post('/form', [App\Http\Controllers\FormController::class, 'store'])->nam
 Route::get('/pengunjung/login', [PengunjungController::class, 'index'])->name('pengunjung.login');
 Route::post('/pengunjung/login', [PengunjungController::class, 'login'])->name('pengunjung.login.post');
 
+// logout pengunjung
+Route::post('/logout-pengunjung', function () {
+    session()->flush(); // hapus semua session pengunjung
+
+    return redirect()->route('pengunjung.login'); // arahkan ke halaman login pengunjung
+})->name('logout.pengunjung');
+
 // about
 Route::get('/about', [BookingController::class, 'about'])->name('booking.about');
 Route::post('/about', [BookingController::class, 'about'])->name('booking.about');

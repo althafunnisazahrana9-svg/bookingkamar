@@ -76,17 +76,36 @@
                     </li>
                     <li>
                         <div class="d-grid px-2 pt-2 pb-1">
-                            <a class="btn btn-sm btn-danger d-flex" onclick="$('#logout-form').submit()"
-                                href="javascript:void(0);">
-                                <small class="align-middle">Logout</small>
-                                <i class="ti ti-logout ms-2 ti-14px"></i>
-                            </a>
+                            @if (Auth::check())
+                                {{-- Logout untuk Admin --}}
+                                <a class="btn btn-sm btn-danger d-flex"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form-admin').submit();"
+                                    href="javascript:void(0);">
+                                    <small class="align-middle">Logout</small>
+                                    <i class="ti ti-logout ms-2 ti-14px"></i>
+                                </a>
 
-                            <form id="logout-form" method="POST" action="{{ route('logout') }}">
-                                @csrf
-                            </form>
+                                <form id="logout-form-admin" method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                </form>
+                                {{-- logout pengunjung --}}
+                            @elseif (Auth::guest())
+                                {{-- Logout untuk Pengunjung --}}
+                                <a class="btn btn-sm btn-danger d-flex"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form-pengunjung').submit();"
+                                    href="javascript:void(0);">
+                                    <small class="align-middle">Logout</small>
+                                    <i class="ti ti-logout ms-2 ti-14px"></i>
+                                </a>
+
+                                <form id="logout-form-pengunjung" method="POST"
+                                    action="{{ route('logout.pengunjung') }}">
+                                    @csrf
+                                </form>
+                            @endif
                         </div>
                     </li>
+
                 </ul>
             </li>
             <!--/ User -->
