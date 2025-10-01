@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Form Booking</title>
+    <title>Form Booking | Hotel Aetheria</title>
 
     <meta name="description" content="" />
 
@@ -57,6 +57,7 @@
 
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('/js/config.js') }}"></script>
+
 </head>
 
 <body style="background-color: #c4a484;"> <!-- warna coklat muda untuk bg -->
