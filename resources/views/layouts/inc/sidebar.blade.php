@@ -49,9 +49,10 @@
                 </a>
             </li>
         </ul>
+
     @endauth
     {{-- Jika login sebagai Pengunjung --}}
-    @if (session('role') === 'pengunjung')
+    @guest
         <ul class="menu-inner py-1 list-unstyled">
             <li class="menu-item">
                 <a href="{{ route('booking.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
@@ -64,6 +65,6 @@
                 </a>
             </li>
         </ul>
-    @endif
+    @endguest
 
 </aside>
