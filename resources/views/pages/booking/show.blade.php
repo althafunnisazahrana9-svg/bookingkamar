@@ -109,6 +109,7 @@
                 </table>
             </div>
 
+
             <div class="d-flex justify-content-between mt-3">
                 <!-- Tombol kiri: Kembali, Lihat Bukti Transfer, Pembayaran -->
                 <div class="d-flex gap-2">
@@ -116,69 +117,71 @@
                         <span class="ti ti-arrow-left"></span>
                         Kembali
                     </a>
-
-                    {{-- Hanya tampilkan tombol pembayaran jika status bukan rejected --}}
-                    @if ($booking->status != 'rejected')
-                        @if ($booking->pembayaran && $booking->pembayaran->bukti_transfer)
-                            <a href="{{ asset('storage/' . $booking->pembayaran->bukti_transfer) }}" target="_blank"
-                                class="btn btn-sm btn-info">
-                                <span class="ti ti-file"></span> Lihat Bukti Transfer
-                            </a>
-                        @else
-                            {{-- Kalau transfer tanpa bukti ATAU COD --}}
-                            <a href="{{ $booking->metode_pembayaran === 'transfer'
-                                ? route('pembayaran.transfer', $booking->id)
-                                : route('pembayaran.cod', $booking->id) }}"
-                                class="btn btn-sm btn-success">
-                                <span class="ti ti-receipt-2"></span> Pembayaran
-                            </a>
+                    {{-- hanya admin yang bisa merubah --}}
+                    @auth('web')
+                        {{-- Hanya tampilkan tombol pembayaran jika status bukan rejected --}}
+                        @if ($booking->status != 'rejected')
+                            @if ($booking->pembayaran && $booking->pembayaran->bukti_transfer)
+                                <a href="{{ asset('storage/' . $booking->pembayaran->bukti_transfer) }}" target="_blank"
+                                    class="btn btn-sm btn-info">
+                                    <span class="ti ti-file"></span> Lihat Bukti Transfer
+                                </a>
+                            @else
+                                {{-- Kalau transfer tanpa bukti ATAU COD --}}
+                                <a href="{{ $booking->metode_pembayaran === 'transfer'
+                                    ? route('pembayaran.transfer', $booking->id)
+                                    : route('pembayaran.cod', $booking->id) }}"
+                                    class="btn btn-sm btn-success">
+                                    <span class="ti ti-receipt-2"></span> Pembayaran
+                                </a>
+                            @endif
                         @endif
-                    @endif
-                </div>
+                    </div>
 
-                <!-- Tombol kanan: Konfirmasi, Tolak, Lunas, Belum Lunas -->
-                <div class="d-flex gap-2">
-                    @if ($booking->status == 'pending')
-                        <a href="{{ route('booking.confirm', $booking->id) }}" class="btn btn-sm btn-success">
-                            <span class="ti ti-check"></span>
-                            Konfirmasi
-                        </a>
+                    <!-- Tombol kanan: Konfirmasi, Tolak, Lunas, Belum Lunas -->
+                    <div class="d-flex gap-2">
+                        @if ($booking->status == 'pending')
+                            <a href="{{ route('booking.confirm', $booking->id) }}" class="btn btn-sm btn-success">
+                                <span class="ti ti-check"></span>
+                                Konfirmasi
+                            </a>
 
-                        <form action="{{ route('booking.reject', $booking->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-sm btn-danger">
-                                <span class="ti ti-x"></span>
-                                Tolak
-                            </button>
-                        </form>
-                    @endif
-
-                    {{-- Tombol Lunas / Belum Lunas (Berlaku untuk COD & Transfer) --}}
-                    @if ($booking->pembayaran)
-                        @if ($booking->pembayaran->status !== 'lunas')
-                            <div class="text-end">
-                                {{-- Tombol Lunas --}}
-                                <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success">
-                                        <i class="ti ti-cash"></i> Lunas
-                                    </button>
-                                </form>
-
-                                {{-- Tombol Belum Lunas --}}
-                                <form action="{{ route('booking.setBelumLunas', $booking->id) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="btn btn-warning">
-                                        <i class="ti ti-clock"></i> Belum Lunas
-                                    </button>
-                                </form>
-                            </div>
+                            <form action="{{ route('booking.reject', $booking->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <span class="ti ti-x"></span>
+                                    Tolak
+                                </button>
+                            </form>
                         @endif
-                    @endif
+
+                        {{-- Tombol Lunas / Belum Lunas (Berlaku untuk COD & Transfer) --}}
+                        @if ($booking->pembayaran)
+                            @if ($booking->pembayaran->status !== 'lunas')
+                                <div class="text-end">
+                                    {{-- Tombol Lunas --}}
+                                    <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST"
+                                        class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="btn btn-success">
+                                            <i class="ti ti-cash"></i> Lunas
+                                        </button>
+                                    </form>
+
+                                    {{-- Tombol Belum Lunas --}}
+                                    <form action="{{ route('booking.setBelumLunas', $booking->id) }}" method="POST"
+                                        class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="btn btn-warning">
+                                            <i class="ti ti-clock"></i> Belum Lunas
+                                        </button>
+                                    </form>
+                                </div>
+                            @endif
+                        @endif
+                    </div>
                 </div>
-            </div>
+            @endauth
         </div>
     </div>
 @endsection
