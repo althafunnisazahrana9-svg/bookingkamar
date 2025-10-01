@@ -7,6 +7,8 @@
     <title>Hotel Aetheria</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
 </head>
 
 <body style="background-color: #D2B48C;">
@@ -14,11 +16,31 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #D2B48C;">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">LOGO</a>
-            <form class="d-flex ms-auto me-4">
-                <input class="form-control me-2" type="search" placeholder="Search">
-                <button class="btn btn-light" type="submit">🔍</button>
-            </form>
+            <a href="{{ route('home') }}" class="app-brand-link d-flex align-items-center text-white">
+                <span class="app-brand-logo">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="rounded-circle" width="80"
+                        height="80">
+                </span>
+            </a>
+            <div class="top-widget">
+                <div class="d-flex align-items-center me-4 text-white">
+                    <div class="me-4 d-flex align-items-center">
+                        <i class="bi bi-geo-alt-fill fs-4 me-2 mt-1"></i>
+                        <span class="d-block text-start">
+                            Jl. Lembah Aetheria No. 1525, <br />
+                            Taman Senja, Kota Seraphine <br />
+                            Angeles, CNZ
+                        </span>
+                    </div>
+                    <div class="top-info phone-num ms-4">
+                        <i class="bi bi-telephone-fill fs-4 me-2 mt-1"></i>
+                        <span>
+                            +62 (085)0510-0167
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </nav>
 
