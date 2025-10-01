@@ -21,7 +21,10 @@ class PengunjungController extends Controller
             'password' => 'required|min:6',
         ]);
 
+        // Login pakai guard 'pengunjung'
         if (Auth::guard('pengunjung')->attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate();
+
             return redirect()->route('booking.about')->with('success', 'Login berhasil!');
         }
 

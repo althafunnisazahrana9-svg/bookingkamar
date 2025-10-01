@@ -15,7 +15,7 @@
 
     {{-- {{-- admin di dalam auth --}}
     {{-- pengunjung di diluar auth, jadi sidebarnya pengunjung bisa masuk ke login --}}
-    @auth
+    @auth('web')
         {{-- Jika login sebagai Admin --}}
         <ul class="menu-inner py-1 list-unstyled">
             <li class="menu-item">
@@ -49,22 +49,23 @@
                 </a>
             </li>
         </ul>
-
     @endauth
     {{-- Jika login sebagai Pengunjung --}}
     @guest
-        <ul class="menu-inner py-1 list-unstyled">
-            <li class="menu-item">
-                <a href="{{ route('booking.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                    <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar booking
-                </a>
-            </li>
-            <li class="menu-item">
-                <a href="{{ route('booking.about') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                    <i class="menu-icon tf-icons ti ti-building-skyscraper me-2"></i> Detail Hotel
-                </a>
-            </li>
-        </ul>
+        @auth('pengunjung')
+            <ul class="menu-inner py-1 list-unstyled">
+                <li class="menu-item">
+                    <a href="{{ route('booking.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
+                        <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar booking
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('booking.about') }}" class="menu-link d-block py-2 px-3 rounded text-white">
+                        <i class="menu-icon tf-icons ti ti-building-skyscraper me-2"></i> Detail Hotel
+                    </a>
+                </li>
+            </ul>
+        @endauth
     @endguest
 
 </aside>
