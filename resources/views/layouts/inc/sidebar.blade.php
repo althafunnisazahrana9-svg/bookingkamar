@@ -13,63 +13,29 @@
 
     <div class="menu-inner-shadow"></div>
 
+    {{-- {{-- admin di dalam auth --}}
+    {{-- pengunjung di diluar auth, jadi sidebarnya pengunjung bisa masuk ke login --}}
     @auth
         {{-- Jika login sebagai Admin --}}
-        @if (Auth::user()->role === 'admin')
-            <ul class="menu-inner py-1 list-unstyled">
-                <li class="menu-item">
-                    <a href="{{ route('home') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                        <i class="menu-icon tf-icons ti ti-home me-2"></i> Dashboard
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('booking.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                        <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar Booking
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('kamar.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                        <i class="menu-icon tf-icons ti ti-apps-off me-2"></i> Data Kamar
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('pesan.welcome') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                        <i class="menu-icon tf-icons ti ti-message me-2"></i> Pesan Kamar
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('booking.about') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                        <i class="menu-icon tf-icons ti ti-building-skyscraper me-2"></i> Detail Hotel
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                        <i class="menu-icon tf-icons ti ti-users me-2"></i> Admin
-                    </a>
-                </li>
-            </ul>
-
-            {{-- Jika login sebagai Pengunjung --}}
-        @elseif (Auth::user()->role === 'pengunjung')
-            <ul class="menu-inner py-1 list-unstyled">
-                <li class="menu-item">
-                    <a href="{{ route('booking.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                        <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar Booking
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('booking.about') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                        <i class="menu-icon tf-icons ti ti-building-skyscraper me-2"></i> Detail Hotel
-                    </a>
-                </li>
-            </ul>
-        @endif
-    @else
-        {{-- Jika belum login (guest) --}}
         <ul class="menu-inner py-1 list-unstyled">
             <li class="menu-item">
+                <a href="{{ route('home') }}" class="menu-link d-block py-2 px-3 rounded text-white">
+                    <i class="menu-icon tf-icons ti ti-home me-2"></i> Dashboard
+                </a>
+            </li>
+            <li class="menu-item">
                 <a href="{{ route('booking.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                    <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar booking
+                    <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar Booking
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('kamar.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
+                    <i class="menu-icon tf-icons ti ti-apps-off me-2"></i> Data Kamar
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('pesan.welcome') }}" class="menu-link d-block py-2 px-3 rounded text-white">
+                    <i class="menu-icon tf-icons ti ti-message me-2"></i> Pesan Kamar
                 </a>
             </li>
             <li class="menu-item">
@@ -77,6 +43,25 @@
                     <i class="menu-icon tf-icons ti ti-building-skyscraper me-2"></i> Detail Hotel
                 </a>
             </li>
+            <li class="menu-item">
+                <a href="{{ route('admin.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
+                    <i class="menu-icon tf-icons ti ti-users me-2"></i> Admin
+                </a>
+            </li>
         </ul>
     @endauth
+    {{-- Jika login sebagai Pengunjung --}}
+    <ul class="menu-inner py-1 list-unstyled">
+        <li class="menu-item">
+            <a href="{{ route('booking.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
+                <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar booking
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{{ route('booking.about') }}" class="menu-link d-block py-2 px-3 rounded text-white">
+                <i class="menu-icon tf-icons ti ti-building-skyscraper me-2"></i> Detail Hotel
+            </a>
+        </li>
+    </ul>
+
 </aside>

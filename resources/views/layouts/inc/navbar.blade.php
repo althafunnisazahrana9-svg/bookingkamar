@@ -54,12 +54,15 @@
                         <div class="avatar avatar-online">
                             <img src="{{ asset('images/admin1.jpg') }}" alt class="rounded-circle" />
                         </div>
+                        {{-- admin --}}
                         @if (Auth::check())
                             <span>{{ Auth::user()->nama }}</span>
-                        @elseif(session('nama_pemesan'))
-                            <span>{{ session('nama_pemesan') }}</span>
-                        @else
+                            {{-- admin --}}
+
+                            {{-- Pengunjung --}}
+                        @elseif (Auth::guest())
                             <span>Pengunjung</span>
+                            {{-- pengunjung --}}
                         @endif
                     </div>
                 </a>

@@ -97,8 +97,12 @@ class BookingController extends Controller
         // Simpan booking ke database
         $booking = \App\Models\Booking::create($request->all());
 
-        // Simpan nama ke session supaya bisa tampil di navbar
-        session(['nama_pemesan' => $request->nama_pemesan]);
+        // Simpan data pengunjung ke session
+        session([
+            'role' => 'pengunjung',
+            'nama_pemesan' => $request->nama_pemesan,
+            'email_pemesan' => $request->email,
+        ]);
 
         // Arahkan sesuai metode pembayaran
         if ($request->metode_pembayaran === 'transfer') {
