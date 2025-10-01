@@ -51,17 +51,19 @@
         </ul>
     @endauth
     {{-- Jika login sebagai Pengunjung --}}
-    <ul class="menu-inner py-1 list-unstyled">
-        <li class="menu-item">
-            <a href="{{ route('booking.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar booking
-            </a>
-        </li>
-        <li class="menu-item">
-            <a href="{{ route('booking.about') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                <i class="menu-icon tf-icons ti ti-building-skyscraper me-2"></i> Detail Hotel
-            </a>
-        </li>
-    </ul>
+    @if (session('role') === 'pengunjung')
+        <ul class="menu-inner py-1 list-unstyled">
+            <li class="menu-item">
+                <a href="{{ route('booking.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
+                    <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar booking
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('booking.about') }}" class="menu-link d-block py-2 px-3 rounded text-white">
+                    <i class="menu-icon tf-icons ti ti-building-skyscraper me-2"></i> Detail Hotel
+                </a>
+            </li>
+        </ul>
+    @endif
 
 </aside>

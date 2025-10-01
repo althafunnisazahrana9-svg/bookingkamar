@@ -56,7 +56,7 @@
                         </div>
                         {{-- admin --}}
                         @if (Auth::check())
-                            <span>{{ Auth::user()->nama }}</span>
+                            <span>{{ Auth::user()->name }}</span>
                             {{-- admin --}}
 
                             {{-- Pengunjung --}}
