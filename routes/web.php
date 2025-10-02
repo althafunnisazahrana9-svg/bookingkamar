@@ -9,22 +9,22 @@ use App\Http\Controllers\PengunjungController;
 use App\Http\Controllers\PesanController;
 use Illuminate\Support\Facades\Route;
 
+// route untuk login pengunjung
+Route::get('/pengunjung/login', [PengunjungController::class, 'index'])->name('pengunjung.login');
+Route::post('/pengunjung/login', [PengunjungController::class, 'login'])->name('pengunjung.login.post');
+
+// logout pengunjung
+Route::post('/logout-pengunjung', function () {
+    session()->flush(); // hapus semua session pengunjung
+
+    return redirect()->route('pengunjung.login'); // arahkan ke halaman login pengunjung
+})->name('logout.pengunjung');
+
 Route::middleware(['pengunjung.auth'])->group(function () {
     Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
 
     Route::get('/form', [App\Http\Controllers\FormController::class, 'index'])->name('pages.form.index');
     Route::post('/form', [App\Http\Controllers\FormController::class, 'store'])->name('pages.form.store');
-
-    // route untuk login pengunjung
-    Route::get('/pengunjung/login', [PengunjungController::class, 'index'])->name('pengunjung.login');
-    Route::post('/pengunjung/login', [PengunjungController::class, 'login'])->name('pengunjung.login.post');
-
-    // logout pengunjung
-    Route::post('/logout-pengunjung', function () {
-        session()->flush(); // hapus semua session pengunjung
-
-        return redirect()->route('pengunjung.login'); // arahkan ke halaman login pengunjung
-    })->name('logout.pengunjung');
 
     // about
     Route::get('/about', [BookingController::class, 'about'])->name('booking.about');
@@ -121,7 +121,8 @@ Route::group([
     Route::middleware(['auth', 'role:admin'])->group(function () {
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
+        // resource booking
+        Route::resource('/booking', App\Http\Controllers\BookingController::class);
         Route::post('/admin/bookings/update-status', [AdminController::class, 'updateStatus'])->name('admin.booking.updateStatus');
         // Tambahan untuk konfirmasi & tolak booking
         Route::get('booking/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
