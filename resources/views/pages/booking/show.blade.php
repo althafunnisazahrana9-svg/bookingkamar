@@ -138,46 +138,39 @@
                 </div>
                 {{-- hanya admin yang bisa merubah --}}
                 @auth('web')
-
                     <!-- Tombol kanan: Konfirmasi, Tolak, Lunas, Belum Lunas -->
                     <div class="d-flex gap-2">
+                        {{-- Jika booking masih pending --}}
                         @if ($booking->status == 'pending')
                             <a href="{{ route('booking.confirm', $booking->id) }}" class="btn btn-sm btn-success">
-                                <span class="ti ti-check"></span>
-                                Konfirmasi
+                                <span class="ti ti-check"></span> Konfirmasi
                             </a>
 
                             <form action="{{ route('booking.reject', $booking->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 <button type="submit" class="btn btn-sm btn-danger">
-                                    <span class="ti ti-x"></span>
-                                    Tolak
+                                    <span class="ti ti-x"></span> Tolak
                                 </button>
                             </form>
-                        @endif
 
-                        {{-- Tombol Lunas / Belum Lunas (Berlaku untuk COD & Transfer) --}}
-                        @if ($booking->pembayaran)
+                            {{-- Tombol Lunas / Belum Lunas (Berlaku untuk COD & Transfer) --}}
+                        @elseif ($booking->status == 'confirmed' && $booking->pembayaran)
+                            {{-- Jika booking sudah dikonfirmasi baru muncul tombol lunas/belum lunas --}}
                             @if ($booking->pembayaran->status !== 'lunas')
-                                <div class="text-end">
-                                    {{-- Tombol Lunas --}}
-                                    <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST"
-                                        class="d-inline">
-                                        @csrf
-                                        <button type="submit" class="btn btn-success">
-                                            <i class="ti ti-cash"></i> Lunas
-                                        </button>
-                                    </form>
+                                <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="ti ti-cash"></i> Lunas
+                                    </button>
+                                </form>
 
-                                    {{-- Tombol Belum Lunas --}}
-                                    <form action="{{ route('booking.setBelumLunas', $booking->id) }}" method="POST"
-                                        class="d-inline">
-                                        @csrf
-                                        <button type="submit" class="btn btn-warning">
-                                            <i class="ti ti-clock"></i> Belum Lunas
-                                        </button>
-                                    </form>
-                                </div>
+                                <form action="{{ route('booking.setBelumLunas', $booking->id) }}" method="POST"
+                                    class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning">
+                                        <i class="ti ti-clock"></i> Belum Lunas
+                                    </button>
+                                </form>
                             @endif
                         @endif
                     </div>
