@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
             'role' => \App\Http\Middleware\RoleMiddleware::class,
+            'pengunjung.auth' => \App\Http\Middleware\PengunjungAuth::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

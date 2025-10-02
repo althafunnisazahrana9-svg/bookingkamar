@@ -93,6 +93,14 @@ Route::middleware(['pengunjung.auth'])->group(function () {
 
     // resource booking
     Route::resource('/booking', App\Http\Controllers\BookingController::class);
+
+    // konfirmasi pembayaran
+    Route::get('/pembayaran/konfirmasi/{booking}', [PembayaranController::class, 'konfirmasi'])
+        ->name('pembayaran.konfirmasi');
+    Route::post('/pembayaran/konfirmasi/{booking}', [PembayaranController::class, 'storeKonfirmasi'])
+        ->name('pembayaran.konfirmasi.store');
+    Route::post('/pembayaran/{id}', [PembayaranController::class, 'storeKonfirmasi'])
+        ->name('pembayaran.storeKonfirmasi');
 });
 
 Auth::routes([
@@ -118,13 +126,6 @@ Route::group([
         // Tambahan untuk konfirmasi & tolak booking
         Route::get('booking/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
         Route::post('booking/{id}/reject', [BookingController::class, 'reject'])->name('booking.reject');
-        // konfirmasi pembayaran
-        Route::get('/pembayaran/konfirmasi/{booking}', [PembayaranController::class, 'konfirmasi'])
-            ->name('pembayaran.konfirmasi');
-        Route::post('/pembayaran/konfirmasi/{booking}', [PembayaranController::class, 'storeKonfirmasi'])
-            ->name('pembayaran.konfirmasi.store');
-        Route::post('/pembayaran/{id}', [PembayaranController::class, 'storeKonfirmasi'])
-            ->name('pembayaran.storeKonfirmasi');
         // status pembayaran
         Route::post('/booking/{id}/lunas', [BookingController::class, 'setLunas'])->name('booking.setLunas');
         Route::post('/booking/{id}/belum-lunas', [BookingController::class, 'setBelumLunas'])->name('booking.setBelumLunas');
