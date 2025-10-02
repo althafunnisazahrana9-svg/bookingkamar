@@ -9,89 +9,91 @@ use App\Http\Controllers\PengunjungController;
 use App\Http\Controllers\PesanController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
+Route::middleware(['pengunjung.auth'])->group(function () {
+    Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
 
-Route::get('/form', [App\Http\Controllers\FormController::class, 'index'])->name('pages.form.index');
-Route::post('/form', [App\Http\Controllers\FormController::class, 'store'])->name('pages.form.store');
+    Route::get('/form', [App\Http\Controllers\FormController::class, 'index'])->name('pages.form.index');
+    Route::post('/form', [App\Http\Controllers\FormController::class, 'store'])->name('pages.form.store');
 
-// route untuk login pengunjung
-Route::get('/pengunjung/login', [PengunjungController::class, 'index'])->name('pengunjung.login');
-Route::post('/pengunjung/login', [PengunjungController::class, 'login'])->name('pengunjung.login.post');
+    // route untuk login pengunjung
+    Route::get('/pengunjung/login', [PengunjungController::class, 'index'])->name('pengunjung.login');
+    Route::post('/pengunjung/login', [PengunjungController::class, 'login'])->name('pengunjung.login.post');
 
-// logout pengunjung
-Route::post('/logout-pengunjung', function () {
-    session()->flush(); // hapus semua session pengunjung
+    // logout pengunjung
+    Route::post('/logout-pengunjung', function () {
+        session()->flush(); // hapus semua session pengunjung
 
-    return redirect()->route('pengunjung.login'); // arahkan ke halaman login pengunjung
-})->name('logout.pengunjung');
+        return redirect()->route('pengunjung.login'); // arahkan ke halaman login pengunjung
+    })->name('logout.pengunjung');
 
-// about
-Route::get('/about', [BookingController::class, 'about'])->name('booking.about');
-Route::post('/about', [BookingController::class, 'about'])->name('booking.about');
+    // about
+    Route::get('/about', [BookingController::class, 'about'])->name('booking.about');
+    Route::post('/about', [BookingController::class, 'about'])->name('booking.about');
 
-// services
-Route::get('/services', [BookingController::class, 'services'])->name('booking.services');
-Route::post('/services', [BookingController::class, 'services'])->name('booking.services');
+    // services
+    Route::get('/services', [BookingController::class, 'services'])->name('booking.services');
+    Route::post('/services', [BookingController::class, 'services'])->name('booking.services');
 
-// rooms
-Route::get('/rooms', [BookingController::class, 'rooms'])->name('booking.rooms');
-Route::post('/rooms', [BookingController::class, 'rooms'])->name('booking.rooms');
+    // rooms
+    Route::get('/rooms', [BookingController::class, 'rooms'])->name('booking.rooms');
+    Route::post('/rooms', [BookingController::class, 'rooms'])->name('booking.rooms');
 
-// news
-Route::get('/news', [BookingController::class, 'news'])->name('booking.news');
-Route::post('/news', [BookingController::class, 'news'])->name('booking.news');
+    // news
+    Route::get('/news', [BookingController::class, 'news'])->name('booking.news');
+    Route::post('/news', [BookingController::class, 'news'])->name('booking.news');
 
-// contact
-Route::get('/contact', [BookingController::class, 'contact'])->name('booking.contact');
-Route::post('/contact', [BookingController::class, 'contact'])->name('booking.contact');
+    // contact
+    Route::get('/contact', [BookingController::class, 'contact'])->name('booking.contact');
+    Route::post('/contact', [BookingController::class, 'contact'])->name('booking.contact');
 
-// pesan welcome
-Route::get('/welcome', [PesanController::class, 'welcome'])->name('pesan.welcome');
+    // pesan welcome
+    Route::get('/welcome', [PesanController::class, 'welcome'])->name('pesan.welcome');
 
-// struk
-Route::get('/booking/{id}/struk', [BookingController::class, 'struk'])->name('booking.struk');
+    // struk
+    Route::get('/booking/{id}/struk', [BookingController::class, 'struk'])->name('booking.struk');
 
-// untuk halaman transfer bank
-Route::get('/pembayaran/transfer-bank/{booking}', [PembayaranController::class, 'transfer'])->name('pembayaran.transfer');
+    // untuk halaman transfer bank
+    Route::get('/pembayaran/transfer-bank/{booking}', [PembayaranController::class, 'transfer'])->name('pembayaran.transfer');
 
-// upload bukti transfer
-Route::post('/pembayaran/{booking}/upload-bukti-transfer',
-    [PembayaranController::class, 'storeKonfirmasi'])->name('pembayaran.uploadBuktiTransfer');
+    // upload bukti transfer
+    Route::post('/pembayaran/{booking}/upload-bukti-transfer',
+        [PembayaranController::class, 'storeKonfirmasi'])->name('pembayaran.uploadBuktiTransfer');
 
-// untuk halaman pembayaran di tempat
-Route::get('/pembayaran/cod/{booking}', [PembayaranController::class, 'cod'])
-    ->name('pembayaran.cod');
+    // untuk halaman pembayaran di tempat
+    Route::get('/pembayaran/cod/{booking}', [PembayaranController::class, 'cod'])
+        ->name('pembayaran.cod');
 
-// news kemewahan
-Route::get('news/Kemewahan-dan-Kedamaian-alam-Satu-Tempat', [NewsController::class, 'index'])->name('news.index');
-Route::post('news/Kemewahan-dan-Kedamaian-alam-Satu-Tempat', [NewsController::class, 'index'])->name('news.index');
+    // news kemewahan
+    Route::get('news/Kemewahan-dan-Kedamaian-alam-Satu-Tempat', [NewsController::class, 'index'])->name('news.index');
+    Route::post('news/Kemewahan-dan-Kedamaian-alam-Satu-Tempat', [NewsController::class, 'index'])->name('news.index');
 
-// news kuliner
-Route::get('news/Kuliner-Istimewa-untuk-Setiap-Momen', [NewsController::class, 'kuliner'])->name('news.kuliner');
-Route::post('news/Kuliner-Istimewa-untuk-Setiap-Momen', [NewsController::class, 'kuliner'])->name('news.kuliner');
+    // news kuliner
+    Route::get('news/Kuliner-Istimewa-untuk-Setiap-Momen', [NewsController::class, 'kuliner'])->name('news.kuliner');
+    Route::post('news/Kuliner-Istimewa-untuk-Setiap-Momen', [NewsController::class, 'kuliner'])->name('news.kuliner');
 
-// news kuliner
-Route::get('news/Romantisme-di-Setiap-Detil', [NewsController::class, 'romantisme'])->name('news.romantisme');
-Route::post('news/Romantisme-di-Setiap-Detil', [NewsController::class, 'romantisme'])->name('news.romantisme');
+    // news kuliner
+    Route::get('news/Romantisme-di-Setiap-Detil', [NewsController::class, 'romantisme'])->name('news.romantisme');
+    Route::post('news/Romantisme-di-Setiap-Detil', [NewsController::class, 'romantisme'])->name('news.romantisme');
 
-// news holidays
-Route::get('news/Yang-Perlu-Kamu-Tahu-Sebelum-Berlibur', [NewsController::class, 'holidays'])->name('news.holidays');
-Route::post('news/Yang-Perlu-Kamu-Tahu-Sebelum-Berlibur', [NewsController::class, 'holidays'])->name('news.holidays');
+    // news holidays
+    Route::get('news/Yang-Perlu-Kamu-Tahu-Sebelum-Berlibur', [NewsController::class, 'holidays'])->name('news.holidays');
+    Route::post('news/Yang-Perlu-Kamu-Tahu-Sebelum-Berlibur', [NewsController::class, 'holidays'])->name('news.holidays');
 
-// news coffe
-Route::get('news/Coffee-Shop-Baru', [NewsController::class, 'coffeeshop'])->name('news.coffeeshop');
-Route::post('news/Coffee-Shop-Baru', [NewsController::class, 'coffeeshop'])->name('news.coffeeshop');
+    // news coffe
+    Route::get('news/Coffee-Shop-Baru', [NewsController::class, 'coffeeshop'])->name('news.coffeeshop');
+    Route::post('news/Coffee-Shop-Baru', [NewsController::class, 'coffeeshop'])->name('news.coffeeshop');
 
-// news master
-Route::get('news/Peningkatan-Fasilitas-Telah-Dilakukan-pada-Master-Suite-HOTEL', [NewsController::class, 'master'])->name('news.master');
-Route::post('news/Peningkatan-Fasilitas-Telah-Dilakukan-pada-Master-Suite-HOTEL', [NewsController::class, 'master'])->name('news.master');
+    // news master
+    Route::get('news/Peningkatan-Fasilitas-Telah-Dilakukan-pada-Master-Suite-HOTEL', [NewsController::class, 'master'])->name('news.master');
+    Route::post('news/Peningkatan-Fasilitas-Telah-Dilakukan-pada-Master-Suite-HOTEL', [NewsController::class, 'master'])->name('news.master');
 
-// success
-Route::get('/booking/success/{id}', [\App\Http\Controllers\BookingController::class, 'success'])
-    ->name('booking.success');
+    // success
+    Route::get('/booking/success/{id}', [\App\Http\Controllers\BookingController::class, 'success'])
+        ->name('booking.success');
 
-// resource booking
-Route::resource('/booking', App\Http\Controllers\BookingController::class);
+    // resource booking
+    Route::resource('/booking', App\Http\Controllers\BookingController::class);
+});
 
 Auth::routes([
     'register' => false,

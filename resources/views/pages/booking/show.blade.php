@@ -117,26 +117,27 @@
                         <span class="ti ti-arrow-left"></span>
                         Kembali
                     </a>
-                    {{-- hanya admin yang bisa merubah --}}
-                    @auth('web')
-                        {{-- Hanya tampilkan tombol pembayaran jika status bukan rejected --}}
-                        @if ($booking->status != 'rejected')
-                            @if ($booking->pembayaran && $booking->pembayaran->bukti_transfer)
-                                <a href="{{ asset('storage/' . $booking->pembayaran->bukti_transfer) }}" target="_blank"
-                                    class="btn btn-sm btn-info">
-                                    <span class="ti ti-file"></span> Lihat Bukti Transfer
-                                </a>
-                            @else
-                                {{-- Kalau transfer tanpa bukti ATAU COD --}}
-                                <a href="{{ $booking->metode_pembayaran === 'transfer'
-                                    ? route('pembayaran.transfer', $booking->id)
-                                    : route('pembayaran.cod', $booking->id) }}"
-                                    class="btn btn-sm btn-success">
-                                    <span class="ti ti-receipt-2"></span> Pembayaran
-                                </a>
-                            @endif
+
+                    {{-- Hanya tampilkan tombol pembayaran jika status bukan rejected --}}
+                    @if ($booking->status != 'rejected')
+                        @if ($booking->pembayaran && $booking->pembayaran->bukti_transfer)
+                            <a href="{{ asset('storage/' . $booking->pembayaran->bukti_transfer) }}" target="_blank"
+                                class="btn btn-sm btn-info">
+                                <span class="ti ti-file"></span> Lihat Bukti Transfer
+                            </a>
+                        @else
+                            {{-- Kalau transfer tanpa bukti ATAU COD --}}
+                            <a href="{{ $booking->metode_pembayaran === 'transfer'
+                                ? route('pembayaran.transfer', $booking->id)
+                                : route('pembayaran.cod', $booking->id) }}"
+                                class="btn btn-sm btn-success">
+                                <span class="ti ti-receipt-2"></span> Pembayaran
+                            </a>
                         @endif
-                    </div>
+                    @endif
+                </div>
+                {{-- hanya admin yang bisa merubah --}}
+                @auth('web')
 
                     <!-- Tombol kanan: Konfirmasi, Tolak, Lunas, Belum Lunas -->
                     <div class="d-flex gap-2">
