@@ -11,16 +11,16 @@ class DashboardController extends Controller
     public function index()
     {
         // total booking (angka) -> exclude booking ditolak
-        $totalBooking = Booking::where('status', '!=', 'rejected')->count();
+        $totalBooking = Booking::whereNotIn('status', ['pending', 'rejected'])->count();
 
         // booking per metode pembayaran -> exclude booking ditolak
-        $bookingPerMetode = Booking::where('status', '!=', 'rejected')
+        $bookingPerMetode = Booking::whereNotIn('status', ['pending', 'rejected'])
             ->select('metode_pembayaran', \DB::raw('count(*) as total'))
             ->groupBy('metode_pembayaran')
             ->pluck('total', 'metode_pembayaran');
 
         // booking per kamar -> exclude booking ditolak
-        $bookingPerKamar = Booking::where('booking.status', '!=', 'rejected')
+        $bookingPerKamar = Booking::whereNotIn('booking.status', ['pending', 'rejected'])
             ->join('kamar', 'booking.kamar_id', '=', 'kamar.id')
             ->select('kamar.nama as kamar_nama', \DB::raw('count(*) as total'))
             ->groupBy('kamar.nama')
