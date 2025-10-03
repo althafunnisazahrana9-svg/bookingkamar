@@ -9,6 +9,9 @@ use App\Http\Controllers\PengunjungController;
 use App\Http\Controllers\PesanController;
 use Illuminate\Support\Facades\Route;
 
+// route untuk booking untuk admin dan pengunjung di luar middleware auth
+Route::resource('/booking', App\Http\Controllers\BookingController::class);
+
 // route untuk login pengunjung
 Route::get('/pengunjung/login', [PengunjungController::class, 'index'])->name('pengunjung.login');
 Route::post('/pengunjung/login', [PengunjungController::class, 'login'])->name('pengunjung.login.post');
@@ -21,7 +24,6 @@ Route::post('/logout-pengunjung', function () {
 })->name('logout.pengunjung');
 
 Route::middleware(['pengunjung.auth'])->group(function () {
-    Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
 
     Route::get('/form', [App\Http\Controllers\FormController::class, 'index'])->name('pages.form.index');
     Route::post('/form', [App\Http\Controllers\FormController::class, 'store'])->name('pages.form.store');
@@ -91,9 +93,6 @@ Route::middleware(['pengunjung.auth'])->group(function () {
     Route::get('/booking/success/{id}', [\App\Http\Controllers\BookingController::class, 'success'])
         ->name('booking.success');
 
-    // resource booking untuk pengunjung
-    Route::resource('/pengunjung/booking', App\Http\Controllers\BookingController::class);
-
     // konfirmasi pembayaran
     Route::get('/pembayaran/konfirmasi/{booking}', [PembayaranController::class, 'konfirmasi'])
         ->name('pembayaran.konfirmasi');
@@ -118,11 +117,9 @@ Route::group([
     })->name('home');
 
     // Halaman lain khusus admin
-    Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        // resource booking khusus admin
-        Route::resource('/admin/booking', BookingController::class);
         Route::post('/admin/bookings/update-status', [AdminController::class, 'updateStatus'])->name('admin.booking.updateStatus');
         // Tambahan untuk konfirmasi & tolak booking
         Route::get('booking/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');

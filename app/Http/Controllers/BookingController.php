@@ -116,7 +116,7 @@ class BookingController extends Controller
 
         // Default redirect kalau tidak ada metode cocok
         return redirect()->route('booking.success', ['id' => $booking->id])
-            ->with('success', 'Booking berhasil dibuat');
+            ->with('success', 'Booking berhasil dibuat.');
     }
 
     public function struk($id)
