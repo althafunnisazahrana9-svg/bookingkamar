@@ -14,13 +14,13 @@
 
 
             <!-- Notifikasi -->
-            @auth('web') {{-- Hanya admin yang login lewat guard 'web' --}}
+            @auth('web')
                 <li class="nav-item dropdown">
                     <a class="nav-link position-relative text-white" href="#" id="notificationDropdown"
                         data-bs-toggle="dropdown">
                         <i class="bi bi-bell text-white" style="font-size: 20px;"></i>
                         @php
-                            $count = $notifikasi->count(); // jumlah booking
+                            $count = \App\Models\Booking::where('status', 'pending')->count();
                         @endphp
                         @if ($count > 0)
                             <span class="badge bg-danger rounded-pill"
@@ -29,17 +29,15 @@
                             </span>
                         @endif
                     </a>
-
-                    <ul class="dropdown-menu dropdown-menu-end p-0"
-                        style="width: 300px; max-height: 300px; overflow-y: auto;">
-                        <li class="dropdown-header px-3 py-2">Notifikasi ({{ $count }})</li>
-
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li class="dropdown-header">Notifikasi</li>
                         @foreach ($notifikasi as $notif)
+                            {{-- supaya notifikasi yang belum dibaca hurufnya tebal dan notifikasi yang sudah dibaca hurufnya biasa : fw-bold --}}
                             <li>
                                 <a class="dropdown-item @if ($notif->status == 'pending') fw-bold @endif"
                                     href="{{ route('booking.show', $notif->id) }}">
-                                    Booking: {{ $notif->kamar->nama ?? 'Kamar' }} oleh {{ $notif->nama_pemesan }}
-                                    <br>
+                                    Booking : {{ $notif->kamar->nama ?? 'Kamar' }}
+                                    oleh {{ $notif->nama_pemesan }}
                                     <small class="text-muted">{{ $notif->created_at->diffForHumans() }}</small>
                                 </a>
                             </li>
