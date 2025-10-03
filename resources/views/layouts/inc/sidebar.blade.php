@@ -34,16 +34,6 @@
                 </a>
             </li>
             <li class="menu-item">
-                <a href="{{ route('pesan.welcome') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                    <i class="menu-icon tf-icons ti ti-message me-2"></i> Pesan Kamar
-                </a>
-            </li>
-            <li class="menu-item">
-                <a href="{{ route('booking.about') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                    <i class="menu-icon tf-icons ti ti-building-skyscraper me-2"></i> Detail Hotel
-                </a>
-            </li>
-            <li class="menu-item">
                 <a href="{{ route('admin.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
                     <i class="menu-icon tf-icons ti ti-users me-2"></i> Admin
                 </a>
