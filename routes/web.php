@@ -91,8 +91,8 @@ Route::middleware(['pengunjung.auth'])->group(function () {
     Route::get('/booking/success/{id}', [\App\Http\Controllers\BookingController::class, 'success'])
         ->name('booking.success');
 
-    // resource booking
-    Route::resource('/booking', App\Http\Controllers\BookingController::class);
+    // resource booking untuk pengunjung
+    Route::resource('/pengunjung/booking', App\Http\Controllers\BookingController::class);
 
     // konfirmasi pembayaran
     Route::get('/pembayaran/konfirmasi/{booking}', [PembayaranController::class, 'konfirmasi'])
@@ -121,8 +121,8 @@ Route::group([
     Route::middleware(['auth', 'role:admin'])->group(function () {
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        // resource booking
-        Route::resource('/booking', App\Http\Controllers\BookingController::class);
+        // resource booking khusus admin
+        Route::resource('/admin/booking', BookingController::class);
         Route::post('/admin/bookings/update-status', [AdminController::class, 'updateStatus'])->name('admin.booking.updateStatus');
         // Tambahan untuk konfirmasi & tolak booking
         Route::get('booking/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
