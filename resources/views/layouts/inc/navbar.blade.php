@@ -60,11 +60,11 @@
                         @if (Auth::check())
                             <span>{{ Auth::user()->name }}</span>
                             {{-- admin --}}
-
-                            {{-- Pengunjung --}}
-                        @elseif (Auth::guest())
-                            <span>Pengunjung</span>
-                            {{-- pengunjung --}}
+                        @endif
+                        {{-- bikin guard pengunjung di config/auth.php --}}
+                        {{-- Pengunjung --}}
+                        @if (Auth::guard('pengunjung')->check())
+                            <span>{{ Auth::guard('pengunjung')->user()->name }}</span>
                         @endif
                     </div>
                 </a>
