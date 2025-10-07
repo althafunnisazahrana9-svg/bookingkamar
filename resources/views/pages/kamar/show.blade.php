@@ -52,11 +52,6 @@
                     <span class="ti ti-arrow-left me-1"></span>
                     Kembali
                 </a>
-
-                <a href="{{ route('kamar.edit', $kamar->id) }}" class="btn btn-primary">
-                    <span class="ti ti-pencil me-1"></span>
-                    Edit
-                </a>
             </div>
         </div>
     </div>
