@@ -71,10 +71,17 @@
                 <ul class="dropdown-menu dropdown-menu-end">
 
                     <li>
-                        <a class="dropdown-item" href="{{ route('ubah-profil') }}">
-                            <i class="ti ti-user me-3 ti-md"></i>
-                            <span class="align-middle">Ubah Profil</span>
-                        </a>
+                        @if (Auth::guard('web')->check())
+                            <a class="dropdown-item" href="{{ route('admin.ubah-profil') }}">
+                                <i class="ti ti-user me-3 ti-md"></i>
+                                <span class="align-middle">Ubah Profil</span>
+                            </a>
+                        @elseif (Auth::guard('pengunjung')->check())
+                            <a class="dropdown-item" href="{{ route('pengunjung.ubah-profil') }}">
+                                <i class="ti ti-user me-3 ti-md"></i>
+                                <span class="align-middle">Ubah Profil</span>
+                            </a>
+                        @endif
                     </li>
                     <li>
                         <div class="d-grid px-2 pt-2 pb-1">

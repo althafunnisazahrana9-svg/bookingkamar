@@ -28,6 +28,9 @@ Route::middleware(['pengunjung.auth'])->group(function () {
     Route::get('/form', [App\Http\Controllers\FormController::class, 'index'])->name('pages.form.index');
     Route::post('/form', [App\Http\Controllers\FormController::class, 'store'])->name('pages.form.store');
 
+    Route::get('/pengunjung/ubah-profil', [PengunjungController::class, 'edit'])->name('pengunjung.ubah-profil');
+    Route::post('/pengunjung/ubah-profil', [PengunjungController::class, 'update'])->name('pengunjung.ubah-profil.update');
+
     // about
     Route::get('/about', [BookingController::class, 'about'])->name('booking.about');
     Route::post('/about', [BookingController::class, 'about'])->name('booking.about');

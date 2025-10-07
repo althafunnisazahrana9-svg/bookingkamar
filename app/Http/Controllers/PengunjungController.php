@@ -32,4 +32,27 @@ class PengunjungController extends Controller
             'email' => 'Email atau password salah.',
         ])->withInput();
     }
+
+    // ubah profil pengunjung
+    // Ubah profil pengunjung
+    public function edit()
+    {
+        $user = Auth::guard('pengunjung')->user();
+
+        return view('pages.pengunjung.edit', compact('user'));
+    }
+
+    public function update(Request $request)
+    {
+        $pengunjung = Auth::guard('pengunjung')->user();
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
+
+        $pengunjung->update($request->only('name', 'email'));
+
+        return redirect()->route('pengunjung.ubah-profil')->with('success', 'Profil berhasil diperbarui.');
+    }
 }
