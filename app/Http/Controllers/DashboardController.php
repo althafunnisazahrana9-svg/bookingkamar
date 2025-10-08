@@ -45,11 +45,17 @@ class DashboardController extends Controller
             ->sum('booking.harga');
 
         return view('pages.dashboard.index', compact(
+            // total booking (hanya yang diterima & selesai, exclude pending/rejected)
             'totalBooking',
+            // jumlah booking berdasarkan metode pembayaran (contoh: transfer, cash, e-wallet)
             'bookingPerMetode',
+            // jumlah booking per kamar (untuk tahu kamar mana yang paling sering dipesan)
             'bookingPerKamar',
+            // total pendapatan keseluruhan (hanya dari pembayaran yang statusnya lunas)
             'totalPendapatan',
+            // status pembayaran berdasarkan booking (contoh: lunas, menunggu, gagal)
             'statusPembayaran',
+            // pendapatan per hari (dijumlahkan hanya dari pembayaran lunas)
             'pendapatanPerHari'
         ));
     }

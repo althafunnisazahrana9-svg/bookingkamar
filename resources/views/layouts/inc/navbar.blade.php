@@ -7,11 +7,10 @@
         </a>
     </div>
 
+    {{-- Bagian kanan navbar --}}
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
-
-
 
             <!-- Notifikasi -->
             @auth('web')
@@ -20,15 +19,18 @@
                         data-bs-toggle="dropdown">
                         <i class="bi bi-bell text-white" style="font-size: 20px;"></i>
                         @php
+                            // hitung jumlah booking yang masih pending
                             $count = \App\Models\Booking::where('status', 'pending')->count();
                         @endphp
                         @if ($count > 0)
+                            {{-- badge merah penanda jumlah notifikasi --}}
                             <span class="badge bg-danger rounded-pill"
                                 style="position: absolute; top: 2px; right: 2px; font-size: 11px; padding: 2px 6px;">
                                 {{ $count }}
                             </span>
                         @endif
                     </a>
+                    {{-- Dropdown daftar notifikasi --}}
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li class="dropdown-header">Notifikasi</li>
                         @foreach ($notifikasi as $notif)
@@ -45,43 +47,41 @@
                     </ul>
                 </li>
             @endauth
-
             <!-- Notifikasi -->
 
-            <!-- User -->
+            <!-- User (Profile & Logout) -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                {{-- Avatar/profil + nama user --}}
                 <a class="nav-link dropdown-toggle hide-arrow p-0 text-white" href="javascript:void(0);"
                     data-bs-toggle="dropdown">
                     <div class="d-flex align-items-center gap-1">
                         <div class="avatar avatar-online">
                             <img src="{{ asset('images/admin1.jpg') }}" alt class="rounded-circle" />
                         </div>
-                        {{-- admin --}}
+                        {{-- tampilan nama administrator --}}
                         @if (Auth::check())
                             <span>{{ Auth::user()->name }}</span>
                             {{-- admin --}}
                         @endif
                         {{-- bikin guard pengunjung di config/auth.php --}}
-                        {{-- Pengunjung --}}
+                        {{-- tampilan nama Pengunjung (chika) --}}
                         @if (Auth::guard('pengunjung')->check())
                             <span>{{ Auth::guard('pengunjung')->user()->name }}</span>
                         @endif
+                        {{-- pengunjung --}}
                     </div>
                 </a>
+                {{-- Dropdown menu user --}}
                 <ul class="dropdown-menu dropdown-menu-end">
 
+                    {{-- Link Ubah Profil --}}
                     <li>
-                        @if (Auth::guard('web')->check())
-                            <a class="dropdown-item" href="{{ route('admin.ubah-profil') }}">
+                        @auth('web')
+                            <a class="dropdown-item" href="{{ route('ubah-profil') }}">
                                 <i class="ti ti-user me-3 ti-md"></i>
                                 <span class="align-middle">Ubah Profil</span>
                             </a>
-                        @elseif (Auth::guard('pengunjung')->check())
-                            <a class="dropdown-item" href="{{ route('pengunjung.ubah-profil') }}">
-                                <i class="ti ti-user me-3 ti-md"></i>
-                                <span class="align-middle">Ubah Profil</span>
-                            </a>
-                        @endif
+                        @endauth
                     </li>
                     <li>
                         <div class="d-grid px-2 pt-2 pb-1">
