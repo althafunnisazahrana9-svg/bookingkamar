@@ -14,9 +14,8 @@ class BookingController extends Controller
      */
     public function index()
     {
-        // $booking = Booking::with('kamar')->orderBy('created_at', 'desc')->get();
-
-        // Ambil semua booking terbaru untuk notifikasi
+        // Ambil data booking dengan relasi kamar
+        // Bisa difilter berdasarkan tanggal check-in
         $booking = Booking::with('kamar')
             ->when(request('tanggal'), function ($query, $tanggal) {
                 $query->whereDate('tanggal_checkin', $tanggal);
@@ -24,7 +23,7 @@ class BookingController extends Controller
             ->orderBy('created_at', 'asc')
             ->get();
 
-        // ambil data notifikasi
+        // Ambil semua booking terbaru untuk notifikasi
         $notifikasi = Booking::with('kamar')->latest()->get();
 
         // kirim data notifikasi ke view
@@ -33,6 +32,7 @@ class BookingController extends Controller
 
     public function confirm($id)
     {
+        // Ubah status booking jadi confirmed
         $booking = Booking::findOrFail($id);
         $booking->status = 'confirmed';
         $booking->save();
@@ -49,6 +49,7 @@ class BookingController extends Controller
 
     public function reject($id)
     {
+        // Ubah status booking jadi rejected
         $booking = Booking::findOrFail($id);
         $booking->status = 'rejected';
         $booking->save();
@@ -68,7 +69,7 @@ class BookingController extends Controller
      */
     public function create()
     {
-
+        // Ambil semua kamar untuk dipilih user
         $kamar = Kamar::all(); // ambil semua data kamar
         $notifikasi = Booking::with('kamar')->latest()->get();
 
@@ -80,6 +81,7 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
             'kamar_id' => 'required',
             'nama_pemesan' => 'required',
@@ -98,7 +100,7 @@ class BookingController extends Controller
         // Simpan booking ke database
         $booking = \App\Models\Booking::create($request->all());
 
-        // Simpan data pengunjung ke session
+        // Simpan data pengunjung ke session (untuk identifikasi role)
         session([
             'role' => 'pengunjung',
             'nama_pemesan' => $request->nama_pemesan,
@@ -128,6 +130,7 @@ class BookingController extends Controller
 
     public function setLunas($id)
     {
+        // Set status pembayaran jadi Lunas
         $pembayaran = Pembayaran::where('booking_id', $id)->first();
         if ($pembayaran) {
             $pembayaran->status = 'lunas';
@@ -140,6 +143,7 @@ class BookingController extends Controller
     // lunas dan belum lunas
     public function setBelumLunas($id)
     {
+        // Set status pembayaran jadi Belum Lunas
         $pembayaran = Pembayaran::where('booking_id', $id)->first();
         if ($pembayaran) {
             $pembayaran->status = 'belum_bayar'; // sesuaikan dengan status yang kamu pakai
@@ -151,6 +155,7 @@ class BookingController extends Controller
 
     public function success($id)
     {
+        // Halaman sukses booking
         $booking = \App\Models\Booking::findOrFail($id);
 
         return view('pages.booking.success', compact('booking'));
@@ -191,6 +196,7 @@ class BookingController extends Controller
      */
     public function show(string $id)
     {
+        // Detail booking
         $booking = Booking::with('kamar')->findOrfail($id);
 
         return view('pages.booking.show', compact('booking'));
@@ -204,6 +210,7 @@ class BookingController extends Controller
      */
     public function destroy(string $id)
     {
+        // Hapus booking
         $booking = Booking::find($id);
         $booking->delete();
 
