@@ -14,15 +14,19 @@ class AdminController extends Controller
      */
     public function index()
     {
+        // Ambil semua data admin dari tabel users urutkan berdasarkan nama (ASC)
         $admin = User::orderBy('name', 'ASC')->get();
 
+        // Kirim data ke view pages/admin/index.blade.php
         return view('pages.admin.index', compact('admin'));
     }
 
     public function bookingIndex()
     {
+        // Ambil semua data booking beserta relasi kamar, urut terbaru
         $booking = Booking::with('kamar')->latest()->get();
 
+        // Kirim data ke view booking/index.blade.php
         return view('pages.booking.index', compact('booking'));
     }
 
@@ -32,21 +36,23 @@ class AdminController extends Controller
         Auth::guard('web')->logout();          // logout admin
         Auth::guard('pengunjung')->logout();   // logout pengunjung
 
-        // Invalidasi session dan token CSRF
+        // Hapus session & token CSRF
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        // Redirect ke halaman login atau homepage
+        // Kembali ke halaman utama dengan pesan sukses
         return redirect('/')->with('success', 'Anda berhasil logout!');
     }
 
     public function updateStatus(Request $request)
     {
+        // Validasi input status booking
         $request->validate([
             'booking_id' => 'required|exists:booking,id',
             'status' => 'required|in:pending,confirmed,canceled',
         ]);
 
+        // Cari booking sesuai ID dan ubah statusnya
         $booking = Booking::findOrFail($request->booking_id);
         $booking->status = $request->status;
         $booking->save();
@@ -59,6 +65,7 @@ class AdminController extends Controller
      */
     public function create()
     {
+        // Arahkan ke halaman create admin
         return view('pages.admin.create');
     }
 
@@ -67,12 +74,14 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        // Validasi input dari form
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|min:8|confirmed', // password minimal 8 karakter dan konfirmasi sama
         ]);
 
+        // Simpan admin baru
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -83,7 +92,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Tampilkan detail admin berdasarkan ID.
      */
     public function show(string $id)
     {
@@ -93,7 +102,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Form edit admin berdasarkan ID.
      */
     public function edit(string $id)
     {
@@ -103,20 +112,23 @@ class AdminController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update data admin yang sudah ada.
      */
     public function update(Request $request, string $id)
     {
+        // Validasi data input
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'nullable|min:8|confirmed',
         ]);
 
+        // Cari admin yang mau diupdate
         $admin = User::find($id);
         $admin->name = $request->name;
         $admin->email = $request->email;
 
+        // Jika password diisi, update password juga
         if ($request->password) {
             $admin->password = bcrypt($request->password);
         }
@@ -127,10 +139,11 @@ class AdminController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Hapus admin berdasarkan ID.
      */
     public function destroy(string $id)
     {
+        // Cari admin lalu hapus
         $admin = User::find($id);
         $admin->delete();
 
