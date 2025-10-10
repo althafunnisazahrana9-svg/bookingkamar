@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
+     * Konstruktor controller
+     *
+     * Saat class HomeController dipanggil,
+     * middleware 'auth' dijalankan dulu.
+     * Artinya semua method di controller ini hanya bisa diakses
+     * oleh admin yang sudah login (authenticated).
      *
      * @return void
      */
@@ -17,7 +20,10 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Menampilkan halaman dashboard aplikasi
+     *
+     * Fungsi index() akan mengembalikan view 'home',
+     * yaitu tampilan utama setelah admin berhasil login.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
