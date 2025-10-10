@@ -27,20 +27,22 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
+        // Validasi input dari form
         $request->validate([
-            'nama_pemesan' => 'required|string|max:255',
-            'kamar_id' => 'required|exists:kamar,id',
-            'jumlah_tamu' => 'required|integer',
-            'email' => 'required|email',
-            'telp' => 'required|string|max:20',
-            'nik' => 'required|string|max:20',
-            'alamat' => 'required|string',
-            'tanggal_checkin' => 'required|date',
-            'tanggal_checkout' => 'required|date|after_or_equal:tanggal_checkin',
-            'harga' => 'required',
-            'metode_pembayaran' => 'required|in:transfer,cash',
+            'nama_pemesan' => 'required|string|max:255', // nama wajib diisi
+            'kamar_id' => 'required|exists:kamar,id',  // kamar harus ada di tabel kamar
+            'jumlah_tamu' => 'required|integer', // jumlah tamu harus angka
+            'email' => 'required|email', // email harus valid
+            'telp' => 'required|string|max:20', // nomor telepon wajib
+            'nik' => 'required|string|max:20', // NIK wajib
+            'alamat' => 'required|string', // alamat wajib
+            'tanggal_checkin' => 'required|date', // tanggal check-in wajib
+            'tanggal_checkout' => 'required|date|after_or_equal:tanggal_checkin', // checkout minimal lebih besar dari check-in
+            'harga' => 'required', // harga wajib
+            'metode_pembayaran' => 'required|in:transfer,cash', // harga wajib
         ]);
 
+        // Simpan data booking baru ke database
         $booking = Booking::create([
             'nama_pemesan' => $request->nama_pemesan,
             'kamar_id' => $request->kamar_id,
@@ -51,15 +53,16 @@ class FormController extends Controller
             'alamat' => $request->alamat,
             'tanggal_checkin' => $request->tanggal_checkin,
             'tanggal_checkout' => $request->tanggal_checkout,
-            'harga' => str_replace(',', '', $request->harga),
+            'harga' => str_replace(',', '', $request->harga),  // hilangkan koma pada harga
             'metode_pembayaran' => $request->metode_pembayaran,
-            'status_booking' => 'pending',
+            'status_booking' => 'pending',  // hilangkan koma pada harga
         ]);
 
+        // Arahkan user ke halaman daftar booking dengan pesan sukses
         return redirect()->route('booking.index')
             ->with('success', 'Booking berhasil dibuat.');
 
-        // ubah status kamar jadi terisi
+        // ubah status kamar jadi terisi tapi tidak jalan soalnya di atas sudah ada return
         $kamar = Kamar::find($request->kamar_id);
         if ($kamar) {
             $kamar->status = 'terisi';
