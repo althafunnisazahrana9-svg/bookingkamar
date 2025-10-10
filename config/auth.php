@@ -32,18 +32,20 @@ return [
     | system used by the application. Typically, Eloquent is utilized.
     |
     | Supported: "session"
-    |
+    |    | Guard digunakan untuk autentikasi.
+    | - 'web' untuk user admin (pakai session & provider 'users').
+    | - 'pengunjung' untuk user tamu/hotel guest (pakai session & provider 'pengunjung').
     */
 
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'users',  // provider diambil dari users
         ],
 
         'pengunjung' => [
             'driver' => 'session',
-            'provider' => 'pengunjung',
+            'provider' => 'pengunjung', // provider untuk model Pengunjung
         ],
 
     ],
@@ -62,13 +64,15 @@ return [
     | be assigned to any extra authentication guards you have defined.
     |
     | Supported: "database", "eloquent"
-    |
+    || Provider menentukan dari mana data user diambil.
+    | - 'users' ambil dari model User (admin).
+    | - 'pengunjung' ambil dari model Pengunjung (tamu).
     */
 
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => env('AUTH_MODEL', App\Models\User::class), // model default User
         ],
 
         // 'users' => [
@@ -78,7 +82,7 @@ return [
 
         'pengunjung' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Pengunjung::class,
+            'model' => App\Models\Pengunjung::class,  // model custom Pengunjung
         ],
     ],
 
