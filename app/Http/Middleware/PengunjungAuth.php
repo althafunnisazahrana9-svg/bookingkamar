@@ -13,13 +13,14 @@ class PengunjungAuth
      *
      * * Middleware ini digunakan untuk memastikan
      * hanya pengunjung yang sudah login yang bisa mengakses halaman tertentu.
+     *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next)
     {
         // Cek apakah user dengan guard "pengunjung" sudah login atau belum
         if (! Auth::guard('pengunjung')->check()) {
-             // Jika belum login → arahkan ke halaman login pengunjung
+            // Jika belum login → arahkan ke halaman login pengunjung
             return redirect()->route('pengunjung.login');
         }
 
