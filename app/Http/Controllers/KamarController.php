@@ -8,7 +8,11 @@ use Illuminate\Http\Request;
 class KamarController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar semua kamar
+     *
+     * Fungsi index() mengambil semua data kamar dari database,
+     * diurutkan berdasarkan nama, lalu dikirim ke view
+     * "pages.kamar.index".
      */
     public function index()
     {
@@ -18,7 +22,10 @@ class KamarController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * * Menampilkan form untuk menambahkan kamar baru
+     *
+     * Fungsi create() hanya mengarahkan ke view
+     * "pages.kamar.create" yang berisi form input.
      */
     public function create()
     {
@@ -26,7 +33,12 @@ class KamarController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     *  * Menyimpan data kamar baru ke database
+     *
+     * Fungsi store() akan:
+     * 1. Memvalidasi input dari form (nama, harga, fasilitas wajib diisi).
+     * 2. Menyimpan data kamar ke tabel "kamar".
+     * 3. Redirect kembali ke halaman daftar kamar dengan pesan sukses.
      */
     public function store(Request $request)
     {
@@ -43,7 +55,10 @@ class KamarController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * * Menampilkan detail dari kamar tertentu
+     *
+     * Fungsi show() akan mencari kamar berdasarkan id,
+     * jika ada maka ditampilkan di view "pages.kamar.show".
      */
     public function show(string $id)
     {
