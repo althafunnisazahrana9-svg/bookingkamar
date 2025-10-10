@@ -77,7 +77,6 @@
                         </div>
                         <!-- /Logo -->
                         <h4 class="mb-1">Selamat Datang di Hotel Aetheria!</h4>
-                        <p class="mb-6">Silahkan login untuk Booking Kamar</p>
 
                         <form id="formAuthentication" class="mb-4" action="{{ route('login') }}" method="POST">
                             @csrf
