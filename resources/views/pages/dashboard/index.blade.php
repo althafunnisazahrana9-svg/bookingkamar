@@ -67,11 +67,11 @@
     </div>
     <!-- Chart End -->
 
-    <!-- Pendapatan Per Hari (Line Chart) -->
+    <!-- Statistik Garis -->
     <div class="col-sm-12 col-xl-12 mt-4">
-        <div class="bg-light rounded h-100 p-4">
-            <h6 class="mb-4">📈 Pendapatan Per Hari</h6>
-            <canvas id="pendapatan-chart"></canvas>
+        <div class="bg-light rounded h-100 p-4 shadow-sm">
+            <h6 class="mb-4">📈 Statistik Garis (Trend Aktivitas Booking)</h6>
+            <canvas id="statistik-chart"></canvas>
         </div>
     </div>
     <!-- Chart End -->
@@ -116,57 +116,55 @@
         });
 
 
-        // Chart Pendapatan Per Hari (Line Chart)
-        const ctxPendapatan = document.getElementById('pendapatan-chart').getContext('2d');
+        // === Statistik Garis (Line Chart) ===
+        const ctxStatistik = document.getElementById('statistik-chart').getContext('2d');
 
-        // Membuat gradient untuk background line
-        const gradient = ctxPendapatan.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, 'rgba(153, 102, 255, 0.4)');
-        gradient.addColorStop(1, 'rgba(153, 102, 255, 0)');
+        // Buat gradient lembut
+        const gradient = ctxStatistik.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(54, 162, 235, 0.4)');
+        gradient.addColorStop(1, 'rgba(54, 162, 235, 0)');
 
-        new Chart(ctxPendapatan, {
+        new Chart(ctxStatistik, {
             type: 'line',
             data: {
-                labels: {!! json_encode($pendapatanPerHari->keys()) !!}, // Tanggal
+                labels: {!! json_encode($pendapatanPerHari->keys()->map(fn($t) => Carbon\Carbon::parse($t)->format('d'))) !!},
                 datasets: [{
-                    label: 'Pendapatan (Rp)',
-                    data: {!! json_encode($pendapatanPerHari->values()) !!}, // Total
-                    borderColor: 'rgba(153, 102, 255, 1)',
+                    label: 'Total Aktivitas Booking (per Hari)',
+                    data: {!! json_encode($pendapatanPerHari->values()) !!},
+                    borderColor: 'rgba(54, 162, 235, 1)',
                     backgroundColor: gradient,
                     fill: true,
-                    tension: 0.3, // membuat garis lebih smooth
+                    tension: 0.4,
                     pointRadius: 4,
-                    pointBackgroundColor: 'rgba(153, 102, 255, 1)'
+                    pointBackgroundColor: 'rgba(54, 162, 235, 1)'
                 }]
             },
             options: {
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'top',
+                        position: 'top'
                     },
                     title: {
                         display: true,
-                        text: 'Pendapatan Per Hari'
+                        text: 'Statistik Aktivitas Booking Bulan Ini'
                     }
                 },
                 scales: {
                     x: {
                         title: {
                             display: true,
-                            text: 'Tanggal'
+                            text: 'Tanggal (1–31)'
+                        },
+                        ticks: {
+                            stepSize: 1
                         }
                     },
                     y: {
                         beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'Jumlah (Rp)'
-                        },
-                        ticks: {
-                            callback: function(value) {
-                                return 'Rp ' + value.toLocaleString();
-                            }
+                            text: 'Jumlah Aktivitas'
                         }
                     }
                 }

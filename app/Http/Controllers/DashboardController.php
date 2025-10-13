@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Kamar;
 use App\Models\Pembayaran;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -32,6 +33,17 @@ class DashboardController extends Controller
             ->groupBy('tanggal')
             ->orderBy('tanggal', 'asc')
             ->pluck('total', 'tanggal');
+
+        // Buat daftar tanggal lengkap dari awal sampai akhir bulan ini
+        $tanggalMulai = Carbon::now()->startOfMonth();
+        $tanggalAkhir = Carbon::now()->endOfMonth();
+
+        $semuaTanggal = collect();
+        for ($date = $tanggalMulai->copy(); $date->lte($tanggalAkhir); $date->addDay()) {
+            $semuaTanggal->put($date->toDateString(), $pendapatanPerHari[$date->toDateString()] ?? 0);
+        }
+
+        $pendapatanPerHari = $semuaTanggal;
 
         // status pembayaran berdasarkan booking
         $statusPembayaran = Booking::join('pembayaran', 'booking.id', '=', 'pembayaran.booking_id')
