@@ -18,21 +18,25 @@
     @auth('web')
         {{-- Jika login sebagai Admin --}}
         <ul class="menu-inner py-1 list-unstyled">
+            {{-- dashboard --}}
             <li class="menu-item">
                 <a href="{{ route('home') }}" class="menu-link d-block py-2 px-3 rounded text-white">
                     <i class="menu-icon tf-icons ti ti-home me-2"></i> Dashboard
                 </a>
             </li>
+            {{-- Daftar Booking --}}
             <li class="menu-item">
                 <a href="{{ route('booking.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
                     <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar Booking
                 </a>
             </li>
+            {{-- Data Kamar --}}
             <li class="menu-item">
                 <a href="{{ route('kamar.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
                     <i class="menu-icon tf-icons ti ti-apps-off me-2"></i> Data Kamar
                 </a>
             </li>
+            {{-- Admin --}}
             <li class="menu-item">
                 <a href="{{ route('admin.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
                     <i class="menu-icon tf-icons ti ti-users me-2"></i> Admin
@@ -44,11 +48,13 @@
     @guest
         @auth('pengunjung')
             <ul class="menu-inner py-1 list-unstyled">
+                {{-- Daftar booking --}}
                 <li class="menu-item">
                     <a href="{{ route('booking.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
                         <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar booking
                     </a>
                 </li>
+                {{-- Detail Hotel --}}
                 <li class="menu-item">
                     <a href="{{ route('booking.about') }}" class="menu-link d-block py-2 px-3 rounded text-white">
                         <i class="menu-icon tf-icons ti ti-building-skyscraper me-2"></i> Detail Hotel

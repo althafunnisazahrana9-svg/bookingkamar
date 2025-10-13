@@ -5,16 +5,22 @@
 
 <head>
     <meta charset="utf-8" />
+    <!-- Mengatur tampilan agar responsif di semua ukuran layar -->
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
+
+    <!-- Judul halaman di tab browser -->
     <title>Login Admin | Hotel Aetheria</title>
 
     <meta name="description" content="" />
 
+
+    <!-- Ikon kecil di tab browser -->
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('/images/logo.png') }}" />
 
+    <!-- Memuat font utama dari Google Fonts -->
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,6 +28,7 @@
         href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap"
         rel="stylesheet" />
 
+    <!-- Memuat ikon-ikon yang digunakan di halaman -->
     <!-- Icons -->
     <link rel="stylesheet" href="{{ asset('/vendor/fonts/fontawesome.css') }}" />
     <link rel="stylesheet" href="{{ asset('/vendor/fonts/tabler-icons.css') }}" />
@@ -61,13 +68,14 @@
 <body>
     <!-- Content -->
 
+    {{-- BAGIAN UTAMA: FORM LOGIN ADMIN --}}
     <div class="container-xxl">
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="authentication-inner py-6">
                 <!-- Login -->
                 <div class="card">
                     <div class="card-body">
-                        <!-- Logo -->
+                        <!-- Logo dan nama hotel -->
                         <div class="app-brand demo p-3">
                             <a href="{{ route('home') }}" class="d-flex align-items-center text-decoration-none">
                                 <img src="{{ asset('images/logo.png') }}" alt="Logo" class="rounded-circle me-3"
@@ -75,36 +83,43 @@
                                 <span class="fw-bold fs-4">Hotel Aetheria !</span>
                             </a>
                         </div>
-                        <!-- /Logo -->
+                        <!-- PESAN SAMBUTAN -->
                         <h4 class="mb-1">Selamat Datang di Hotel Aetheria!</h4>
 
+                        {{-- FORM LOGIN --}}
                         <form id="formAuthentication" class="mb-4" action="{{ route('login') }}" method="POST">
                             @csrf
 
+                            <!-- Input Email -->
                             <div class="mb-6">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="text" class="form-control" id="email" name="email"
                                     placeholder="Enter your email" autofocus />
+                                <!-- Pesan error jika email salah -->
                                 @error('email')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
+                            <!-- Input Password -->
                             <div class="mb-6 form-password-toggle">
                                 <label class="form-label" for="password">Password</label>
                                 <div class="input-group input-group-merge">
                                     <input type="password" id="password" class="form-control" name="password"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                         aria-describedby="password" />
+                                    <!-- Ikon untuk menampilkan/menyembunyikan password -->
                                     <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                                 </div>
+                                <!-- Pesan error jika password salah -->
                                 @error('password')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
+                            <!-- Checkbox 'selalu ingat saya' -->
                             <div class="my-8">
                                 <div class="d-flex justify-content-between">
                                     <div class="form-check mb-0 ms-2">
@@ -115,6 +130,7 @@
                                 </div>
 
                             </div>
+                            <!-- Tombol Login -->
                             <div class="mb-6">
                                 <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
                             </div>
@@ -123,7 +139,7 @@
 
                     </div>
                 </div>
-                <!-- /Register -->
+                <!-- login -->
             </div>
         </div>
     </div>
