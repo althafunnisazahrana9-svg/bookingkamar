@@ -60,8 +60,8 @@
                     <nav class="main-menu mobile-menu">
                         <ul>
                             <li><a href="{{ route('booking.about') }}">About</a></li>
-                            <li><a href="{{ route('booking.services') }}">Services</a></li>
                             <li><a href="{{ route('pesan.welcome') }}">Booking</a></li>
+                            <li><a href="{{ route('booking.index') }}">Daftar Booking</a></li>
                             <li><a href="{{ route('booking.rooms') }}">Rooms</a></li>
                             <li><a href="{{ route('booking.news') }}">News</a></li>
                             <li><a href="{{ route('booking.contact') }}">Contact</a></li>
@@ -84,8 +84,8 @@
                     </div>
                 </div>
                 <div class="page-nav">
-                    <a href="{{ route('pesan.welcome') }}" class="left-nav"><i class="lnr lnr-arrow-left"></i>
-                        Booking</a>
+                    <a href="{{ route('booking.index') }}" class="left-nav"><i class="lnr lnr-arrow-left"></i>
+                        Daftar Booking</a>
                     <a href="{{ route('booking.news') }}" class="right-nav">News <i
                             class="lnr lnr-arrow-right"></i></a>
                 </div>

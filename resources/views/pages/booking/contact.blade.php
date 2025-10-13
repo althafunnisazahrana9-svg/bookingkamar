@@ -56,8 +56,8 @@
                     <nav class="main-menu mobile-menu">
                         <ul>
                             <li><a href="{{ route('booking.about') }}">About</a></li>
-                            <li><a href="{{ route('booking.services') }}">Services</a></li>
                             <li><a href="{{ route('pesan.welcome') }}">Booking</a></li>
+                            <li><a href="{{ route('booking.index') }}">Daftar Booking</a></li>
                             <li><a href="{{ route('booking.rooms') }}">Rooms</a></li>
                             <li><a href="{{ route('booking.news') }}">News</a></li>
                             <li><a href="{{ route('booking.contact') }}">Contact</a></li>
@@ -109,12 +109,6 @@
                                     <span>Everyday: 10:00 -22:00</span>
                                 </li>
                             </ul>
-                        </div>
-                        <div class="social-links">
-                            <h2>Follow us on:</h2>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
                         </div>
                     </div>
                 </div>
