@@ -1,25 +1,34 @@
 @extends('layouts.app')
 
+{{-- File ini menggunakan layout utama bernama "app.blade.php"
+    Semua tampilan di dalamnya akan dimasukkan ke dalam bagian @yield('content') 
+    pada layout utama tersebut. --}}
+
 @section('title', 'Tambah Admin')
 
 @section('content')
+    {{-- Bagian utama konten halaman "Tambah Admin" --}}
     <div class="row">
         <div class="col-md-6">
             <h3 class="page-title">Tambah Admin</h3>
+            {{--  untuk Form Tambah Admin --}}
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('admin.store') }}" method="POST">
                         @csrf
+                        {{-- Input Nama Admin --}}
                         <div class="form-group mb-3">
                             <label for="name" class="form-label">Nama</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
                                 name="name" value="{{ old('name') }}" />
+                            {{-- Jika terjadi error validasi pada field "name", tampilkan pesan error --}}
                             @error('name')
                                 <div class="invalid-feedback d-block">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
+                        {{-- Input Email Admin --}}
                         <div class="form-group mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
@@ -31,6 +40,7 @@
                             @enderror
                         </div>
 
+                        {{-- Input Password Admin --}}
                         <div class="form-group mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control @error('password') is-invalid @enderror"
