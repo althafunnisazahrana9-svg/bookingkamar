@@ -11,57 +11,75 @@
         </a>
     </div>
 
+    {{-- ✅ Efek hover & active --}}
+    <style>
+        .menu-link {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .menu-link:hover {
+            background-color: #b58c67 !important;
+            color: #fff !important;
+        }
+
+        .menu-link.active {
+            background-color: #8b5e3c !important;
+            color: #fff !important;
+            font-weight: 600;
+        }
+    </style>
+
     <div class="menu-inner-shadow"></div>
 
-    {{-- {{-- admin di dalam auth --}}
-    {{-- pengunjung di diluar auth, jadi sidebarnya pengunjung bisa masuk ke login --}}
+    {{-- ✅ Sidebar ADMIN --}}
     @auth('web')
-        {{-- Jika login sebagai Admin --}}
         <ul class="menu-inner py-1 list-unstyled">
-            {{-- dashboard --}}
             <li class="menu-item">
-                <a href="{{ route('home') }}" class="menu-link d-block py-2 px-3 rounded text-white">
+                <a href="{{ route('dashboard') }}"
+                    class="menu-link d-block py-2 px-3 rounded text-white {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                     <i class="menu-icon tf-icons ti ti-home me-2"></i> Dashboard
                 </a>
             </li>
-            {{-- Daftar Booking --}}
+
             <li class="menu-item">
-                <a href="{{ route('booking.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
+                <a href="{{ route('booking.index') }}"
+                    class="menu-link d-block py-2 px-3 rounded text-white {{ request()->routeIs('booking.index') ? 'active' : '' }}">
                     <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar Booking
                 </a>
             </li>
-            {{-- Data Kamar --}}
+
             <li class="menu-item">
-                <a href="{{ route('kamar.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
+                <a href="{{ route('kamar.index') }}"
+                    class="menu-link d-block py-2 px-3 rounded text-white {{ request()->routeIs('kamar.index') ? 'active' : '' }}">
                     <i class="menu-icon tf-icons ti ti-apps-off me-2"></i> Data Kamar
                 </a>
             </li>
-            {{-- Admin --}}
+
             <li class="menu-item">
-                <a href="{{ route('admin.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
+                <a href="{{ route('admin.index') }}"
+                    class="menu-link d-block py-2 px-3 rounded text-white {{ request()->is('admin/admin*') ? 'active' : '' }}">
                     <i class="menu-icon tf-icons ti ti-users me-2"></i> Admin
                 </a>
             </li>
         </ul>
     @endauth
-    {{-- Jika login sebagai Pengunjung --}}
-    @guest
-        @auth('pengunjung')
-            <ul class="menu-inner py-1 list-unstyled">
-                {{-- Daftar booking --}}
-                <li class="menu-item">
-                    <a href="{{ route('booking.index') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                        <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar booking
-                    </a>
-                </li>
-                {{-- Detail Hotel --}}
-                <li class="menu-item">
-                    <a href="{{ route('booking.about') }}" class="menu-link d-block py-2 px-3 rounded text-white">
-                        <i class="menu-icon tf-icons ti ti-building-skyscraper me-2"></i> Detail Hotel
-                    </a>
-                </li>
-            </ul>
-        @endauth
-    @endguest
 
+    {{-- ✅ Sidebar PENGUNJUNG --}}
+    @auth('pengunjung')
+        <ul class="menu-inner py-1 list-unstyled">
+            <li class="menu-item">
+                <a href="{{ route('booking.index') }}"
+                    class="menu-link d-block py-2 px-3 rounded text-white {{ request()->routeIs('booking.index') ? 'active' : '' }}">
+                    <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar Booking
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="{{ route('booking.about') }}"
+                    class="menu-link d-block py-2 px-3 rounded text-white {{ request()->routeIs('booking.about') ? 'active' : '' }}">
+                    <i class="menu-icon tf-icons ti ti-building-skyscraper me-2"></i> Detail Hotel
+                </a>
+            </li>
+        </ul>
+    @endauth
 </aside>

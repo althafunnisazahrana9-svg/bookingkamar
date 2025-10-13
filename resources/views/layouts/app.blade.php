@@ -114,6 +114,17 @@
 
     @stack('scripts')
 
+    <script>
+        // ✅ Menandai item aktif secara dinamis
+        document.querySelectorAll('.menu-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('.menu-link').forEach(l => l.classList.remove('active'));
+                document.querySelectorAll('.menu-link').forEach(l => l.style.backgroundColor = '');
+                this.classList.add('active');
+                this.style.backgroundColor = '#A67B5B';
+            });
+        });
+    </script>
 
     <!-- Bootstrap Icons lonceng -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
