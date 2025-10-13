@@ -31,53 +31,53 @@
 
     <div class="menu-inner-shadow"></div>
 
-    {{-- ✅ Sidebar ADMIN --}}
+    {{-- Sidebar ADMIN --}}
     @auth('web')
         <ul class="menu-inner py-1 list-unstyled">
             <li class="menu-item">
                 <a href="{{ route('dashboard') }}"
                     class="menu-link d-block py-2 px-3 rounded text-white {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                    <i class="menu-icon tf-icons ti ti-home me-2"></i> Dashboard
+                    <i class="menu-icon fa-solid fa-gauge" style="color:#c68e3b;"></i> Dashboard
                 </a>
             </li>
 
             <li class="menu-item">
                 <a href="{{ route('booking.index') }}"
                     class="menu-link d-block py-2 px-3 rounded text-white {{ request()->routeIs('booking.index') ? 'active' : '' }}">
-                    <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar Booking
+                    <i class="menu-icon fa-solid fa-book" style="color:#c68e3b;"></i> Daftar Booking
                 </a>
             </li>
 
             <li class="menu-item">
                 <a href="{{ route('kamar.index') }}"
                     class="menu-link d-block py-2 px-3 rounded text-white {{ request()->routeIs('kamar.index') ? 'active' : '' }}">
-                    <i class="menu-icon tf-icons ti ti-apps-off me-2"></i> Data Kamar
+                    <i class="menu-icon fa-solid fa-bed" style="color:#c68e3b;"></i> Data Kamar
                 </a>
             </li>
 
             <li class="menu-item">
                 <a href="{{ route('admin.index') }}"
                     class="menu-link d-block py-2 px-3 rounded text-white {{ request()->is('admin/admin*') ? 'active' : '' }}">
-                    <i class="menu-icon tf-icons ti ti-users me-2"></i> Admin
+                    <i class="menu-icon fa-solid fa-user-gear" style="color:#c68e3b;"></i> Admin
                 </a>
             </li>
         </ul>
     @endauth
 
-    {{-- ✅ Sidebar PENGUNJUNG --}}
+    {{-- Sidebar PENGUNJUNG --}}
     @auth('pengunjung')
         <ul class="menu-inner py-1 list-unstyled">
             <li class="menu-item">
                 <a href="{{ route('booking.index') }}"
                     class="menu-link d-block py-2 px-3 rounded text-white {{ request()->routeIs('booking.index') ? 'active' : '' }}">
-                    <i class="menu-icon tf-icons ti ti-users-group me-2"></i> Daftar Booking
+                    <i class="menu-icon fa-solid fa-book" style="color:#c68e3b;"></i> Daftar Booking
                 </a>
             </li>
 
             <li class="menu-item">
                 <a href="{{ route('booking.about') }}"
                     class="menu-link d-block py-2 px-3 rounded text-white {{ request()->routeIs('booking.about') ? 'active' : '' }}">
-                    <i class="menu-icon tf-icons ti ti-building-skyscraper me-2"></i> Detail Hotel
+                    <i class="menu-icon fa-solid fa-bed" style="color:#c68e3b;"></i> Detail Hotel
                 </a>
             </li>
         </ul>
