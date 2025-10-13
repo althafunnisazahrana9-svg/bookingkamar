@@ -118,15 +118,17 @@
                         Kembali
                     </a>
 
-                    {{-- Hanya tampilkan tombol pembayaran jika status bukan rejected --}}
-                    @if ($booking->status != 'rejected')
-                        @if ($booking->pembayaran && $booking->pembayaran->bukti_transfer)
-                            <a href="{{ asset('storage/' . $booking->pembayaran->bukti_transfer) }}" target="_blank"
-                                class="btn btn-sm btn-info">
-                                <span class="ti ti-file"></span> Lihat Bukti Transfer
-                            </a>
-                        @else
-                            {{-- Kalau transfer tanpa bukti ATAU COD --}}
+                    {{-- ✅ Tombol Lihat Bukti Transfer → untuk ADMIN & PENGUNJUNG --}}
+                    @if ($booking->pembayaran && $booking->pembayaran->bukti_transfer)
+                        <a href="{{ asset('storage/' . $booking->pembayaran->bukti_transfer) }}" target="_blank"
+                            class="btn btn-sm btn-info">
+                            <span class="ti ti-file"></span> Lihat Bukti Transfer
+                        </a>
+                    @endif
+
+                    {{-- ✅ Tombol Pembayaran → hanya muncul untuk PENGUNJUNG & booking tidak ditolak --}}
+                    @auth('pengunjung')
+                        @if ($booking->status != 'rejected' && (!$booking->pembayaran || !$booking->pembayaran->bukti_transfer))
                             <a href="{{ $booking->metode_pembayaran === 'transfer'
                                 ? route('pembayaran.transfer', $booking->id)
                                 : route('pembayaran.cod', $booking->id) }}"
@@ -134,48 +136,48 @@
                                 <span class="ti ti-receipt-2"></span> Pembayaran
                             </a>
                         @endif
-                    @endif
+                    @endauth
                 </div>
-                {{-- hanya admin yang bisa merubah --}}
-                @auth('web')
-                    <!-- Tombol kanan: Konfirmasi, Tolak, Lunas, Belum Lunas -->
-                    <div class="d-flex gap-2">
-                        {{-- Jika booking masih pending --}}
-                        @if ($booking->status == 'pending')
-                            <a href="{{ route('booking.confirm', $booking->id) }}" class="btn btn-sm btn-success">
-                                <span class="ti ti-check"></span> Konfirmasi
-                            </a>
+            </div>
+            {{-- hanya admin yang bisa merubah --}}
+            @auth('web')
+                <!-- Tombol kanan: Konfirmasi, Tolak, Lunas, Belum Lunas -->
+                <div class="d-flex gap-2">
+                    {{-- Jika booking masih pending --}}
+                    @if ($booking->status == 'pending')
+                        <a href="{{ route('booking.confirm', $booking->id) }}" class="btn btn-sm btn-success">
+                            <span class="ti ti-check"></span> Konfirmasi
+                        </a>
 
-                            <form action="{{ route('booking.reject', $booking->id) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('booking.reject', $booking->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <span class="ti ti-x"></span> Tolak
+                            </button>
+                        </form>
+
+                        {{-- Tombol Lunas / Belum Lunas (Berlaku untuk COD & Transfer) --}}
+                    @elseif ($booking->status == 'confirmed' && $booking->pembayaran)
+                        {{-- Jika booking sudah dikonfirmasi baru muncul tombol lunas/belum lunas --}}
+                        @if ($booking->pembayaran->status !== 'lunas')
+                            <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST" class="d-inline">
                                 @csrf
-                                <button type="submit" class="btn btn-sm btn-danger">
-                                    <span class="ti ti-x"></span> Tolak
+                                <button type="submit" class="btn btn-success">
+                                    <i class="ti ti-cash"></i> Lunas
                                 </button>
                             </form>
 
-                            {{-- Tombol Lunas / Belum Lunas (Berlaku untuk COD & Transfer) --}}
-                        @elseif ($booking->status == 'confirmed' && $booking->pembayaran)
-                            {{-- Jika booking sudah dikonfirmasi baru muncul tombol lunas/belum lunas --}}
-                            @if ($booking->pembayaran->status !== 'lunas')
-                                <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success">
-                                        <i class="ti ti-cash"></i> Lunas
-                                    </button>
-                                </form>
-
-                                <form action="{{ route('booking.setBelumLunas', $booking->id) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="btn btn-warning">
-                                        <i class="ti ti-clock"></i> Belum Lunas
-                                    </button>
-                                </form>
-                            @endif
+                            <form action="{{ route('booking.setBelumLunas', $booking->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="ti ti-clock"></i> Belum Lunas
+                                </button>
+                            </form>
                         @endif
-                    </div>
+                    @endif
                 </div>
-            @endauth
-        </div>
+            </div>
+        @endauth
+    </div>
     </div>
 @endsection
