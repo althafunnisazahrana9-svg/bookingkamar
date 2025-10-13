@@ -57,7 +57,7 @@
                                     @elseif ($item->pembayaran && $item->pembayaran->status == 'lunas')
                                         <span class="badge bg-success">Lunas</span>
                                     @else
-                                        <span class="badge bg-secondary">Belum Bayar</span> {{-- kalau belum ada data pembayaran --}}
+                                        <span class="badge bg-secondary">-</span> {{-- kalau belum ada data pembayaran --}}
                                     @endif
                                 </td>
                                 <td>
