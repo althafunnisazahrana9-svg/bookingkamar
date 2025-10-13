@@ -46,10 +46,11 @@ class DashboardController extends Controller
         $pendapatanPerHari = $semuaTanggal;
 
         // status pembayaran berdasarkan booking
-        $statusPembayaran = Booking::join('pembayaran', 'booking.id', '=', 'pembayaran.booking_id')
-            ->select('pembayaran.status', \DB::raw('count(*) as total'))
-            ->groupBy('pembayaran.status')
-            ->pluck('total', 'pembayaran.status');
+        $statusPembayaran = Booking::leftJoin('pembayaran', 'booking.id', '=', 'pembayaran.booking_id')
+            ->whereNotIn('booking.status', ['rejected'])
+            ->selectRaw("COALESCE(pembayaran.status, 'pending') as status, COUNT(*) as total")
+            ->groupBy('status')
+            ->pluck('total', 'status');
 
         // total pendapatan (hanya yang lunas)
         $totalPendapatan = Pembayaran::where('pembayaran.status', 'lunas')

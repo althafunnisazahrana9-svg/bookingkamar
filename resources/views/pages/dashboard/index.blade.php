@@ -102,6 +102,7 @@
                         return ucwords(str_replace('_', ' ', $key));
                     }),
                 ) !!}, // label otomatis dari DB
+
                 datasets: [{
                     data: {!! json_encode($statusPembayaran->values()) !!}, // jumlah otomatis
                     backgroundColor: [
