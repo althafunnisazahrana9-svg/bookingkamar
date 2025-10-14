@@ -90,26 +90,42 @@
     <!-- Contact Section Begin -->
     <section class="contact-section spad">
         <div class="container">
-            <div class="row">
+            <div class="row align-items-start">
+                <!-- Kiri: Contact Information -->
                 <div class="col-lg-6">
                     <div class="contact-left">
                         <div class="contact-information">
                             <h2>Contact Information</h2>
                             <ul>
-                                <li><img src="{{ asset('template2/img/placeholder-copy.png') }}" alt="">
-                                    <span>Jl. Lembah Aetheria No. 1525, Taman Senja, Kota Seraphine<br />Angeles,
+                                <li>
+                                    <img src="{{ asset('template2/img/placeholder-copy.png') }}" alt="">
+                                    <span>Jl. Lembah Aetheria No. 1525, Taman Senja, Kota Seraphine<br>Angeles,
                                         CNZ</span>
                                 </li>
-                                <li><img src="{{ asset('template2/img/phone-copy.png') }}" alt=""> <span>+62
-                                        (885)0510-0167</span></li>
-                                <li><img src="{{ asset('template2/img/envelop.png') }}" alt="">
+                                <li>
+                                    <img src="{{ asset('template2/img/phone-copy.png') }}" alt="">
+                                    <span>+62 (885)0510-0167</span>
+                                </li>
+                                <li>
+                                    <img src="{{ asset('template2/img/envelop.png') }}" alt="">
                                     <span>aetheria@mail.com</span>
                                 </li>
-                                <li><img src="{{ asset('template2/img/clock-copy.png') }}" alt="">
-                                    <span>Everyday: 10:00 -22:00</span>
+                                <li>
+                                    <img src="{{ asset('template2/img/clock-copy.png') }}" alt="">
+                                    <span>Everyday: 10:00 - 22:00</span>
                                 </li>
                             </ul>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Kanan: Map -->
+                <div class="col-lg-6">
+                    <div class="map">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d423283.4355676389!2d-118.69193052429003!3d34.02073049434915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c75ddc27da13%3A0xe22fdf6f254608f4!2sLos%20Angeles%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1568665689853!5m2!1sen!2sbd"
+                            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy">
+                        </iframe>
                     </div>
                 </div>
             </div>
@@ -117,13 +133,6 @@
     </section>
     <!-- Contact Section End -->
 
-    <!-- Map Section Begin -->
-    <div class="map">
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d423283.4355676389!2d-118.69193052429003!3d34.02073049434915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c75ddc27da13%3A0xe22fdf6f254608f4!2sLos%20Angeles%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1568665689853!5m2!1sen!2sbd"
-            height="560" style="border:0;" allowfullscreen=""></iframe>
-    </div>
-    <!-- Map Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer-section">

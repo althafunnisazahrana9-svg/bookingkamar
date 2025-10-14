@@ -92,6 +92,10 @@ Route::middleware(['pengunjung.auth'])->group(function () {
     Route::get('news/Peningkatan-Fasilitas-Telah-Dilakukan-pada-Master-Suite-HOTEL', [NewsController::class, 'master'])->name('news.master');
     Route::post('news/Peningkatan-Fasilitas-Telah-Dilakukan-pada-Master-Suite-HOTEL', [NewsController::class, 'master'])->name('news.master');
 
+    // news wisata
+    Route::get('news/Wisata-Baru-Dekat-Hotel-Aetheria-:-Jelajahi-Keindahan-Alam-yang-Memukau!', [NewsController::class, 'wisata'])->name('news.wisata');
+    Route::post('news/Wisata-Baru-Dekat-Hotel-Aetheria-:-Jelajahi-Keindahan-Alam-yang-Memukau!', [NewsController::class, 'wisata'])->name('news.wisata');
+
     // success
     Route::get('/booking/success/{id}', [\App\Http\Controllers\BookingController::class, 'success'])
         ->name('booking.success');

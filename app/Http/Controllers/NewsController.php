@@ -33,4 +33,9 @@ class NewsController extends Controller
     {
         return view('pages.news.master');
     }
+
+    public function wisata()
+    {
+        return view('pages.news.wisata');
+    }
 }

@@ -97,20 +97,19 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6 order-2 order-lg-1">
                     <div class="side-bar">
-                        <div class="categories-item">
-                            <h4>Categories</h4>
-                            <div class="categories-list">
-                                <ul>
-                                    <li>Accommodation <span>1</span></li>
-                                    <li>Nearby <span>9</span></li>
-                                    <li>Holidays <span>4</span></li>
-                                    <li>Events <span>2</span></li>
-                                    <li>News <span>13</span></li>
-                                    <li>Restaurant <span>8</span></li>
-                                    <li>Wellness Treatments <span>11</span></li>
-                                    <li>Uncategorized <span>47</span></li>
-                                </ul>
+                        <div class="blog-text">
+
+                            <div class="blog-widget">
+                                <div class="blog-info">
+                                    <img src="{{ asset('images/wisata.jpg') }}" alt="">
+                                </div>
+                                <h4>Wisata Baru Dekat Hotel Aetheria: Jelajahi Keindahan Alam yang Memukau!.</h4>
+                                <span>September 17, 2025</span>
                             </div>
+                            <p>Liburan adalah momen yang ditunggu-tunggu banyak orang. Namun, agar liburan berjalan
+                                lancar ...</p>
+                            <a href="{{ route('news.wisata') }}">Continue Reading <i
+                                    class="lnr lnr-arrow-right"></i></a>
                         </div>
                         <div class="recent-post">
                             <h4>Recent Posts</h4>
