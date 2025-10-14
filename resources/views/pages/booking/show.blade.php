@@ -142,6 +142,8 @@
                             </a>
                         @endif
                     @endauth
+                    <br>
+                    <p>⚠️ Jangan lakukan pembayaran sebelum booking dikonfirmasi oleh admin.</p>
                 </div>
             </div>
             {{-- hanya admin yang bisa merubah --}}
@@ -182,6 +184,7 @@
                     @endif
                 </div>
             </div>
+
         @endauth
     </div>
     </div>
