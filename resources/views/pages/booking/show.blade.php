@@ -149,7 +149,7 @@
             {{-- hanya admin yang bisa merubah --}}
             @auth('web')
                 <!-- Tombol kanan: Konfirmasi, Tolak, Lunas, Belum Lunas -->
-                <div class="d-flex gap-2">
+                <div class="d-flex gap-2 my-2">
                     {{-- Jika booking masih pending --}}
                     @if ($booking->status == 'pending')
                         <a href="{{ route('booking.confirm', $booking->id) }}" class="btn btn-sm btn-success">
