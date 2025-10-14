@@ -114,12 +114,13 @@
                                     <label for="jumlah_tamu" class="form-label">Jumlah Tamu</label>
                                     <input type="number"
                                         class="form-control @error('jumlah_tamu') is-invalid @enderror" id="jumlah_tamu"
-                                        name="jumlah_tamu" value="{{ old('jumlah_tamu') }}" />
+                                        name="jumlah_tamu" value="{{ old('jumlah_tamu') }}" min="1" />
                                     @error('jumlah_tamu')
                                         <span class="invalid-feedback d-block">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
+
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="email" class="form-label">Email</label>
