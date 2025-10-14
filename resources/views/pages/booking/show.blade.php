@@ -65,6 +65,11 @@
                         <td>{{ $booking->harga }}</td>
                     </tr>
                     <tr>
+                        <th width="25%">Metode Pembayaran</th>
+                        <th width="10px">:</th>
+                        <td>{{ $booking->metode_pembayaran }}</td>
+                    </tr>
+                    <tr>
                         <th width="25%">Status</th>
                         <th width="10px">:</th>
                         <td>
