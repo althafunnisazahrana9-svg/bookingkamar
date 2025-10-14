@@ -57,8 +57,8 @@
                     <nav class="main-menu mobile-menu">
                         <ul>
                             <li><a href="{{ route('booking.about') }}">About</a></li>
-                            <li><a href="{{ route('booking.services') }}">Services</a></li>
                             <li><a href="{{ route('pesan.welcome') }}">Booking</a></li>
+                            <li><a href="{{ route('booking.index') }}">Daftar Booking</a></li>
                             <li><a href="{{ route('booking.rooms') }}">Rooms</a></li>
                             <li><a href="{{ route('booking.news') }}">News</a></li>
                             <li><a href="{{ route('booking.contact') }}">Contact</a></li>

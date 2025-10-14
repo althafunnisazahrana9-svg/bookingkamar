@@ -141,15 +141,15 @@
                                 <span class="ti ti-receipt-2"></span> Pembayaran
                             </a>
                         @endif
+                        <br>
+                        <p>⚠️ Jangan lakukan pembayaran sebelum booking dikonfirmasi oleh admin.</p>
                     @endauth
-                    <br>
-                    <p>⚠️ Jangan lakukan pembayaran sebelum booking dikonfirmasi oleh admin.</p>
                 </div>
             </div>
             {{-- hanya admin yang bisa merubah --}}
             @auth('web')
                 <!-- Tombol kanan: Konfirmasi, Tolak, Lunas, Belum Lunas -->
-                <div class="d-flex gap-2 my-2">
+                <div class="d-flex justify-content-end gap-2 my-2">
                     {{-- Jika booking masih pending --}}
                     @if ($booking->status == 'pending')
                         <a href="{{ route('booking.confirm', $booking->id) }}" class="btn btn-sm btn-success">
