@@ -173,26 +173,26 @@
                                     <input type="date"
                                         class="form-control @error('tanggal_checkin') is-invalid @enderror"
                                         id="tanggal_checkin" name="tanggal_checkin"
-                                        value="{{ old('tanggal_checkin') }}" />
+                                        value="{{ old('tanggal_checkin') }}" min="{{ date('Y-m-d') }}" />
                                     @error('tanggal_checkin')
                                         <span class="invalid-feedback d-block">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="tanggal_checkout" class="form-label">Tanggal Check-out</label>
                                     <input type="date"
                                         class="form-control @error('tanggal_checkout') is-invalid @enderror"
                                         id="tanggal_checkout" name="tanggal_checkout"
-                                        value="{{ old('tanggal_checkout') }}" />
+                                        value="{{ old('tanggal_checkout') }}" min="{{ date('Y-m-d') }}" />
                                     @error('tanggal_checkout')
                                         <span class="invalid-feedback d-block">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
                         </div>
-
 
 
                         <div class="row">
@@ -245,8 +245,15 @@
             const checkout = document.getElementById('tanggal_checkout');
             const hargaInput = document.getElementById('harga');
 
+            // 🔒 Set tanggal minimum agar tidak bisa pilih tanggal yang sudah lewat
+            const today = new Date().toISOString().split('T')[0];
+            checkin.min = today;
+            checkout.min = today;
+
+            // Fungsi menghitung total harga
             function hitungTotalHarga() {
-                const hargaPerMalam = parseFloat(kamarSelect.options[kamarSelect.selectedIndex].dataset.harga);
+                const hargaPerMalam = parseFloat(kamarSelect.options[kamarSelect.selectedIndex]?.dataset.harga ||
+                    0);
                 const tgl1 = checkin.valueAsDate;
                 const tgl2 = checkout.valueAsDate;
 
@@ -263,11 +270,22 @@
                 }
             }
 
-            kamarSelect.addEventListener('change', hitungTotalHarga); // 🔥
-            checkin.addEventListener('change', hitungTotalHarga); // 🔥
-            checkout.addEventListener('change', hitungTotalHarga); // 🔥
+            // Saat tanggal check-in diubah, atur min tanggal check-out & reset bila perlu
+            checkin.addEventListener('change', function() {
+                const checkinDate = this.value;
+                checkout.min = checkinDate;
+                if (checkout.value && checkout.value < checkinDate) {
+                    checkout.value = '';
+                }
+                hitungTotalHarga();
+            });
+
+            // Jalankan ulang perhitungan saat kamar atau tanggal diubah
+            kamarSelect.addEventListener('change', hitungTotalHarga);
+            checkout.addEventListener('change', hitungTotalHarga);
         });
     </script>
+
 
     <script>
         function formatHarga(input) {
