@@ -67,15 +67,21 @@ class PembayaranController extends Controller
     }
 
     // Halaman instruksi COD
+    // Halaman instruksi COD
     public function cod($id)
     {
         // Ambil data booking berdasarkan ID
         $booking = Booking::findOrFail($id);
 
-        // Jika belum ada pembayaran, buat baru dengan status "belum_bayar"
-        $booking->pembayaran()->firstOrCreate([], [
-            'status' => 'belum_bayar',
+        // Ambil pembayaran yang sudah ada, kalau belum ada buat baru
+        $pembayaran = $booking->pembayaran()->firstOrCreate([], [
+            'status' => 'menunggu_konfirmasi',
         ]);
+
+        // Jika status masih "belum_bayar", ubah jadi "menunggu_konfirmasi"
+        if ($pembayaran->status === 'belum_bayar') {
+            $pembayaran->update(['status' => 'menunggu_konfirmasi']);
+        }
 
         // Tampilkan halaman instruksi pembayaran COD
         return view('pages.pembayaran.cod', compact('booking'));

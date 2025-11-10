@@ -19,15 +19,17 @@
                         data-bs-toggle="dropdown">
                         <i class="bi bi-bell text-white" style="font-size: 20px;"></i>
                         @php
-                            // hitung jumlah pembayaran yang belum dikonfirmasi (status = 'menunggu_konfirmasi' atau 'belum_bayar')
-                            $count = \App\Models\Pembayaran::whereIn('status', [
-                                'menunggu_konfirmasi',
-                                'lunas',
-                                'belum_bayar',
-                            ])->count();
+                            $notifikasi = \App\Models\Pembayaran::whereIn('status', ['menunggu_konfirmasi'])
+                                ->whereHas('booking', function ($query) {
+                                    $query->whereIn('metode_pembayaran', ['cod', 'transfer']);
+                                })
+                                ->latest()
+                                ->get();
+
+                            $count = $notifikasi->count();
                         @endphp
+
                         @if ($count > 0)
-                            {{-- badge merah penanda jumlah notifikasi --}}
                             <span class="badge bg-danger rounded-pill"
                                 style="position: absolute; top: 2px; right: 2px; font-size: 11px; padding: 2px 6px;">
                                 {{ $count }}
@@ -40,15 +42,14 @@
 
                         @foreach ($notifikasi as $notif)
                             @php
-                                $booking = $notif->booking; // simpan relasi booking ke variabel
+                                $booking = $notif->booking; // relasi ke booking
                             @endphp
 
                             <li>
                                 <a class="dropdown-item 
-            @if ($notif->status == 'menunggu_konfirmasi' || $notif->status == 'belum_bayar') fw-bold @endif"
+                                    @if ($notif->status == 'menunggu_konfirmasi' || $notif->status == 'belum_bayar') fw-bold @endif"
                                     href="{{ $booking ? route('booking.show', $booking->id) : '#' }}">
                                     Pembayaran untuk Booking: {{ $booking->kamar->nama ?? 'Kamar Tidak Ditemukan' }}<br>
-                                    Status: {{ ucfirst(str_replace('_', ' ', $notif->status)) }}
                                     <small class="text-muted">{{ $notif->created_at->diffForHumans() }}</small>
                                 </a>
                             </li>

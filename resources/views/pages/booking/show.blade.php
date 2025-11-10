@@ -126,8 +126,6 @@
                                 <span class="ti ti-receipt-2"></span> Pembayaran
                             </a>
                         @endif
-                        <br>
-                        <p>⚠️ Jangan lakukan pembayaran sebelum booking dikonfirmasi oleh admin.</p>
                     @endauth
                 </div>
             </div>
@@ -156,13 +154,6 @@
                                 @csrf
                                 <button type="submit" class="btn btn-success">
                                     <i class="ti ti-cash"></i> Lunas
-                                </button>
-                            </form>
-
-                            <form action="{{ route('booking.setBelumLunas', $booking->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                <button type="submit" class="btn btn-warning">
-                                    <i class="ti ti-clock"></i> Belum Lunas
                                 </button>
                             </form>
                         @endif
