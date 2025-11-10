@@ -69,21 +69,6 @@
                         <th width="10px">:</th>
                         <td>{{ $booking->metode_pembayaran }}</td>
                     </tr>
-                    <tr>
-                        <th width="25%">Status</th>
-                        <th width="10px">:</th>
-                        <td>
-                            @if ($booking->status == 'pending')
-                                <span class="badge bg-warning text-dark">Pending</span>
-                            @elseif ($booking->status == 'confirmed')
-                                <span class="badge bg-success">Confirmed</span>
-                            @elseif ($booking->status == 'rejected')
-                                <span class="badge bg-danger">Rejected</span>
-                            @else
-                                <span class="badge bg-secondary">{{ ucfirst($booking->status) }}</span>
-                            @endif
-                        </td>
-                    </tr>
 
                     <tr>
                         <th width="25%">Status Pembayaran</th>

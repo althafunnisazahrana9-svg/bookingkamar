@@ -27,7 +27,6 @@
                             <th>Nama Pemesan</th>
                             <th>Tanggal Check-in</th>
                             <th>Harga</th>
-                            <th>Status</th>
                             <th>Status Pembayaran</th>
                             <th>Aksi</th>
                         </tr>
@@ -40,16 +39,7 @@
                                 <td>{{ $item->nama_pemesan }}</td>
                                 <td>{{ $item->tanggal_checkin }}</td>
                                 <td>{{ number_format($item->harga, 0, ',', '.') }}</td>
-                                {{-- status  --}}
-                                <td>
-                                    @if ($item->status == 'pending')
-                                        <span class="badge bg-warning">Pending</span> {{-- kuning --}}
-                                    @elseif ($item->status == 'confirmed')
-                                        <span class="badge bg-success">Confirmed</span> {{-- hijau --}}
-                                    @elseif ($item->status == 'rejected')
-                                        <span class="badge bg-danger">Rejected</span> {{-- merah --}}
-                                    @endif
-                                </td>
+
                                 {{-- status pembayaran --}}
                                 <td>
                                     @if ($item->pembayaran && $item->pembayaran->status == 'belum_bayar')
