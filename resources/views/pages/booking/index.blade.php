@@ -42,25 +42,21 @@
 
                                 {{-- status pembayaran --}}
                                 <td>
-                                    {{-- Jika metode pembayaran CASH, maka status selalu Belum Ada Pembayaran --}}
                                     @if ($item->metode_pembayaran == 'cash')
-                                        <span class="badge bg-secondary">Belum Ada Pembayaran</span>
-
-                                        {{-- Jika metode transfer dan pembayaran ada --}}
-                                    @elseif ($item->pembayaran)
-                                        @if ($item->pembayaran->status == 'menunggu_konfirmasi')
-                                            <span class="badge bg-warning text-dark">Menunggu Konfirmasi</span>
-                                        @elseif ($item->pembayaran->status == 'sudah_bayar' || $item->pembayaran->status == 'lunas')
+                                        @if ($item->pembayaran && $item->pembayaran->status == 'lunas')
                                             <span class="badge bg-success">Lunas</span>
-                                        @elseif ($item->pembayaran->status == 'belum_bayar')
-                                            <span class="badge bg-secondary">Belum Bayar</span>
                                         @else
                                             <span class="badge bg-secondary">Belum Ada Pembayaran</span>
                                         @endif
-
-                                        {{-- Jika tidak ada record pembayaran --}}
                                     @else
-                                        <span class="badge bg-secondary">Belum Ada Pembayaran</span>
+                                        {{-- Transfer --}}
+                                        @if ($item->pembayaran && $item->pembayaran->status == 'menunggu_konfirmasi')
+                                            <span class="badge bg-warning text-dark">Menunggu Konfirmasi</span>
+                                        @elseif ($item->pembayaran && $item->pembayaran->status == 'lunas')
+                                            <span class="badge bg-success">Lunas</span>
+                                        @else
+                                            <span class="badge bg-secondary">Belum Ada Pembayaran</span>
+                                        @endif
                                     @endif
                                 </td>
 

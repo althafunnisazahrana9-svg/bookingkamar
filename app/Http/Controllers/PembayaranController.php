@@ -72,7 +72,15 @@ class PembayaranController extends Controller
     {
         $booking = Booking::findOrFail($id);
 
-        // Untuk COD: JANGAN buat pembayaran baru
+        // Buat record pembayaran untuk COD dengan status default "belum_bayar"
+        $pembayaran = $booking->pembayaran()->firstOrCreate(
+            ['booking_id' => $booking->id],
+            [
+                'status' => 'belum_bayar',
+                'bukti_transfer' => null,
+            ]
+        );
+
         return view('pages.pembayaran.cod', compact('booking'));
     }
 

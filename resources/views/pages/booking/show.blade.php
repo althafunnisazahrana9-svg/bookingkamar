@@ -75,22 +75,25 @@
                         <th width="10px">:</th>
                         <td>
                             @if ($booking->metode_pembayaran == 'cash')
-                                <span class="badge bg-secondary">Belum Ada Pembayaran</span>
-                            @elseif ($booking->pembayaran)
-                                @if ($booking->pembayaran->status == 'menunggu_konfirmasi')
-                                    <span class="badge bg-warning text-dark">Menunggu Konfirmasi</span>
-                                @elseif ($booking->pembayaran->status == 'lunas')
+                                {{-- Semua cash sebelum admin set lunas --}}
+                                @if ($booking->pembayaran && $booking->pembayaran->status == 'lunas')
                                     <span class="badge bg-success">Lunas</span>
-                                @elseif ($booking->pembayaran->status == 'belum_bayar')
-                                    <span class="badge bg-secondary">Belum Bayar</span>
                                 @else
-                                    <span class="badge bg-danger">{{ $booking->pembayaran->status }}</span>
+                                    <span class="badge bg-secondary">Belum Ada Pembayaran</span>
                                 @endif
                             @else
-                                <span class="badge bg-secondary">Belum Ada Pembayaran</span>
+                                {{-- Transfer --}}
+                                @if ($booking->pembayaran)
+                                    @if ($booking->pembayaran->status == 'menunggu_konfirmasi')
+                                        <span class="badge bg-warning">Menunggu Konfirmasi</span>
+                                    @elseif ($booking->pembayaran->status == 'lunas')
+                                        <span class="badge bg-success">Lunas</span>
+                                    @endif
+                                @else
+                                    <span class="badge bg-secondary">Belum Ada Pembayaran</span>
+                                @endif
                             @endif
                         </td>
-
                     </tr>
                     <tr>
                         <th width="25%">Booking pada</th>
@@ -147,10 +150,8 @@
                             </button>
                         </form>
 
-                        {{-- Tombol Lunas / Belum Lunas (Berlaku untuk COD & Transfer) --}}
-                    @elseif ($booking->status == 'confirmed' && $booking->pembayaran)
-                        {{-- Jika booking sudah dikonfirmasi baru muncul tombol lunas/belum lunas --}}
-                        @if ($booking->pembayaran->status !== 'lunas')
+                        {{-- Tombol Lunas hanya muncul jika booking sudah dikonfirmasi dan pembayaran belum lunas --}}
+                        @if ($booking->status == 'confirmed' && $booking->pembayaran && $booking->pembayaran->status !== 'lunas')
                             <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 <button type="submit" class="btn btn-success">
@@ -161,7 +162,6 @@
                     @endif
                 </div>
             </div>
-
         @endauth
     </div>
     </div>
