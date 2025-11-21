@@ -74,22 +74,23 @@
                         <th width="25%">Status Pembayaran</th>
                         <th width="10px">:</th>
                         <td>
-                            @if ($booking->pembayaran)
-                                @if ($booking->pembayaran->status == 'belum_bayar')
-                                    <span class="badge bg-secondary">Belum Bayar</span>
-                                @elseif ($booking->pembayaran->status == 'menunggu_konfirmasi')
+                            @if ($booking->metode_pembayaran == 'cash')
+                                <span class="badge bg-secondary">Belum Ada Pembayaran</span>
+                            @elseif ($booking->pembayaran)
+                                @if ($booking->pembayaran->status == 'menunggu_konfirmasi')
                                     <span class="badge bg-warning text-dark">Menunggu Konfirmasi</span>
                                 @elseif ($booking->pembayaran->status == 'lunas')
                                     <span class="badge bg-success">Lunas</span>
+                                @elseif ($booking->pembayaran->status == 'belum_bayar')
+                                    <span class="badge bg-secondary">Belum Bayar</span>
                                 @else
-                                    <span class="badge bg-dark">{{ ucfirst($booking->pembayaran->status) }}</span>
+                                    <span class="badge bg-danger">{{ $booking->pembayaran->status }}</span>
                                 @endif
                             @else
                                 <span class="badge bg-secondary">Belum Ada Pembayaran</span>
                             @endif
-
-
                         </td>
+
                     </tr>
                     <tr>
                         <th width="25%">Booking pada</th>

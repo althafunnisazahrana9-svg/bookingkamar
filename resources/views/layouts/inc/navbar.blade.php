@@ -19,7 +19,7 @@
                         data-bs-toggle="dropdown">
                         <i class="bi bi-bell text-white" style="font-size: 20px;"></i>
                         @php
-                            $notifikasi = \App\Models\Pembayaran::whereIn('status', ['menunggu_konfirmasi'])
+                            $notifikasi = \App\Models\Pembayaran::where('status', 'menunggu_konfirmasi')
                                 ->whereHas('booking', function ($query) {
                                     $query->whereIn('metode_pembayaran', ['cod', 'transfer']);
                                 })

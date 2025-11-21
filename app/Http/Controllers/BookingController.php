@@ -113,6 +113,13 @@ class BookingController extends Controller
         }
 
         if ($request->metode_pembayaran === 'cod') {
+            // Buat pembayaran otomatis untuk COD
+            Pembayaran::create([
+                'booking_id' => $booking->id,
+                'bukti_transfer' => null,
+                'status' => 'belum_bayar',
+            ]);
+
             return redirect()->route('pembayaran.cod', $booking->id);
         }
 
