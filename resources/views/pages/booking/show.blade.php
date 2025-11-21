@@ -137,32 +137,18 @@
             @auth('web')
                 <!-- Tombol kanan: Konfirmasi, Tolak, Lunas, Belum Lunas -->
                 <div class="d-flex justify-content-end gap-2 my-2">
-                    {{-- Jika booking masih pending --}}
-                    @if ($booking->status == 'pending')
-                        <a href="{{ route('booking.confirm', $booking->id) }}" class="btn btn-sm btn-success">
-                            <span class="ti ti-check"></span> Konfirmasi
-                        </a>
-
-                        <form action="{{ route('booking.reject', $booking->id) }}" method="POST" style="display:inline;">
+                    {{-- Tombol LUNAS selalu muncul jika pembayaran ada & belum lunas --}}
+                    @if ($booking->pembayaran && $booking->pembayaran->status !== 'lunas')
+                        <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST" class="d-inline">
                             @csrf
-                            <button type="submit" class="btn btn-sm btn-danger">
-                                <span class="ti ti-x"></span> Tolak
+                            <button type="submit" class="btn btn-success">
+                                <i class="ti ti-cash"></i> Lunas
                             </button>
                         </form>
-
-                        {{-- Tombol Lunas hanya muncul jika booking sudah dikonfirmasi dan pembayaran belum lunas --}}
-                        @if ($booking->status == 'confirmed' && $booking->pembayaran && $booking->pembayaran->status !== 'lunas')
-                            <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                <button type="submit" class="btn btn-success">
-                                    <i class="ti ti-cash"></i> Lunas
-                                </button>
-                            </form>
-                        @endif
                     @endif
                 </div>
-            </div>
-        @endauth
+            @endauth
+        </div>
     </div>
     </div>
 @endsection
