@@ -13,10 +13,8 @@ class FormController extends Controller
      */
     public function index()
     {
-        // Ambil hanya kamar yang statusnya masih "kosong"
-        // supaya tidak bisa dibooking kalau sudah terisi
         $kamar = Kamar::where('status', 'kosong')->orderBy('nama', 'ASC')->get();
-        // Ambil semua data booking untuk ditampilkan (opsional)
+
         $booking = Booking::all();
 
         return view('pages.form.index', compact('kamar', 'booking'));
@@ -58,15 +56,13 @@ class FormController extends Controller
             'status_booking' => 'pending',  // hilangkan koma pada harga
         ]);
 
-        // Arahkan user ke halaman daftar booking dengan pesan sukses
-        return redirect()->route('booking.index')
-            ->with('success', 'Booking berhasil dibuat.');
-
-        // ubah status kamar jadi terisi tapi tidak jalan soalnya di atas sudah ada return
         $kamar = Kamar::find($request->kamar_id);
         if ($kamar) {
-            $kamar->status = 'terisi';
+            $kamar->status = 'terisi'; // 🔹 tandai kamar sudah terisi
             $kamar->save();
         }
+
+        return redirect()->route('booking.index')
+            ->with('success', 'Booking berhasil dibuat dan kamar otomatis terisi.');
     }
 }
