@@ -12,16 +12,23 @@ class DashboardController extends Controller
     public function index()
     {
         // total booking (angka) -> exclude booking ditolak
-        $totalBooking = Booking::whereNotIn('status', ['rejected'])->count();
+        $totalBooking = Booking::join('pembayaran', 'booking.id', '=', 'pembayaran.booking_id') // DITAMBAHKAN
+            ->where('pembayaran.status', 'lunas') // DITAMBAHKAN
+            ->whereNotIn('booking.status', ['rejected']) // sama seperti kamu sebelumnya
+            ->count();
 
         // booking per metode pembayaran -> exclude booking ditolak
-        $bookingPerMetode = Booking::whereNotIn('status', ['rejected'])
-            ->select('metode_pembayaran', \DB::raw('COUNT(*) as total'))
-            ->groupBy('metode_pembayaran')
-            ->pluck('total', 'metode_pembayaran');
+        $bookingPerMetode = Booking::join('pembayaran', 'booking.id', '=', 'pembayaran.booking_id') // DITAMBAHKAN
+            ->where('pembayaran.status', 'lunas') // DITAMBAHKAN
+            ->whereNotIn('booking.status', ['rejected']) // tetap
+            ->select('booking.metode_pembayaran', \DB::raw('COUNT(*) as total'))
+            ->groupBy('booking.metode_pembayaran')
+            ->pluck('total', 'booking.metode_pembayaran');
 
         // booking per kamar -> exclude booking ditolak
-        $bookingPerKamar = Booking::whereNotIn('booking.status', ['rejected'])
+        $bookingPerKamar = Booking::join('pembayaran', 'booking.id', '=', 'pembayaran.booking_id') // 🟢 DITAMBAHKAN
+            ->where('pembayaran.status', 'lunas') // 🟢 DITAMBAHKAN
+            ->whereNotIn('booking.status', ['rejected'])
             ->join('kamar', 'booking.kamar_id', '=', 'kamar.id')
             ->select('kamar.nama as kamar_nama', \DB::raw('count(*) as total'))
             ->groupBy('kamar.nama')
@@ -49,9 +56,35 @@ class DashboardController extends Controller
         // status pembayaran berdasarkan booking
         $statusPembayaran = Booking::leftJoin('pembayaran', 'booking.id', '=', 'pembayaran.booking_id')
             ->whereNotIn('booking.status', ['rejected'])
-            ->selectRaw("COALESCE(pembayaran.status, 'pending') as status, COUNT(*) as total")
-            ->groupBy('status')
-            ->pluck('total', 'status');
+            ->get()
+            ->groupBy(function ($item) {
+
+                // 1. Jika pembayaran lunas → LUNAS
+                if ($item->status === 'lunas') {
+                    return 'lunas';
+                }
+
+                // 2. Jika metode pembayaran CASH → SELALU BELUM BAYAR
+                if ($item->metode_pembayaran === 'cash') {
+                    return 'belum bayar';
+                }
+
+                // 3. Metode TRANSFER:
+                //    Jika belum upload bukti → BELUM BAYAR
+                if ($item->metode_pembayaran === 'transfer' && empty($item->bukti_transfer)) {
+                    return 'belum bayar';
+                }
+
+                //    Jika sudah upload bukti tapi belum diverifikasi → MENUNGGU KONFIRMASI
+                if ($item->metode_pembayaran === 'transfer' && ! empty($item->bukti_transfer) && $item->status !== 'lunas') {
+                    return 'menunggu konfirmasi';
+                }
+
+                return 'belum bayar';
+            })
+            ->map(function ($group) {
+                return $group->count();
+            });
 
         // total pendapatan (hanya yang lunas)
         $totalPendapatan = Pembayaran::where('pembayaran.status', 'lunas')
