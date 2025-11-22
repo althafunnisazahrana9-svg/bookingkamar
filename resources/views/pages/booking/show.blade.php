@@ -138,14 +138,28 @@
                 <!-- Tombol kanan: Konfirmasi, Tolak, Lunas, Belum Lunas -->
                 <div class="d-flex justify-content-end gap-2 my-2">
                     {{-- Tombol LUNAS selalu muncul jika pembayaran ada & belum lunas --}}
-                    @if ($booking->pembayaran && $booking->pembayaran->status !== 'lunas')
-                        <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            <button type="submit" class="btn btn-success">
-                                <i class="ti ti-cash"></i> Lunas
-                            </button>
-                        </form>
+                    @if ($booking->metode_pembayaran == 'cod' || $booking->metode_pembayaran == 'cash')
+                        {{-- COD/CASH → tombol LUNAS SELALU ADA --}}
+                        @if (optional($booking->pembayaran)->status !== 'lunas')
+                            <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-success">
+                                    <i class="ti ti-cash"></i> Lunas
+                                </button>
+                            </form>
+                        @endif
+                    @elseif ($booking->metode_pembayaran == 'transfer')
+                        {{-- TRANSFER → tombol hanya muncul kalau pembayaran ada --}}
+                        @if ($booking->pembayaran && $booking->pembayaran->status !== 'lunas')
+                            <form action="{{ route('booking.setLunas', $booking->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-success">
+                                    <i class="ti ti-cash"></i> Lunas
+                                </button>
+                            </form>
+                        @endif
                     @endif
+
                 </div>
             @endauth
         </div>

@@ -107,19 +107,21 @@ class BookingController extends Controller
             'email_pemesan' => $request->email,
         ]);
 
-        // Arahkan sesuai metode pembayaran
         if ($request->metode_pembayaran === 'transfer') {
             return redirect()->route('pembayaran.transfer', $booking->id);
         }
 
-        if ($request->metode_pembayaran === 'cod') {
-            // Buat pembayaran otomatis untuk COD
+        // Jika metode pembayaran CASH atau COD → buat otomatis pembayaran belum bayar
+        if ($request->metode_pembayaran === 'cash' || $request->metode_pembayaran === 'cod') {
+
+            //  REVISI BARU → Pembayaran dibuat otomatis
             Pembayaran::create([
                 'booking_id' => $booking->id,
                 'bukti_transfer' => null,
-                'status' => 'belum_bayar',
+                'status' => 'belum_bayar', // supaya admin selalu punya tombol "Lunas"
             ]);
 
+            // arahkan ke halaman pembayaran COD/CASH (bisa sama)
             return redirect()->route('pembayaran.cod', $booking->id);
         }
 
@@ -130,7 +132,7 @@ class BookingController extends Controller
 
     public function struk($id)
     {
-        $booking = Booking::with('pembayaran')->findOrFail($id);
+        $booking = Booking::with('kamar', 'pembayaran')->findOrFail($id);
 
         return view('pages.booking.struk', compact('booking'));
     }
@@ -204,7 +206,19 @@ class BookingController extends Controller
     public function show(string $id)
     {
         // Detail booking
-        $booking = Booking::with('kamar')->findOrfail($id);
+        $booking = Booking::with(['kamar', 'pembayaran'])->findOrFail($id);
+
+        // Jika belum ada pembayaran → buat otomatis
+        if (! $booking->pembayaran) {
+            Pembayaran::create([
+                'booking_id' => $booking->id,
+                'bukti_transfer' => null,
+                'status' => 'belum_bayar',
+            ]);
+
+            // Refresh data
+            $booking->load('pembayaran');
+        }
 
         return view('pages.booking.show', compact('booking'));
     }
