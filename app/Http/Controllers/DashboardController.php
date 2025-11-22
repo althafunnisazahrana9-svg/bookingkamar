@@ -12,20 +12,21 @@ class DashboardController extends Controller
     public function index()
     {
         // total booking (angka) -> exclude booking ditolak
-        $totalBooking = Booking::whereNotIn('status', ['pending', 'rejected'])->count();
+        $totalBooking = Booking::whereNotIn('status', ['rejected'])->count();
 
         // booking per metode pembayaran -> exclude booking ditolak
-        $bookingPerMetode = Booking::whereNotIn('status', ['pending', 'rejected'])
-            ->select('metode_pembayaran', \DB::raw('count(*) as total'))
+        $bookingPerMetode = Booking::whereNotIn('status', ['rejected'])
+            ->select('metode_pembayaran', \DB::raw('COUNT(*) as total'))
             ->groupBy('metode_pembayaran')
             ->pluck('total', 'metode_pembayaran');
 
         // booking per kamar -> exclude booking ditolak
-        $bookingPerKamar = Booking::whereNotIn('booking.status', ['pending', 'rejected'])
+        $bookingPerKamar = Booking::whereNotIn('booking.status', ['rejected'])
             ->join('kamar', 'booking.kamar_id', '=', 'kamar.id')
             ->select('kamar.nama as kamar_nama', \DB::raw('count(*) as total'))
             ->groupBy('kamar.nama')
             ->pluck('total', 'kamar_nama');
+
         // pendapatan per hari (hanya yang lunas)
         $pendapatanPerHari = Pembayaran::where('pembayaran.status', 'lunas')
             ->join('booking', 'pembayaran.booking_id', '=', 'booking.id')
